@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Navigation from './components/Navigation';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css';
+import { AppPages } from './common/models/app-pages.enum';
+import Login from './pages/Login';
+import Profile from './pages/Profile';
+import Registration from './pages/Registration';
+import Order from './pages/Order';
+
+interface AppState {
+  currentPage: AppPages;
+}
+
+class App extends Component<any, AppState> {
+  state = {
+    currentPage: AppPages.LOGIN
+  };
+
+  render() {
+    const { currentPage } = this.state;
+
+    return (
+      <>
+        <Navigation navigate={this.changePage} />
+        {
+          {
+            [AppPages.LOGIN]: <Login />,
+            [AppPages.MAP]: <Order />,
+            [AppPages.PROFILE]: <Profile />,
+            [AppPages.REGISTRATION]: <Registration />,
+          }[currentPage]
+        }
+      </>
+    );
+  }
+
+  private changePage = (page: AppPages) => {
+    this.setState({ currentPage: page });
+  }
 }
 
 export default App;
