@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import Navigation from './components/Navigation';
+import { AppPages } from './common/models';
 
-import './App.css';
-import { AppPages } from './common/models/app-pages.enum';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Registration from './pages/Registration';
 import Order from './pages/Order';
 import Header from './components/Header';
+
+import './App.css';
 
 interface AppState {
   currentPage: AppPages;
@@ -23,7 +23,7 @@ class App extends Component<any, AppState> {
 
     return (
       <>
-        <Header navigate={this.changePage} />
+        <Header navigate={this.changePage} currentPage={currentPage} />
         {
           {
             [AppPages.LOGIN]: <Login />,

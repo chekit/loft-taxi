@@ -1,12 +1,10 @@
 import React from 'react';
+import { NavigationBaseProps } from '../../common/models';
 
-import { AppPages } from '../../common/models/app-pages.enum';
 import Navigation from '../Navigation';
 
-interface HeaderProps {
-    navigate: (nextPage: AppPages) => void;
-}
+interface HeaderProps extends NavigationBaseProps { }
 
-export const Header = ({ navigate }: HeaderProps) => (
-    <Navigation navigate={navigate} />
+export const Header = ({ navigate, currentPage }: HeaderProps) => (
+    <Navigation navigate={navigate} currentPage={currentPage} />
 );

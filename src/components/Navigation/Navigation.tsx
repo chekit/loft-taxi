@@ -1,11 +1,9 @@
 import React from 'react';
-import { AppPages } from '../../common/models/app-pages.enum';
+import { AppPages, NavigationBaseProps } from '../../common/models';
 
-interface NavigationProps {
-    navigate: (nextPage: AppPages) => void;
-}
+interface NavigationProps extends NavigationBaseProps { }
 
-export const Navigation = ({ navigate }: NavigationProps) => (
+export const Navigation = ({ navigate, currentPage }: NavigationProps) => (
     <nav>
         <ul>
             <li>
@@ -18,9 +16,11 @@ export const Navigation = ({ navigate }: NavigationProps) => (
                 <button onClick={() => navigate(AppPages.REGISTRATION)}>Регистрация</button>
 
             </li>
-            <li>
-                <button onClick={() => navigate(AppPages.LOGIN)}>Выход</button>
-            </li>
+            {currentPage !== AppPages.LOGIN && (
+                <li>
+                    <button onClick={() => navigate(AppPages.LOGIN)}>Выход</button>
+                </li>
+            )}
         </ul>
     </nav>
 );
