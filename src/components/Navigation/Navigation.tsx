@@ -9,17 +9,17 @@ export const Navigation = ({ navigate }: NavigationProps) => (
     <nav>
         <ul>
             <li>
-                <button onClick={() => navigate(AppPages.MAP)}>Map</button>
+                <button onClick={() => navigate(AppPages.MAP)}>Карта</button>
             </li>
             <li>
-                <button onClick={() => navigate(AppPages.PROFILE)}>Profile</button>
+                <button onClick={() => navigate(AppPages.PROFILE)}>Профиль</button>
             </li>
             <li>
-                <button onClick={() => navigate(AppPages.REGISTRATION)}>Registration</button>
+                <button onClick={() => navigate(AppPages.REGISTRATION)}>Регистрация</button>
 
             </li>
             <li>
-                <button onClick={() => navigate(AppPages.LOGIN)}>Logout</button>
+                <button onClick={() => navigate(AppPages.LOGIN)}>Выход</button>
             </li>
         </ul>
     </nav>
