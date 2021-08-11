@@ -1,0 +1,14 @@
+@import './colors';
+@import './sizes';
+
+@function flexwidth($base, $context: ($max-width / 1px)) {
+    @return ($base / $context) * 100%;
+}
+
+%reset-button {
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    font-size: inherit;
+}

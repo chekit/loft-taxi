@@ -1,0 +1,41 @@
+@import 'styles/globals.scss';
+
+nav {
+    font-size: 2.1em;
+    line-height: (25/21);
+
+    ul {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+
+        li {
+            margin: 0 20px;
+
+            &:first-child {
+                margin-left: 0;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+    button {
+        @extend %reset-button;
+
+        color: white;
+        transition: color .15s ease-in-out;
+
+        &:hover {
+            color: darken(white, 20%);
+        }
+
+        &.is-active {
+            color: $color-active-nav;
+        }
+    }
+}

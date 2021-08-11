@@ -7,7 +7,7 @@ import Registration from './pages/Registration';
 import Order from './pages/Order';
 import Header from './components/Header';
 
-import './App.css';
+import './App.scss';
 
 interface AppState {
   currentPage: AppPages;
@@ -22,17 +22,19 @@ class App extends Component<any, AppState> {
     const { currentPage } = this.state;
 
     return (
-      <>
+      <main className={currentPage === AppPages.LOGIN ? 'is-row' : ''}>
         <Header navigate={this.changePage} currentPage={currentPage} />
-        {
+        <section>
           {
-            [AppPages.LOGIN]: <Login />,
-            [AppPages.MAP]: <Order />,
-            [AppPages.PROFILE]: <Profile />,
-            [AppPages.REGISTRATION]: <Registration />,
-          }[currentPage]
-        }
-      </>
+            {
+              [AppPages.LOGIN]: <Login login={() => this.changePage(AppPages.MAP)} />,
+              [AppPages.MAP]: <Order />,
+              [AppPages.PROFILE]: <Profile />,
+              [AppPages.REGISTRATION]: <Registration />,
+            }[currentPage]
+          }
+        </section>
+      </main>
     );
   }
 
