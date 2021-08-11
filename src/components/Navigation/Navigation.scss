@@ -34,6 +34,10 @@ nav {
             color: darken(white, 20%);
         }
 
+        &:active {
+            color: darken(white, 30%);
+        }
+
         &.is-active {
             color: $color-active-nav;
         }
