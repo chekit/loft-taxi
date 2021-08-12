@@ -4,6 +4,7 @@ import './LoginForm.scss';
 
 interface LoginFormProps {
     submitHandler: VoidFunction;
+    registrationRedirect: VoidFunction;
 }
 
 interface LoginFormState {
@@ -29,12 +30,17 @@ export class LoginForm extends Component<LoginFormProps, LoginFormState> {
         });
     }
 
+    onRegisterClick = (e: React.UIEvent) => {
+        e.preventDefault();
+        this.props.registrationRedirect();
+    }
+
     render() {
-        const { submitHandler: submit } = this.props;
+        const { submitHandler } = this.props;
         const { login, password } = this.state;
 
         return (
-            <form className="form" onSubmit={submit}>
+            <form className="form" onSubmit={submitHandler}>
                 <h2 className="form__title">Войти</h2>
                 <fieldset className="form__fieldset">
                     <label htmlFor="login" className="form__label">Email</label>
@@ -48,7 +54,7 @@ export class LoginForm extends Component<LoginFormProps, LoginFormState> {
                 </div>
                 <button type="submit" className="form__submit" disabled={!login || !password}>Войти</button>
                 <div className="form__register">
-                    <p>Новый пользователь? <a href="#" onClick={e => e.preventDefault()}>Регистрация</a></p>
+                    <p>Новый пользователь? <a href="#" onClick={this.onRegisterClick}>Регистрация</a></p>
                 </div>
             </form>
         );

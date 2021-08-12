@@ -27,7 +27,7 @@ class App extends Component<any, AppState> {
         <section>
           {
             {
-              [AppPages.LOGIN]: <Login login={() => this.changePage(AppPages.MAP)} />,
+              [AppPages.LOGIN]: <Login login={this.redirectToApp} registration={this.redirectToRegistration} />,
               [AppPages.MAP]: <Order />,
               [AppPages.PROFILE]: <Profile />,
               [AppPages.REGISTRATION]: <Registration />,
@@ -36,6 +36,14 @@ class App extends Component<any, AppState> {
         </section>
       </main>
     );
+  }
+
+  private redirectToApp = () => {
+    this.changePage(AppPages.MAP);
+  }
+
+  private redirectToRegistration = () => {
+    this.changePage(AppPages.REGISTRATION);
   }
 
   private changePage = (page: AppPages) => {
