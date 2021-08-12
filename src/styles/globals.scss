@@ -1,7 +1,7 @@
 @import './colors';
 @import './sizes';
 
-@function flexwidth($base, $context: ($max-width / 1px)) {
+@function flexwidth($base, $context: ($default-context / 1px)) {
     @return ($base / $context) * 100%;
 }
 

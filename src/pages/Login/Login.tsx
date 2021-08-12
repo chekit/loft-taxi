@@ -1,4 +1,5 @@
 import React from 'react';
+import LoginForm from '../../components/LoginForm';
 
 import './Login.scss';
 
@@ -9,7 +10,6 @@ interface LoginProps {
 
 export const Login = ({ login }: LoginProps) => (
     <div className="wrapper">
-        <p>Login Page</p>
-        <button onClick={login}>Войти</button>
+        <LoginForm submitHandler={login} />
     </div>
 )
