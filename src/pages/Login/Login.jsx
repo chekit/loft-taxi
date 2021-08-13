@@ -3,13 +3,7 @@ import LoginForm from '../../components/LoginForm';
 
 import './Login.scss';
 
-// @TODO: Temporary
-interface LoginProps {
-    login: VoidFunction;
-    registration: VoidFunction;
-}
-
-export const Login = ({ login, registration: register }: LoginProps) => (
+export const Login = ({ login, registration: register }) => (
     <div className="wrapper">
         <LoginForm submitHandler={login} registrationRedirect={register} />
     </div>

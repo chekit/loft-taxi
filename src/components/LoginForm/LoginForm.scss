@@ -61,6 +61,12 @@
         }
     }
 
+    &__link {
+        text-decoration: none;
+        transition: color 0.15s ease-in-out;
+        cursor: pointer;
+    }
+
     &__recall {
         @extend %basic-font;
 
@@ -69,10 +75,8 @@
         color: $color-form-subtle;
         text-align: right;
 
-        a {
-            color: inherit;
-            text-decoration: none;
-            transition: color 0.15s ease-in-out;
+        .form__link {
+            color: $color-form-subtle;
 
             &:hover {
                 color: darken($color-form-subtle, 25%);
@@ -95,19 +99,21 @@
         color: $color-submit-default;
         font-size: 2.1em;
         line-height: (25/21);
-        transition: background-color, color .15s ease-in-out;
+        transition: background-color, color 0.15s ease-in-out;
 
         &:disabled {
             background-color: $color-submit-bg-disabled;
             color: $color-submit-disabled;
             cursor: default;
 
-            &:hover, &:active {
+            &:hover,
+            &:active {
                 background-color: $color-submit-bg-disabled;
             }
         }
 
-        &:hover, &:active {
+        &:hover,
+        &:active {
             background-color: $color-submit-bg-active;
         }
     }
@@ -117,10 +123,8 @@
 
         color: $color-form-subtle;
 
-        a {
+        .form__link {
             color: $color-form-subtle-link;
-            transition: color .15s ease-in-out;
-            text-decoration: none;
 
             &:hover {
                 color: darken($color-form-subtle-link, 25%);

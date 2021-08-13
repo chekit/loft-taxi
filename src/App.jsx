@@ -9,11 +9,7 @@ import Header from './components/Header';
 
 import './App.scss';
 
-interface AppState {
-  currentPage: AppPages;
-}
-
-class App extends Component<any, AppState> {
+class App extends Component {
   state = {
     currentPage: AppPages.LOGIN
   };
@@ -22,15 +18,15 @@ class App extends Component<any, AppState> {
     const { currentPage } = this.state;
 
     return (
-      <main className={currentPage === AppPages.LOGIN ? 'is-row' : ''}>
+      <main className={currentPage === AppPages.LOGIN || currentPage === AppPages.REGISTRATION ? 'is-row' : ''}>
         <Header navigate={this.changePage} currentPage={currentPage} />
         <section>
           {
             {
               [AppPages.LOGIN]: <Login login={this.redirectToApp} registration={this.redirectToRegistration} />,
+              [AppPages.REGISTRATION]: <Registration login={() => this.changePage(AppPages.LOGIN)} />,
               [AppPages.MAP]: <Order />,
               [AppPages.PROFILE]: <Profile />,
-              [AppPages.REGISTRATION]: <Registration />,
             }[currentPage]
           }
         </section>
@@ -38,16 +34,16 @@ class App extends Component<any, AppState> {
     );
   }
 
-  private redirectToApp = () => {
+  redirectToApp = () => {
     this.changePage(AppPages.MAP);
   }
 
-  private redirectToRegistration = () => {
+  redirectToRegistration = () => {
     this.changePage(AppPages.REGISTRATION);
   }
 
-  private changePage = (page: AppPages) => {
-    this.setState({ currentPage: page });
+  changePage = (currentPage/* : AppPages */) => {
+    this.setState({ currentPage });
   }
 }
 

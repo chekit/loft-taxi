@@ -2,35 +2,25 @@ import React, { Component } from 'react';
 
 import './LoginForm.scss';
 
-interface LoginFormProps {
-    submitHandler: VoidFunction;
-    registrationRedirect: VoidFunction;
-}
-
-interface LoginFormState {
-    login: string | undefined;
-    password: string | undefined;
-}
-
-export class LoginForm extends Component<LoginFormProps, LoginFormState> {
+export class LoginForm extends Component {
     state = {
         login: undefined,
         password: undefined
     };
 
-    onLoginChange = ({ currentTarget: { value } }: React.FormEvent<HTMLInputElement>) => {
+    onLoginChange = ({ currentTarget: { value } }) => {
         this.setState({
             login: value
         });
     }
 
-    onPasswordChange = ({ currentTarget: { value } }: React.FormEvent<HTMLInputElement>) => {
+    onPasswordChange = ({ currentTarget: { value } }) => {
         this.setState({
             password: value
         });
     }
 
-    onRegisterClick = (e: React.UIEvent) => {
+    onRegisterClick = (e) => {
         e.preventDefault();
         this.props.registrationRedirect();
     }
@@ -49,12 +39,14 @@ export class LoginForm extends Component<LoginFormProps, LoginFormState> {
                     <label htmlFor="password" className="form__label">Пароль</label>
                     <input type="password" name="password" className="form__input" placeholder="password" value={password} onChange={this.onPasswordChange} />
                 </fieldset>
-                <div className="form__recall">
-                    <a href="#">Забыли пароль?</a>
+                <div className="form__recall ">
+                    {/* @TODO: Change to link */}
+                    <span className="form__link" onClick={() => console.log('Recall pass')}>Забыли пароль?</span>
                 </div>
                 <button type="submit" className="form__submit" disabled={!login || !password}>Войти</button>
                 <div className="form__register">
-                    <p>Новый пользователь? <a href="#" onClick={this.onRegisterClick}>Регистрация</a></p>
+                    {/* @TODO: Change to link */}
+                    <p>Новый пользователь? <span className="form__link" onClick={this.onRegisterClick}>Регистрация</span></p>
                 </div>
             </form>
         );

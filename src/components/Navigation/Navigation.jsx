@@ -1,11 +1,10 @@
 import React from 'react';
-import { AppPages, NavigationBaseProps } from '../../common/models';
+
+import { AppPages } from '../../common/models';
 
 import './Navigation.scss';
 
-interface NavigationProps extends NavigationBaseProps { }
-
-export const Navigation = ({ navigate, currentPage }: NavigationProps) => (
+export const Navigation = ({ navigate, currentPage }) => (
     <nav>
         <ul>
             <li>
@@ -13,10 +12,6 @@ export const Navigation = ({ navigate, currentPage }: NavigationProps) => (
             </li>
             <li>
                 <button onClick={() => navigate(AppPages.PROFILE)} className={currentPage === AppPages.PROFILE ? 'is-active' : ''}>Профиль</button>
-            </li>
-            <li>
-                <button onClick={() => navigate(AppPages.REGISTRATION)} className={currentPage === AppPages.REGISTRATION ? 'is-active' : ''}>Регистрация</button>
-
             </li>
             {currentPage !== AppPages.LOGIN && (
                 <li>
