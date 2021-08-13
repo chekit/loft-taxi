@@ -1,0 +1,134 @@
+@import 'styles/globals.scss';
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    padding: $base-step flexwidth(10);
+    width: flexwidth(350, 375);
+    max-width: $form-max-width;
+    min-width: $form-min-width;
+
+    %basic-font {
+        font-size: 1.6em;
+        line-height: (19/16);
+    }
+
+    @media screen and (min-width: $desktop) {
+        padding: $base-step * 5.5 flexwidth(50, 580);
+        width: flexwidth(580, $max-width / 1px);
+        border-radius: $base-step * 2;
+        box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    &__title {
+        margin: 0 0 (50/30) * 1em;
+        font-size: 3em;
+        line-height: (35/30);
+    }
+
+    &__fieldset {
+        margin-bottom: $base-step * 1.5;
+        width: 100%;
+        background-color: transparent;
+        outline: none;
+        border: none;
+    }
+
+    &__label,
+    &__input {
+        @extend %basic-font;
+
+        display: block;
+        width: 100%;
+    }
+
+    &__label {
+        margin-bottom: $base-step;
+        font-weight: bold;
+    }
+
+    &__input {
+        box-sizing: border-box;
+        padding: $base-step 0;
+        margin-bottom: $base-step * 2.5;
+        border: none;
+        border-bottom: 2px solid $color-input-border;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+
+    &__link {
+        text-decoration: none;
+        transition: color 0.15s ease-in-out;
+        cursor: pointer;
+    }
+
+    &__recall {
+        @extend %basic-font;
+
+        margin-bottom: $base-step;
+        width: 100%;
+        color: $color-form-subtle;
+        text-align: right;
+
+        .form__link {
+            color: $color-form-subtle;
+
+            &:hover {
+                color: darken($color-form-subtle, 25%);
+            }
+
+            &:active {
+                color: darken($color-form-subtle, 40%);
+            }
+        }
+    }
+
+    &__submit {
+        @extend %reset-button;
+
+        margin: $base-step * 3 auto;
+        width: 100%;
+        height: $base-step * 6;
+        background-color: $color-submit-bg-default;
+        border-radius: $base-step * 7;
+        color: $color-submit-default;
+        font-size: 2.1em;
+        line-height: (25/21);
+        transition: background-color, color 0.15s ease-in-out;
+
+        &:disabled {
+            background-color: $color-submit-bg-disabled;
+            color: $color-submit-disabled;
+            cursor: default;
+
+            &:hover,
+            &:active {
+                background-color: $color-submit-bg-disabled;
+            }
+        }
+
+        &:hover,
+        &:active {
+            background-color: $color-submit-bg-active;
+        }
+    }
+
+    &__register {
+        @extend %basic-font;
+
+        color: $color-form-subtle;
+
+        .form__link {
+            color: $color-form-subtle-link;
+
+            &:hover {
+                color: darken($color-form-subtle-link, 25%);
+            }
+        }
+    }
+}

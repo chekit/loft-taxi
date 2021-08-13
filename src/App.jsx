@@ -23,8 +23,8 @@ class App extends Component {
         <section>
           {
             {
-              [AppPages.LOGIN]: <Login login={this.redirectToApp} registration={this.redirectToRegistration} />,
-              [AppPages.REGISTRATION]: <Registration login={() => this.changePage(AppPages.LOGIN)} />,
+              [AppPages.LOGIN]: <Login enter={this.redirectToApp} registration={this.redirectToRegistration} />,
+              [AppPages.REGISTRATION]: <Registration enter={this.redirectToApp} login={this.redirectToLogin} />,
               [AppPages.MAP]: <Order />,
               [AppPages.PROFILE]: <Profile />,
             }[currentPage]
@@ -42,7 +42,11 @@ class App extends Component {
     this.changePage(AppPages.REGISTRATION);
   }
 
-  changePage = (currentPage/* : AppPages */) => {
+  redirectToLogin = () => {
+    this.changePage(AppPages.LOGIN);
+  }
+
+  changePage = (currentPage) => {
     this.setState({ currentPage });
   }
 }

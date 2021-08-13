@@ -3,8 +3,8 @@ import LoginForm from '../../components/LoginForm';
 
 import './Login.scss';
 
-export const Login = ({ login, registration: register }) => (
+export const Login = ({ enter, registration }) => (
     <div className="wrapper">
-        <LoginForm submitHandler={login} registrationRedirect={register} />
+        <LoginForm submitHandler={enter} registrationRedirect={registration} />
     </div>
 )
