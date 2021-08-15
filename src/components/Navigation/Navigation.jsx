@@ -1,9 +1,9 @@
 import React from 'react';
-
 import { AppPages } from '../../common/models';
 
 import './Navigation.scss';
 
+// @TODO: Add logic for mobile devices
 export const Navigation = ({ navigate, currentPage }) => (
     <nav>
         <ul>

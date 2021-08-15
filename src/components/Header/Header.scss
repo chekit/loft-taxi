@@ -6,7 +6,6 @@
     justify-content: center;
     background-color: $color-header-background;
     height: $header-height-m;
-    transition: all .15 ease-in-out;
 
     @media screen and (min-width: $desktop) {
         padding: 0 flexwidth(50) 0 flexwidth(27);

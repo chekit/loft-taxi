@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { AppPages } from '../../common/models';
-
 import Logo from '../Logo';
 import Navigation from '../Navigation';
 
