@@ -1,15 +1,1 @@
 @import 'styles/globals.scss';
-
-// @TODO: Fix styling and class names
-.wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    flex: auto;
-    height: 100%;
-
-    @media screen and (min-width: $desktop) {
-        background: transparent url('/assets/logn-page-background.png') center center fixed;
-    }
-}

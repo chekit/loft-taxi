@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import FormInput from '../Form/Input';
 
 import './RegistrationForm.scss';
 
 export class RegistrationForm extends Component {
     state = {
-        login: undefined,
-        password: undefined
+        login: '',
+        name: '',
+        password: ''
     };
 
     onLoginChange = ({ currentTarget: { value } }) => {
@@ -20,27 +22,32 @@ export class RegistrationForm extends Component {
         });
     }
 
+    onNameChange = ({ currentTarget: { value } }) => {
+        this.setState({
+            name: value
+        });
+    }
+
     onLoginClick = (e) => {
         e.preventDefault();
-        this.props.loginRedirect();
+        this.props.redirect();
+    }
+
+    submitHandler = e => {
+        e.preventDefault();
+        this.props.proceed();
     }
 
     render() {
-        const { submitHandler } = this.props;
-        const { login, password } = this.state;
+        const { login, password, name } = this.state;
 
         return (
-            <form className="form" onSubmit={submitHandler}>
+            <form className="form" onSubmit={this.submitHandler}>
                 <h2 className="form__title">Регистрация</h2>
                 <fieldset className="form__fieldset">
-                    <label htmlFor="login" className="form__label">Email*</label>
-                    <input type="email" name="login" className="form__input" placeholder="mail@mail.ru" value={login} onChange={this.onLoginChange} required />
-
-                    <label htmlFor="name" className="form__label">Как вас зовут?*</label>
-                    <input type="text" name="name" className="form__input" placeholder="Петр Александрович" value={password} onChange={this.onPasswordChange} required />
-
-                    <label htmlFor="password" className="form__label">Придумайте пароль*</label>
-                    <input type="password" name="password" className="form__input" placeholder="password" value={password} onChange={this.onPasswordChange} required />
+                    <FormInput label="Email" type="email" name="login" placeholder="mail@mail.ru" value={login} onChangeHandler={this.onLoginChange} isRequired="true" />
+                    <FormInput label="Как вас зовут?" type="text" name="name" placeholder="Петр Александрович" value={name} onChangeHandler={this.onNameChange} isRequired="true" />
+                    <FormInput label="Придумайте пароль" type="password" name="password" placeholder="password" value={password} onChangeHandler={this.onPasswordChange} isRequired="true" />
                 </fieldset>
                 <button type="submit" className="form__submit" disabled={!login || !password}>Зарегистрироваться</button>
                 <div className="form__register">

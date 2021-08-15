@@ -14,40 +14,31 @@ class App extends Component {
     currentPage: AppPages.LOGIN
   };
 
+  changePage = (currentPage) => {
+    this.setState({ currentPage });
+  }
+
   render() {
     const { currentPage } = this.state;
+    const mainContainerMod = currentPage === AppPages.LOGIN || currentPage === AppPages.REGISTRATION ? 'is-row' : '';
 
     return (
-      <main className={currentPage === AppPages.LOGIN || currentPage === AppPages.REGISTRATION ? 'is-row' : ''}>
+      <main className={mainContainerMod}>
         <Header navigate={this.changePage} currentPage={currentPage} />
-        <section>
-          {
-            {
-              [AppPages.LOGIN]: <Login enter={this.redirectToApp} registration={this.redirectToRegistration} />,
-              [AppPages.REGISTRATION]: <Registration enter={this.redirectToApp} login={this.redirectToLogin} />,
-              [AppPages.MAP]: <Order />,
-              [AppPages.PROFILE]: <Profile />,
-            }[currentPage]
-          }
-        </section>
+        <section>{
+          this.loadPage(currentPage)
+        }</section>
       </main>
     );
   }
 
-  redirectToApp = () => {
-    this.changePage(AppPages.MAP);
-  }
-
-  redirectToRegistration = () => {
-    this.changePage(AppPages.REGISTRATION);
-  }
-
-  redirectToLogin = () => {
-    this.changePage(AppPages.LOGIN);
-  }
-
-  changePage = (currentPage) => {
-    this.setState({ currentPage });
+  loadPage(pageType) {
+    return ({
+      [AppPages.LOGIN]: <Login enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.REGISTRATION)} />,
+      [AppPages.REGISTRATION]: <Registration enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.LOGIN)} />,
+      [AppPages.MAP]: <Order />,
+      [AppPages.PROFILE]: <Profile />,
+    }[pageType])
   }
 }
 

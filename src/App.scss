@@ -7,7 +7,6 @@ main {
     width: 100%;
     height: 100vh;
     min-width: $min-width;
-    // max-width: $max-width;
 
     &.is-row {
         @media screen and (min-width: $desktop) {
@@ -16,7 +15,6 @@ main {
     }
 }
 
-// @TODO: Temporary. For Demo
 section {
     display: flex;
     flex: auto;

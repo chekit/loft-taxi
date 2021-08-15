@@ -1,8 +1,11 @@
 import React from 'react';
 import RegistrationForm from '../../components/RegistrationForm';
+import PageWithForm from '../../components/PageWithForm';
 
-export const Registration = ({ enter, login }) => (
-    <div className="wrapper">
-        <RegistrationForm submitHandler={enter} loginRedirect={login} />
-    </div>
+import './Registration.scss';
+
+export const Registration = ({ enter, redirect }) => (
+    <PageWithForm>
+        <RegistrationForm proceed={enter} redirect={redirect} />
+    </PageWithForm>
 );

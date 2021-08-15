@@ -5,11 +5,14 @@ $max-width: 1920px;
 
 $default-context: 1440px;
 
-$header-height-mobile: 193px;
-$header-height-desktop: 102px;
+$header-height-m: 193px;
+$header-height-d: 102px;
 
 $base-font: 10px;
 $base-step: 10px;
 
 $form-max-width: 580px;
-$form-min-width: 300px;
+$form-min-width: 320px;
+
+$horizontal-section-width-m: 375px;
+$horizontal-section-width-d: 950px;

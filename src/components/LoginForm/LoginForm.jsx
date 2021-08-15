@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import FormInput from '../Form/Input';
 
 import './LoginForm.scss';
 
 export class LoginForm extends Component {
     state = {
-        login: undefined,
-        password: undefined
+        login: ''   ,
+        password: ''
     };
 
     onLoginChange = ({ currentTarget: { value } }) => {
@@ -20,24 +21,25 @@ export class LoginForm extends Component {
         });
     }
 
-    onRegisterClick = (e) => {
+    onRegisterClick = e => {
         e.preventDefault();
-        this.props.registrationRedirect();
+        this.props.redirect();
+    }
+
+    submitHandler = e => {
+        e.preventDefault();
+        this.props.proceed();
     }
 
     render() {
-        const { submitHandler } = this.props;
         const { login, password } = this.state;
 
         return (
-            <form className="form" onSubmit={submitHandler}>
+            <form className="form" onSubmit={this.submitHandler}>
                 <h2 className="form__title">Войти</h2>
                 <fieldset className="form__fieldset">
-                    <label htmlFor="login" className="form__label">Email</label>
-                    <input type="email" name="login" className="form__input" placeholder="mail@mail.ru" value={login} onChange={this.onLoginChange} />
-
-                    <label htmlFor="password" className="form__label">Пароль</label>
-                    <input type="password" name="password" className="form__input" placeholder="password" value={password} onChange={this.onPasswordChange} />
+                    <FormInput label="Email" type="email" name="login" placeholder="mail@mail.ru" value={login} onChangeHandler={this.onLoginChange} />
+                    <FormInput label="Пароль" type="password" name="password" placeholder="password" value={password} onChangeHandler={this.onPasswordChange} />
                 </fieldset>
                 <div className="form__recall ">
                     {/* @TODO: Change to link */}
