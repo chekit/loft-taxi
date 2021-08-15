@@ -14,9 +14,9 @@ class App extends Component {
     currentPage: AppPages.LOGIN
   };
 
-  changePage = (currentPage) => {
+  changePage = currentPage => {
     this.setState({ currentPage });
-  }
+  };
 
   render() {
     const { currentPage } = this.state;
@@ -38,7 +38,7 @@ class App extends Component {
       [AppPages.REGISTRATION]: <Registration enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.LOGIN)} />,
       [AppPages.MAP]: <Order />,
       [AppPages.PROFILE]: <Profile />,
-    }[pageType])
+    }[pageType]);
   }
 }
 

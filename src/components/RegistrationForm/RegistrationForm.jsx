@@ -16,29 +16,29 @@ export class RegistrationForm extends Component {
         this.setState({
             login: value
         });
-    }
+    };
 
     onPasswordChange = ({ currentTarget: { value } }) => {
         this.setState({
             password: value
         });
-    }
+    };
 
     onNameChange = ({ currentTarget: { value } }) => {
         this.setState({
             name: value
         });
-    }
+    };
 
-    onLoginClick = (e) => {
+    onLoginClick = e => {
         e.preventDefault();
         this.props.redirect();
-    }
+    };
 
     submitHandler = e => {
         e.preventDefault();
         this.props.proceed();
-    }
+    };
 
     render() {
         const { login, password, name } = this.state;
