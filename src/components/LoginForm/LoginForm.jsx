@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import Form from '../Form';
 import FormInput from '../Form/Input';
+import SubmitButton from '../Form/SubmitButton';
 
 import './LoginForm.scss';
 
 export class LoginForm extends Component {
     state = {
-        login: ''   ,
+        login: '',
         password: ''
     };
 
@@ -35,8 +37,7 @@ export class LoginForm extends Component {
         const { login, password } = this.state;
 
         return (
-            <form className="form" onSubmit={this.submitHandler}>
-                <h2 className="form__title">Войти</h2>
+            <Form title="Войти" submitHandler={this.submitHandler}>
                 <fieldset className="form__fieldset">
                     <FormInput label="Email" type="email" name="login" placeholder="mail@mail.ru" value={login} onChangeHandler={this.onLoginChange} />
                     <FormInput label="Пароль" type="password" name="password" placeholder="password" value={password} onChangeHandler={this.onPasswordChange} />
@@ -45,12 +46,12 @@ export class LoginForm extends Component {
                     {/* @TODO: Change to link */}
                     <span className="form__link" onClick={() => console.log('Recall pass')}>Забыли пароль?</span>
                 </div>
-                <button type="submit" className="form__submit" disabled={!login || !password}>Войти</button>
+                <SubmitButton title="Войти" isDisabled={!login || !password}></SubmitButton>
                 <div className="form__register">
                     {/* @TODO: Change to link */}
                     <p>Новый пользователь? <span className="form__link" onClick={this.onRegisterClick}>Регистрация</span></p>
                 </div>
-            </form>
+            </Form>
         );
     }
 }
