@@ -7,8 +7,7 @@ import Navigation from '../Navigation';
 
 import './Header.scss';
 
-export const Header = ({ navigate, currentPage }) => {
-    const showNavigation = currentPage !== AppPages.LOGIN && currentPage !== AppPages.REGISTRATION;
+export const Header = ({ navigate, currentPage, showNavigation }) => {
     return (
         <header className={`header ${!showNavigation ? 'is-vertical' : ''}`}>
             <Logo currentPage={currentPage} />

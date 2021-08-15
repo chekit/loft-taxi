@@ -24,7 +24,7 @@ class App extends Component {
 
     return (
       <main className={mainContainerMod}>
-        <Header navigate={this.changePage} currentPage={currentPage} />
+        <Header navigate={this.changePage} currentPage={currentPage} showNavigation={currentPage !== AppPages.LOGIN && currentPage !== AppPages.REGISTRATION} />
         <section>{
           this.loadPage(currentPage)
         }</section>
