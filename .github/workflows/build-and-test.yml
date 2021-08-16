@@ -28,7 +28,7 @@ jobs:
         run: npm install
 
       - name: Run Tests 🧪
-        run: npm test:mac
+        run: npm test
 
       - name: Run Build 🔨
-        run: npm build:mac
+        run: npm build
