@@ -11,27 +11,23 @@ export class LoginForm extends Component {
         password: ''
     };
 
-    onLoginChange = ({ currentTarget: { value } }) => {
-        this.setState({
-            login: value
-        });
-    }
-
-    onPasswordChange = ({ currentTarget: { value } }) => {
-        this.setState({
-            password: value
-        });
-    }
-
     onRegisterClick = e => {
         e.preventDefault();
         this.props.redirect();
-    }
+    };
+
+    handleInputChange = e => {
+        const { target: { name, value } } = e;
+
+        this.setState({
+            [name]: value
+        });
+    };
 
     submitHandler = e => {
         e.preventDefault();
         this.props.proceed();
-    }
+    };
 
     render() {
         const { login, password } = this.state;
@@ -39,8 +35,8 @@ export class LoginForm extends Component {
         return (
             <Form title="Войти" submitHandler={this.submitHandler}>
                 <fieldset className="form__fieldset">
-                    <FormInput label="Email" type="email" name="login" placeholder="mail@mail.ru" value={login} onChangeHandler={this.onLoginChange} />
-                    <FormInput label="Пароль" type="password" name="password" placeholder="password" value={password} onChangeHandler={this.onPasswordChange} />
+                    <FormInput label="Email" type="email" name="login" placeholder="mail@mail.ru" value={login} onChangeHandler={this.handleInputChange} />
+                    <FormInput label="Пароль" type="password" name="password" placeholder="password" value={password} onChangeHandler={this.handleInputChange} />
                 </fieldset>
                 <div className="form__recall ">
                     {/* @TODO: Change to link */}

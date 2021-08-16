@@ -12,27 +12,17 @@ export class RegistrationForm extends Component {
         password: ''
     };
 
-    onLoginChange = ({ currentTarget: { value } }) => {
-        this.setState({
-            login: value
-        });
-    };
-
-    onPasswordChange = ({ currentTarget: { value } }) => {
-        this.setState({
-            password: value
-        });
-    };
-
-    onNameChange = ({ currentTarget: { value } }) => {
-        this.setState({
-            name: value
-        });
-    };
-
     onLoginClick = e => {
         e.preventDefault();
         this.props.redirect();
+    };
+
+    handleInputChange = e => {
+        const { target: { name, value } } = e;
+
+        this.setState({
+            [name]: value
+        });
     };
 
     submitHandler = e => {
@@ -46,9 +36,9 @@ export class RegistrationForm extends Component {
         return (
             <Form title="Регистрация" submitHandler={this.submitHandler}>
                 <fieldset className="form__fieldset">
-                    <FormInput label="Email" type="email" name="login" placeholder="mail@mail.ru" value={login} onChangeHandler={this.onLoginChange} isRequired={true} />
-                    <FormInput label="Как вас зовут?" type="text" name="name" placeholder="Петр Александрович" value={name} onChangeHandler={this.onNameChange} isRequired={true} />
-                    <FormInput label="Придумайте пароль" type="password" name="password" placeholder="password" value={password} onChangeHandler={this.onPasswordChange} isRequired={true} />
+                    <FormInput label="Email" type="email" name="login" placeholder="mail@mail.ru" value={login} onChangeHandler={this.handleInputChange} isRequired={true} />
+                    <FormInput label="Как вас зовут?" type="text" name="name" placeholder="Петр Александрович" value={name} onChangeHandler={this.handleInputChange} isRequired={true} />
+                    <FormInput label="Придумайте пароль" type="password" name="password" placeholder="password" value={password} onChangeHandler={this.handleInputChange} isRequired={true} />
                 </fieldset>
                 <SubmitButton title="Зарегистрироваться" isDisabled={!login || !password || !name}></SubmitButton>
                 <div className="form__register">

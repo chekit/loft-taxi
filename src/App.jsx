@@ -18,20 +18,6 @@ class App extends Component {
     this.setState({ currentPage });
   };
 
-  render() {
-    const { currentPage } = this.state;
-    const mainContainerMod = currentPage === AppPages.LOGIN || currentPage === AppPages.REGISTRATION ? 'is-row' : '';
-
-    return (
-      <main className={mainContainerMod}>
-        <Header navigate={this.changePage} currentPage={currentPage} showNavigation={currentPage !== AppPages.LOGIN && currentPage !== AppPages.REGISTRATION} />
-        <section>{
-          this.loadPage(currentPage)
-        }</section>
-      </main>
-    );
-  }
-
   loadPage(pageType) {
     return ({
       [AppPages.LOGIN]: <Login enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.REGISTRATION)} />,
@@ -39,6 +25,21 @@ class App extends Component {
       [AppPages.MAP]: <Order />,
       [AppPages.PROFILE]: <Profile />,
     }[pageType]);
+  }
+
+  render() {
+    const { currentPage } = this.state;
+    const mainContainerMod = currentPage === AppPages.LOGIN || currentPage === AppPages.REGISTRATION ? 'is-row' : '';
+
+    return (
+      <main className={mainContainerMod}>
+        <Header navigate={this.changePage} currentPage={currentPage} showNavigation={currentPage !== AppPages.LOGIN && currentPage !== AppPages.REGISTRATION} />
+        {/* @TODO: Add Layouts wrapper for Logged in and Guest users */}
+        <section>{
+          this.loadPage(currentPage)
+        }</section>
+      </main>
+    );
   }
 }
 
