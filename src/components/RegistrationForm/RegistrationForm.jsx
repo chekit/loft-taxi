@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Form from '../Form';
 import FormInput from '../Form/Input';
 import SubmitButton from '../Form/SubmitButton';
@@ -38,7 +39,7 @@ export class RegistrationForm extends Component {
                 <fieldset className="form__fieldset">
                     <FormInput label="Email" type="email" name="login" placeholder="mail@mail.ru" value={login} onChangeHandler={this.handleInputChange} isRequired={true} />
                     <FormInput label="Как вас зовут?" type="text" name="name" placeholder="Петр Александрович" value={name} onChangeHandler={this.handleInputChange} isRequired={true} />
-                    <FormInput label="Придумайте пароль" type="password" name="password" placeholder="password" value={password} onChangeHandler={this.handleInputChange} isRequired={true} />
+                    <FormInput label="Придумайте пароль" type="password" name="password" placeholder="********" value={password} onChangeHandler={this.handleInputChange} isRequired={true} />
                 </fieldset>
                 <SubmitButton title="Зарегистрироваться" isDisabled={!login || !password || !name}></SubmitButton>
                 <div className="form__register">
@@ -49,3 +50,8 @@ export class RegistrationForm extends Component {
         );
     }
 }
+
+RegistrationForm.propTypes = {
+    proceed: PropTypes.func,
+    redirect: PropTypes.func
+};

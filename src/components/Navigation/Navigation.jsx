@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { AppPages } from '../../common/models';
 import NavigationLink from './NavigationLink';
 
@@ -8,7 +10,7 @@ import './Navigation.scss';
 export const Navigation = ({ navigate, currentPage }) => {
     return (
         <nav className="navigation">
-            <ul class="navigation-list">
+            <ul className="navigation-list">
                 <li className="navigation-list__item">
                     <NavigationLink title="Карта" onClickHandler={() => navigate(AppPages.MAP)} isActive={currentPage === AppPages.MAP}></NavigationLink>
                 </li>
@@ -23,4 +25,9 @@ export const Navigation = ({ navigate, currentPage }) => {
             </ul>
         </nav>
     )
+};
+
+Navigation.propTypes = {
+    navigate: PropTypes.func,
+    currentPage: PropTypes.number,
 };

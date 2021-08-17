@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import LoginForm from '../../components/LoginForm';
 import PageWithForm from '../../components/PageWithForm';
 
@@ -9,3 +11,8 @@ export const Login = ({ enter, redirect }) => (
         <LoginForm proceed={enter} redirect={redirect} />
     </PageWithForm>
 );
+
+Login.propTypes = {
+    enter: PropTypes.func,
+    redirect: PropTypes.func
+};

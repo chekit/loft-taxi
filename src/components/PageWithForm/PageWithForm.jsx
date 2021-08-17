@@ -1,9 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './PageWithForm.scss';
 
-export const PageWithForm = props => (
+export const PageWithForm = ({ children }) => (
     <div className="wrapper">
-        {props.children}
+        {children}
     </div>
 );
+
+PageWithForm.propTypes = {
+    children: PropTypes.element
+}

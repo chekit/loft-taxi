@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './Form.scss';
 
@@ -9,4 +10,10 @@ export const Form = ({ title, submitHandler, children }) => {
             {children}
         </form>
     );
-}
+};
+
+Form.propTypes = {
+    title: PropTypes.string,
+    submitHandler: PropTypes.func,
+    children: PropTypes.arrayOf(PropTypes.element)
+};

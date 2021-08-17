@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Form from '../Form';
 import FormInput from '../Form/Input';
 import SubmitButton from '../Form/SubmitButton';
@@ -36,7 +37,7 @@ export class LoginForm extends Component {
             <Form title="Войти" submitHandler={this.submitHandler}>
                 <fieldset className="form__fieldset">
                     <FormInput label="Email" type="email" name="login" placeholder="mail@mail.ru" value={login} onChangeHandler={this.handleInputChange} />
-                    <FormInput label="Пароль" type="password" name="password" placeholder="password" value={password} onChangeHandler={this.handleInputChange} />
+                    <FormInput label="Пароль" type="password" name="password" placeholder="********" value={password} onChangeHandler={this.handleInputChange} />
                 </fieldset>
                 <div className="form__recall ">
                     {/* @TODO: Change to link */}
@@ -51,3 +52,8 @@ export class LoginForm extends Component {
         );
     }
 }
+
+LoginForm.propTypes = {
+    proceed: PropTypes.func,
+    redirect: PropTypes.func
+};
