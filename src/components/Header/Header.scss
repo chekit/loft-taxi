@@ -1,0 +1,25 @@
+@import 'styles/globals.scss';
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-header-background;
+    height: $header-height-m;
+
+    @media screen and (min-width: $desktop) {
+        padding: 0 flexwidth(50) 0 flexwidth(27);
+        justify-content: space-between;
+        height: $header-height-d;
+    }
+
+    &.is-vertical {
+        @media screen and (min-width: $desktop) {
+            width: flexwidth(485);
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}

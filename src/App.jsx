@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { AppPages } from './common/models';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Login from './pages/Login';
+import Profile from './pages/Profile';
+import Registration from './pages/Registration';
+import Order from './pages/Order';
+import Header from './components/Header';
+
+import './App.scss';
+
+class App extends Component {
+  state = {
+    currentPage: AppPages.LOGIN
+  };
+
+  changePage = currentPage => {
+    this.setState({ currentPage });
+  };
+
+  loadPage(pageType) {
+    return ({
+      [AppPages.LOGIN]: <Login enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.REGISTRATION)} />,
+      [AppPages.REGISTRATION]: <Registration enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.LOGIN)} />,
+      [AppPages.MAP]: <Order />,
+      [AppPages.PROFILE]: <Profile />,
+    }[pageType]);
+  }
+
+  render() {
+    const { currentPage } = this.state;
+    const mainContainerMod = currentPage === AppPages.LOGIN || currentPage === AppPages.REGISTRATION ? 'is-row' : '';
+
+    return (
+      <main className={mainContainerMod}>
+        <Header navigate={this.changePage} currentPage={currentPage} showNavigation={currentPage !== AppPages.LOGIN && currentPage !== AppPages.REGISTRATION} />
+        {/* @TODO: Add Layouts wrapper for Logged in and Guest users */}
+        <section>{
+          this.loadPage(currentPage)
+        }</section>
+      </main>
+    );
+  }
 }
 
 export default App;

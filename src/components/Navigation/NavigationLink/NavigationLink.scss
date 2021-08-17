@@ -1,0 +1,22 @@
+@import 'styles/globals.scss';
+
+.navigation {
+    &__link {
+        color: white;
+        // @TODO: Remove after adding links
+        cursor: pointer;
+        transition: color .15s ease-in-out;
+
+        &:hover {
+            color: darken(white, 20%);
+        }
+
+        &:active {
+            color: darken(white, 30%);
+        }
+
+        &.is-active {
+            color: $color-active-nav;
+        }
+    }
+}

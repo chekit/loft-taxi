@@ -1,0 +1,28 @@
+@import 'styles/globals.scss';
+
+.form {
+    &__label,
+    &__input {
+        @extend %basic-form-font-settings;
+
+        display: block;
+        width: 100%;
+    }
+
+    &__label {
+        margin-bottom: $base-step;
+        font-weight: bold;
+    }
+
+    &__input {
+        box-sizing: border-box;
+        padding: $base-step 0;
+        margin-bottom: $base-step * 2.5;
+        border: none;
+        border-bottom: 2px solid $color-input-border;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+}
