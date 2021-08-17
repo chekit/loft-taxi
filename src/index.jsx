@@ -5,7 +5,7 @@ import App from './App';
 import { theme } from "loft-taxi-mui-theme";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 
-import './index.css';
+import './index.scss';
 
 ReactDOM.render(
   <React.StrictMode>

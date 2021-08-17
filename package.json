@@ -9,16 +9,21 @@
     "@testing-library/user-event": "^12.1.10",
     "loft-taxi-mui-theme": "^1.2.0",
     "prop-types": "^15.7.2",
+    "node-sass": "^4.14.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
-    "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start:win": "cross-env SASS_PATH=./node_modules;./src react-scripts start",
+    "start:mac": "cross-env SASS_PATH=node_modules:src react-scripts start",
+
+    "build:win": "cross-env SASS_PATH=./node_modules;./src react-scripts build",
+    "build:mac": "cross-env SASS_PATH=node_modules:src react-scripts build",
+
+    "test:win": "cross-env SASS_PATH=./node_modules;./src react-scripts test",
+    "test:mac": "cross-env SASS_PATH=node_modules:src react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -38,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }

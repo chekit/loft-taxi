@@ -1,0 +1,27 @@
+@import 'styles/globals.scss';
+
+// @TODO: Add implementation for Mobile devices
+.navigation {
+    font-size: 2.1em;
+    line-height: (25/21);
+
+    &-list {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+
+        &__item {
+            margin: 0 20px;
+
+            &:first-child {
+                margin-left: 0;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}

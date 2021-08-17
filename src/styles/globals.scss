@@ -1,0 +1,19 @@
+@import './colors';
+@import './sizes';
+
+@function flexwidth($base, $context: $default-context) {
+    @return ($base / ($context / 1px)) * 100%;
+}
+
+%reset-button {
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    font-size: inherit;
+}
+
+%basic-form-font-settings {
+    font-size: 1.6em;
+    line-height: (19/16);
+}
