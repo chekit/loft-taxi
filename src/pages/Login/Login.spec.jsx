@@ -1,6 +1,6 @@
 import React from 'react';
 import { Login } from './Login';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 describe('Login Page', () => {
     it(`renders login Form`, () => {

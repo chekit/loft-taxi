@@ -1,6 +1,6 @@
 import React from 'react';
 import { Registration } from './Registration';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 describe('Registration Page', () => {
     it(`renders Registration Form`, () => {
