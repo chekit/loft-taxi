@@ -1,20 +1,5 @@
 @import './styles/globals.scss';
 
-main {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    width: 100%;
-    height: 100vh;
-    min-width: $min-width;
-
-    &.is-row {
-        @media screen and (min-width: $desktop) {
-            flex-direction: row;
-        }
-    }
-}
-
 // @FIXME: Refactor after adding pages content
 section {
     display: flex;
