@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Form from '../Form';
 import FormInput from '../Form/Input';
@@ -6,7 +6,7 @@ import SubmitButton from '../Form/SubmitButton';
 
 import './LoginForm.scss';
 
-export class LoginForm extends Component {
+export class LoginForm extends PureComponent {
     state = {
         login: '',
         password: ''

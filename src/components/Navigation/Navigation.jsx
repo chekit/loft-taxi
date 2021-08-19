@@ -11,7 +11,7 @@ import './Navigation.scss';
 export const Navigation = ({ navigate, currentPage }) => {
     return (
         <AuthContext.Consumer>{(context) => {
-            const { logout, isLoggedIn } = context;
+            const { logout } = context;
 
             return (
                 <nav className="navigation">
@@ -22,11 +22,9 @@ export const Navigation = ({ navigate, currentPage }) => {
                         <li className="navigation-list__item">
                             <NavigationLink title="Профиль" onClickHandler={() => navigate(AppPages.PROFILE)} isActive={currentPage === AppPages.PROFILE}></NavigationLink>
                         </li>
-                        {isLoggedIn && (
-                            <li className="navigation-list__item">
-                                <NavigationLink title="Выход" onClickHandler={() => { logout(); navigate(AppPages.LOGIN) }}></NavigationLink>
-                            </li>
-                        )}
+                        <li className="navigation-list__item">
+                            <NavigationLink title="Выход" onClickHandler={() => { logout(); navigate(AppPages.LOGIN) }}></NavigationLink>
+                        </li>
                     </ul>
                 </nav>
 

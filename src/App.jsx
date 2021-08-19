@@ -38,9 +38,7 @@ class App extends Component {
       <AuthContextProvider>
         <PageWrapper currentPage={currentPage}>
           <Header navigate={this.changePage} currentPage={currentPage} showNavigation={currentPage !== AppPages.LOGIN && currentPage !== AppPages.REGISTRATION} />
-          <section>
-            {this.loadPage(currentPage)}
-          </section>
+          <section>{this.loadPage(currentPage)}</section>
         </PageWrapper>
       </AuthContextProvider>
     );
