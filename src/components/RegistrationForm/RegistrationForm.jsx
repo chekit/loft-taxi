@@ -8,7 +8,7 @@ import './RegistrationForm.scss';
 
 export class RegistrationForm extends PureComponent {
     state = {
-        login: '',
+        email: '',
         name: '',
         password: ''
     };
@@ -28,20 +28,21 @@ export class RegistrationForm extends PureComponent {
 
     submitHandler = e => {
         e.preventDefault();
-        this.props.proceed();
+        const { email, password } = this.state;
+        this.props.proceed(email, password);
     };
 
     render() {
-        const { login, password, name } = this.state;
+        const { email, password, name } = this.state;
 
         return (
             <Form title="Регистрация" submitHandler={this.submitHandler}>
                 <fieldset className="form__fieldset">
-                    <FormInput label="Email" type="email" name="login" placeholder="mail@mail.ru" value={login} onChangeHandler={this.handleInputChange} isRequired={true} />
+                    <FormInput label="Email" type="email" name="email" placeholder="mail@mail.ru" value={email} onChangeHandler={this.handleInputChange} isRequired={true} />
                     <FormInput label="Как вас зовут?" type="text" name="name" placeholder="Петр Александрович" value={name} onChangeHandler={this.handleInputChange} isRequired={true} />
                     <FormInput label="Придумайте пароль" type="password" name="password" placeholder="********" value={password} onChangeHandler={this.handleInputChange} isRequired={true} />
                 </fieldset>
-                <SubmitButton title="Зарегистрироваться" isDisabled={!login || !password || !name}></SubmitButton>
+                <SubmitButton title="Зарегистрироваться" isDisabled={!email || !password || !name}></SubmitButton>
                 <div className="form__register">
                     {/* @TODO: Change to link */}
                     <p>Уже зарегестрированны? <span className="form__link" onClick={this.onLoginClick}>Войти</span></p>

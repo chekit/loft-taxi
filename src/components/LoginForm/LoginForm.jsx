@@ -8,7 +8,7 @@ import './LoginForm.scss';
 
 export class LoginForm extends PureComponent {
     state = {
-        login: '',
+        email: '',
         password: ''
     };
 
@@ -27,23 +27,24 @@ export class LoginForm extends PureComponent {
 
     submitHandler = e => {
         e.preventDefault();
-        this.props.proceed();
+        const { email, password } = this.state;
+        this.props.proceed(email, password);
     };
 
     render() {
-        const { login, password } = this.state;
+        const { email, password } = this.state;
 
         return (
             <Form title="Войти" submitHandler={this.submitHandler}>
                 <fieldset className="form__fieldset">
-                    <FormInput label="Email" type="email" name="login" placeholder="mail@mail.ru" value={login} onChangeHandler={this.handleInputChange} />
+                    <FormInput label="Email" type="email" name="email" placeholder="mail@mail.ru" value={email} onChangeHandler={this.handleInputChange} />
                     <FormInput label="Пароль" type="password" name="password" placeholder="********" value={password} onChangeHandler={this.handleInputChange} />
                 </fieldset>
                 <div className="form__recall ">
                     {/* @TODO: Change to link */}
                     <span className="form__link" onClick={() => console.log('Recall pass')}>Забыли пароль?</span>
                 </div>
-                <SubmitButton title="Войти" isDisabled={!login || !password}></SubmitButton>
+                <SubmitButton title="Войти" isDisabled={!email || !password}></SubmitButton>
                 <div className="form__register">
                     {/* @TODO: Change to link */}
                     <p>Новый пользователь? <span className="form__link" onClick={this.onRegisterClick}>Регистрация</span></p>

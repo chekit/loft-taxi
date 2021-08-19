@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import RegistrationForm from '../../components/RegistrationForm';
@@ -8,16 +8,12 @@ import { AuthContext } from '../../contexts/AuthContext';
 import './Registration.scss';
 
 export const Registration = ({ enter, redirect }) => {
-    return (
-        <AuthContext.Consumer>{(context) => {
-            const { login } = context;
+    const { login } = useContext(AuthContext);
 
-            return (
-                <PageWithForm>
-                    <RegistrationForm proceed={() => { login(); enter() }} redirect={redirect} />
-                </PageWithForm>
-            );
-        }}</AuthContext.Consumer>
+    return (
+        <PageWithForm>
+            <RegistrationForm proceed={(email, password) => { login(email, password); enter() }} redirect={redirect} />
+        </PageWithForm>
     );
 }
 

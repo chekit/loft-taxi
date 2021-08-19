@@ -7,7 +7,7 @@ describe('Registration Page', () => {
     it(`renders Registration Form`, () => {
         const { getByLabelText } = render(<AuthContextProvider><Registration /></AuthContextProvider>);
 
-        expect(getByLabelText(`Email*:`)).toHaveAttribute('name', 'login');
+        expect(getByLabelText(`Email*:`)).toHaveAttribute('name', 'email');
         expect(getByLabelText(`Как вас зовут?*:`)).toHaveAttribute('name', 'name');
         expect(getByLabelText(`Придумайте пароль*:`)).toHaveAttribute('name', 'password');
     });

@@ -1,29 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import Logo from '../Logo';
 import Navigation from '../Navigation';
-import { AuthContext } from '../../contexts/AuthContext';
 
 import './Header.scss';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export const Header = ({ navigate, currentPage }) => {
-    return (
-        <AuthContext.Consumer>{(context) => {
-            const isShowNavigation = context.isLoggedIn;
+    const { isLoggedIn } = useContext(AuthContext);
 
-            return (
-                <header className={`header ${!isShowNavigation && 'is-vertical'}`}>
-                    <Logo currentPage={currentPage} />
-                    {isShowNavigation && <Navigation navigate={navigate} currentPage={currentPage} />}
-                </header>
-            );
-        }}
-        </AuthContext.Consumer>
+    return (
+        <header className={`header ${!isLoggedIn && 'is-vertical'}`}>
+            <Logo currentPage={currentPage} />
+            {isLoggedIn && <Navigation navigate={navigate} currentPage={currentPage} />}
+        </header>
     );
 };
 
 Header.propTypes = {
     navigate: PropTypes.func,
-    currentPage: PropTypes.number
+    currentPage: PropTypes.number,
+    isLoggedIn: PropTypes.bool
 };
