@@ -6,7 +6,13 @@ import SubmitButton from '../Form/SubmitButton';
 
 import './LoginForm.scss';
 
+
 export class LoginForm extends PureComponent {
+    static propTypes = {
+        proceed: PropTypes.func,
+        redirect: PropTypes.func
+    };
+
     state = {
         email: '',
         password: ''
@@ -53,8 +59,3 @@ export class LoginForm extends PureComponent {
         );
     }
 }
-
-LoginForm.propTypes = {
-    proceed: PropTypes.func,
-    redirect: PropTypes.func
-};
