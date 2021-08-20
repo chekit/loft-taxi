@@ -26,7 +26,6 @@ class AuthContextProvider extends Component {
         const { children } = this.props;
 
         return (
-            // @TODO: Refactor global provider
             <AuthContext.Provider value={{ ...this.state, login: this.login, logout: this.logout }}>
                 {children}
             </AuthContext.Provider>

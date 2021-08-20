@@ -1,15 +1,5 @@
 @import './styles/globals.scss';
 
-// @FIXME: Refactor after adding pages content
 section {
-    display: flex;
     flex: auto;
-    align-items: center;
-    justify-content: center;
-
-    // @TODO: Remove after adding pages content
-    & > p {
-        font-size: 28px;
-        font-weight: bold;
-    }
 }
