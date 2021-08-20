@@ -8,7 +8,7 @@ function AuthHOC(WrappedComponent) {
         render() {
             return (
                 <AuthContext.Consumer>{(context) => {
-                    return <WrappedComponent globalContext={context} />;
+                    return <WrappedComponent authContext={context} />;
                 }}</AuthContext.Consumer>
             )
         }
