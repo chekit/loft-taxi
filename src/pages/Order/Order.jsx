@@ -29,7 +29,7 @@ export const Order = () => {
 
         // Unmount
         return () => map.remove();
-    }, []);
+    });
 
     return (
         <div className="map-container" ref={mapContainerRef}></div>
