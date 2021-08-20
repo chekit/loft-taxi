@@ -3,4 +3,4 @@ import Map from '../../components/Map';
 
 import './Order.scss';
 
-export const Order = () => (<Map />);
+export const Order = () => <Map />;

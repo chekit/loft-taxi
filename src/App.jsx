@@ -6,11 +6,11 @@ import Profile from './pages/Profile';
 import Registration from './pages/Registration';
 import Order from './pages/Order';
 import Header from './components/Header';
+import PageWrapper from './components/PageWrapper';
 
 import AuthContextProvider, { AuthContext } from './contexts/AuthContext';
 
 import './App.scss';
-import PageWrapper from './components/PageWrapper';
 
 class App extends Component {
   static contextType = AuthContext;
