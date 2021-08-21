@@ -5,7 +5,6 @@
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "loft-taxi-mui-theme": "^1.2.0",
     "mapbox-gl": "^2.4.1",
@@ -23,6 +22,8 @@
     "build:mac": "cross-env SASS_PATH=node_modules:src react-scripts build",
     "test:win": "cross-env SASS_PATH=./node_modules;./src react-scripts test",
     "test:mac": "cross-env SASS_PATH=node_modules:src react-scripts test",
+    "coverage:win": "cross-env SASS_PATH=./node_modules;./src react-scripts test --coverage",
+    "coverage:mac": "cross-env SASS_PATH=node_modules:src react-scripts test --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -44,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react": "^12.0.0",
     "cross-env": "^7.0.3"
   }
 }

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 import './Input.scss';
 
-export const FormInput = ({ label, value, type, name, placeholder, onChangeHandler, isRequired = false }) => {
+export const FormInput = ({ label, value, type, name, placeholder, onChangeHandler, isRequired, isDisabled }) => {
     return (
         <>
-            {label && <label htmlFor={name} className="form__label">{label}{isRequired && '*'}:</label>}
+            {label && <label htmlFor={name} className="form__label" data-testid="label">{label}{isRequired && '*'}:</label>}
             <input
                 className="form__input"
                 type={type}
@@ -14,7 +14,11 @@ export const FormInput = ({ label, value, type, name, placeholder, onChangeHandl
                 id={name}
                 placeholder={placeholder}
                 value={value}
-                onChange={onChangeHandler} required={isRequired} />
+                onChange={onChangeHandler}
+                required={isRequired}
+                disabled={isDisabled}
+                data-testid="input"
+             />
         </>
     );
 };
@@ -27,12 +31,15 @@ FormInput.propTypes = {
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     onChangeHandler: PropTypes.func,
-    isRequired: PropTypes.bool
+    isRequired: PropTypes.bool,
+    isDisabled: PropTypes.bool,
 };
 
 FormInput.defaultProps = {
     value: '',
     type: 'text',
     placeholder: '',
-    isRequired: false
+    isRequired: false,
+    isDisabled: false,
+    onChangeHandler: () => {}
 };
