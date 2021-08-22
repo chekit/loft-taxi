@@ -6,6 +6,8 @@ import SubmitButton from '../Form/SubmitButton';
 
 import './LoginForm.scss';
 
+export const LOGIN_FORM_TEST_ID = 'login-form';
+export const REGISTER_BUTTON_TEST_ID = 'register-btn';
 
 export class LoginForm extends PureComponent {
     static propTypes = {
@@ -41,7 +43,7 @@ export class LoginForm extends PureComponent {
         const { email, password } = this.state;
 
         return (
-            <Form title="Войти" submitHandler={this.submitHandler}>
+            <Form title="Войти" submitHandler={this.submitHandler} testId={LOGIN_FORM_TEST_ID}>
                 <fieldset className="form__fieldset">
                     <FormInput label="Email" type="email" name="email" placeholder="mail@mail.ru" value={email} onChangeHandler={this.handleInputChange} />
                     <FormInput label="Пароль" type="password" name="password" placeholder="********" value={password} onChangeHandler={this.handleInputChange} />
@@ -53,7 +55,7 @@ export class LoginForm extends PureComponent {
                 <SubmitButton title="Войти" isDisabled={!email || !password}></SubmitButton>
                 <div className="form__register">
                     {/* @TODO: Change to link */}
-                    <p>Новый пользователь? <span className="form__link" onClick={this.onRegisterClick}>Регистрация</span></p>
+                    <p>Новый пользователь? <span className="form__link" onClick={this.onRegisterClick} data-testid={REGISTER_BUTTON_TEST_ID}>Регистрация</span></p>
                 </div>
             </Form>
         );
