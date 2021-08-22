@@ -5,8 +5,8 @@ import './Form.scss';
 
 export const Form = ({ title, submitHandler, children }) => {
     return (
-        <form className="form" onSubmit={submitHandler}>
-            <h2 className="form__title">{title}</h2>
+        <form className="form" onSubmit={submitHandler} data-testid="form">
+            {title && <h2 className="form__title" data-testid="form-title">{title}</h2>}
             {children}
         </form>
     );
@@ -17,3 +17,7 @@ Form.propTypes = {
     submitHandler: PropTypes.func,
     children: PropTypes.arrayOf(PropTypes.element)
 };
+
+Form.defaultProps = {
+    submitHandler: () => { }
+}

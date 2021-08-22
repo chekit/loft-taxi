@@ -5,7 +5,7 @@ import './SubmitButton.scss';
 
 export const SubmitButton = ({ title, isDisabled, onClickHandler }) => {
     return (
-        <button type="submit" className="form__submit" onClick={onClickHandler} disabled={isDisabled}>{title}</button>
+        <button type="submit" className="form__submit" onClick={onClickHandler} disabled={isDisabled} data-testid="submit-button">{title}</button>
     );
 };
 

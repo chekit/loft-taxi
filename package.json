@@ -22,8 +22,7 @@
     "build:mac": "cross-env SASS_PATH=node_modules:src react-scripts build",
     "test:win": "cross-env SASS_PATH=./node_modules;./src react-scripts test",
     "test:mac": "cross-env SASS_PATH=node_modules:src react-scripts test",
-    "coverage:win": "cross-env SASS_PATH=./node_modules;./src react-scripts test --coverage",
-    "coverage:mac": "cross-env SASS_PATH=node_modules:src react-scripts test --coverage",
+    "coverage": "react-scripts test --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
