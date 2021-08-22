@@ -5,19 +5,22 @@ import { LOGIN_FORM_TEST_ID, REGISTER_BUTTON_TEST_ID } from './components/LoginF
 import { LOGIN_BUTTON_TEST_ID, REGISTRATION_FORM_TEST_ID } from './components/RegistrationForm/RegistrationForm';
 import { INPUT_TEST_ID } from './components/Form/Input/Input';
 import { SUBMIT_TEST_ID } from './components/Form/SubmitButton/SubmitButton';
+import AuthContextProvider from './contexts/AuthContext';
 
 jest.mock('./components/Map', () => (() => <p>Mocked Map</p>));
 
 describe('App', () => {
+    const AppWithProvider = () => <AuthContextProvider><App /></AuthContextProvider>;
+
     it(`should render with login form`, () => {
-        render(<App />);
+        render(<AppWithProvider />);
 
         const loginForm = screen.getByTestId(LOGIN_FORM_TEST_ID);
         expect(loginForm).toBeTruthy();
     });
 
     it(`should switch to register form`, () => {
-        render(<App />);
+        render(<AppWithProvider />);
 
         let loginForm = screen.getByTestId(LOGIN_FORM_TEST_ID);
         const registerBtn = screen.getByTestId(REGISTER_BUTTON_TEST_ID);
@@ -34,7 +37,7 @@ describe('App', () => {
     });
 
     it(`should switch to register and back to login form`, () => {
-        render(<App />);
+        render(<AppWithProvider />);
 
         const registerBtn = screen.getByTestId(REGISTER_BUTTON_TEST_ID);
         fireEvent.click(registerBtn);
@@ -51,7 +54,7 @@ describe('App', () => {
     });
 
     it(`should load map page after login`, () => {
-        render(<App />);
+        render(<AppWithProvider />);
 
         const loginForm = screen.queryByTestId(LOGIN_FORM_TEST_ID);
         expect(loginForm).toBeTruthy();

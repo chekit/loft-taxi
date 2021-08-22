@@ -8,7 +8,6 @@ import Order from './pages/Order';
 import Header from './components/Header';
 import PageWrapper from './components/PageWrapper';
 
-import { AuthContext } from './contexts/AuthContext';
 import AuthHOC from './hocs/AuthHOC';
 
 import './App.scss';
