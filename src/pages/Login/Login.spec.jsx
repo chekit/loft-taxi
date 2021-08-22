@@ -10,4 +10,6 @@ describe('Login Page', () => {
         expect(getByLabelText(`Email:`)).toHaveAttribute('name', 'email');
         expect(getByLabelText(`Пароль:`)).toHaveAttribute('name', 'password');
     });
+
+    it.todo('Test for form interaction');
 });

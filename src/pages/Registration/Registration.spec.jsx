@@ -11,4 +11,6 @@ describe('Registration Page', () => {
         expect(getByLabelText(`Как вас зовут?*:`)).toHaveAttribute('name', 'name');
         expect(getByLabelText(`Придумайте пароль*:`)).toHaveAttribute('name', 'password');
     });
+
+    it.todo('Test for form interaction');
 });
