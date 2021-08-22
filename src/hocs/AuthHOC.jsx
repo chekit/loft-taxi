@@ -3,12 +3,13 @@ import { AuthContext } from './../contexts/AuthContext';
 
 function AuthHOC(WrappedComponent) {
     return class extends Component {
+
         static displayName = 'AuthHOC';
 
         render() {
             return (
                 <AuthContext.Consumer>{(context) => {
-                    return <WrappedComponent authContext={context} />;
+                    return <WrappedComponent authContext={context} {...this.props} />;
                 }}</AuthContext.Consumer>
             )
         }
