@@ -1,8 +1,6 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { SubmitButton } from './SubmitButton';
-
-export const BTN_TEST_ID = 'submit-button';
+import { BTN_TEST_ID, SubmitButton } from './SubmitButton';
 
 describe('Submit Button Component', () => {
     const BTN_TITLE = 'Submit';

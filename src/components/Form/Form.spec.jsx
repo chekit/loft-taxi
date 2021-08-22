@@ -1,8 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { Form } from './Form';
-import { SubmitButton } from './SubmitButton/SubmitButton';
-import { BTN_TEST_ID } from './SubmitButton/SubmitButton.spec';
+import { BTN_TEST_ID, SubmitButton } from './SubmitButton/SubmitButton';
 
 describe('Form Component', () => {
     const FORM_TITLE = 'Form Title';
@@ -32,7 +31,7 @@ describe('Form Component', () => {
     });
 
     it('should call submit handler on submit click', () => {
-        const handler = jest.fn();
+        const handler = jest.fn(e => e.preventDefault());
 
         render((<Form title={FORM_TITLE} submitHandler={handler}>
             <SubmitButton title={'Submit'} />
@@ -46,7 +45,7 @@ describe('Form Component', () => {
     });
 
     it('should call submit handler on submit event', () => {
-        const handler = jest.fn();
+        const handler = jest.fn(e => e.preventDefault());
 
         render(<Form title={FORM_TITLE} submitHandler={handler} />);
         const form = screen.getByTestId('form');

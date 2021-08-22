@@ -7,12 +7,14 @@ import NavigationLink from './NavigationLink';
 
 import './Navigation.scss';
 
+export const NAV_TEST_ID = 'navigation';
+
 // @TODO: Add logic for mobile devices
 export const Navigation = ({ navigate, currentPage }) => {
     const { logout } = useContext(AuthContext);
 
     return (
-        <nav className="navigation">
+        <nav className="navigation" data-testid={NAV_TEST_ID}>
             <ul className="navigation-list">
                 <li className="navigation-list__item">
                     <NavigationLink title="Карта" onClickHandler={() => navigate(AppPages.MAP)} isActive={currentPage === AppPages.MAP}></NavigationLink>

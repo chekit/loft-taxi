@@ -15,7 +15,10 @@ export const Form = ({ title, submitHandler, children }) => {
 Form.propTypes = {
     title: PropTypes.string,
     submitHandler: PropTypes.func,
-    children: PropTypes.arrayOf(PropTypes.element)
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
 };
 
 Form.defaultProps = {
