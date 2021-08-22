@@ -10,5 +10,8 @@ export const PageWithForm = ({ children }) => (
 );
 
 PageWithForm.propTypes = {
-    children: PropTypes.element
-}
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
+};

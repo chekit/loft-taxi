@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { Form } from './Form';
-import { BTN_TEST_ID, SubmitButton } from './SubmitButton/SubmitButton';
+import { SUBMIT_TEST_ID, SubmitButton } from './SubmitButton/SubmitButton';
 
 describe('Form Component', () => {
     const FORM_TITLE = 'Form Title';
@@ -37,7 +37,7 @@ describe('Form Component', () => {
             <SubmitButton title={'Submit'} />
         </Form>));
 
-        const btn = screen.getByTestId(BTN_TEST_ID);
+        const btn = screen.getByTestId(SUBMIT_TEST_ID);
 
         fireEvent.click(btn);
 

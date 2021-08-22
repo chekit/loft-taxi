@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import './Input.scss';
 
+export const INPUT_TEST_ID = 'input';
+
 export const FormInput = ({ label, value, type, name, placeholder, onChangeHandler, isRequired, isDisabled }) => {
     return (
         <>
@@ -17,7 +19,7 @@ export const FormInput = ({ label, value, type, name, placeholder, onChangeHandl
                 onChange={onChangeHandler}
                 required={isRequired}
                 disabled={isDisabled}
-                data-testid="input"
+                data-testid={INPUT_TEST_ID}
              />
         </>
     );

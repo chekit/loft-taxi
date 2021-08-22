@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import './SubmitButton.scss';
 
-export const BTN_TEST_ID = 'submit-button';
+export const SUBMIT_TEST_ID = 'submit-button';
 
 export const SubmitButton = ({ title, isDisabled, onClickHandler }) => {
     return (
-        <button type="submit" className="form__submit" onClick={onClickHandler} disabled={isDisabled} data-testid={BTN_TEST_ID}>{title}</button>
+        <button type="submit" className="form__submit" onClick={onClickHandler} disabled={isDisabled} data-testid={SUBMIT_TEST_ID}>{title}</button>
     );
 };
 

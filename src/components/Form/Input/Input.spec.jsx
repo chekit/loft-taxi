@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { FormInput } from './Input';
+import { FormInput, INPUT_TEST_ID } from './Input';
 
 describe('Input Component', () => {
     const LABEL_NAME = 'My label';
@@ -10,7 +10,7 @@ describe('Input Component', () => {
         it(`should render Input component with default settings`, () => {
             render(<FormInput name={'test'} />);
 
-            const input = screen.getByTestId('input');
+            const input = screen.getByTestId(INPUT_TEST_ID);
 
             expect(input.type).toBe('text');
             expect(input.value).toBe('');
@@ -22,35 +22,35 @@ describe('Input Component', () => {
         it(`should render Input component as email type`, () => {
             render(<FormInput name={'test'} type={'email'} />);
 
-            const input = screen.getByTestId('input');
+            const input = screen.getByTestId(INPUT_TEST_ID);
             expect(input.type).toBe('email');
         });
 
         it(`should render Input component as password type`, () => {
             render(<FormInput name={'test'} type={'password'} />);
 
-            const input = screen.getByTestId('input');
+            const input = screen.getByTestId(INPUT_TEST_ID);
             expect(input.type).toBe('password');
         });
 
         it(`should render Input component as required field`, () => {
             render(<FormInput name={'test'} isRequired={true} />);
 
-            const input = screen.getByTestId('input');
+            const input = screen.getByTestId(INPUT_TEST_ID);
             expect(input.required).toBeTruthy();
         });
 
         it(`should render Input component as disabled`, () => {
             render(<FormInput name={'test'} isDisabled={true} />);
 
-            const input = screen.getByTestId('input');
+            const input = screen.getByTestId(INPUT_TEST_ID);
             expect(input.disabled).toBeTruthy();
         });
 
         it(`should render Input id the same as name`, () => {
             render(<FormInput name={'test'} />);
 
-            const input = screen.getByTestId('input');
+            const input = screen.getByTestId(INPUT_TEST_ID);
             expect(input.name).toBe(input.id);
         });
 
@@ -58,7 +58,7 @@ describe('Input Component', () => {
         it(`should set placeholder from props`, () => {
             render(<FormInput name={'test'} placeholder={INPUT_PLACEHOLDER} />);
 
-            const input = screen.getByTestId('input');
+            const input = screen.getByTestId(INPUT_TEST_ID);
             expect(input.placeholder).toBe(INPUT_PLACEHOLDER);
         });
 
@@ -67,8 +67,8 @@ describe('Input Component', () => {
 
             render(<FormInput name={'test'} onChangeHandler={handler} />);
 
-            const input = screen.getByTestId('input');
-            fireEvent.change(input, { target: { value: '23' } })
+            const input = screen.getByTestId(INPUT_TEST_ID);
+            fireEvent.change(input, { target: { value: '23' } });
 
             expect(handler).toHaveBeenCalled();
         });
