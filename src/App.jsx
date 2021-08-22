@@ -8,13 +8,12 @@ import Order from './pages/Order';
 import Header from './components/Header';
 import PageWrapper from './components/PageWrapper';
 
-import AuthContextProvider, { AuthContext } from './contexts/AuthContext';
+import { AuthContext } from './contexts/AuthContext';
+import AuthHOC from './hocs/AuthHOC';
 
 import './App.scss';
 
 class App extends Component {
-  static contextType = AuthContext;
-
   state = {
     currentPage: AppPages.LOGIN
   };
@@ -35,14 +34,12 @@ class App extends Component {
   render() {
     const { currentPage } = this.state;
     return (
-      <AuthContextProvider>
-        <PageWrapper currentPage={currentPage}>
-          <Header navigate={this.changePage} currentPage={currentPage} showNavigation={currentPage !== AppPages.LOGIN && currentPage !== AppPages.REGISTRATION} />
-          <section>{this.loadPage(currentPage)}</section>
-        </PageWrapper>
-      </AuthContextProvider>
+      <PageWrapper currentPage={currentPage}>
+        <Header navigate={this.changePage} currentPage={currentPage} showNavigation={currentPage !== AppPages.LOGIN && currentPage !== AppPages.REGISTRATION} />
+        <section>{this.loadPage(currentPage)}</section>
+      </PageWrapper>
     );
   }
 }
 
-export default App;
+export default AuthHOC(App);

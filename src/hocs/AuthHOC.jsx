@@ -3,8 +3,8 @@ import { AuthContext } from './../contexts/AuthContext';
 
 function AuthHOC(WrappedComponent) {
     return class extends Component {
-
         static displayName = 'AuthHOC';
+        static contextType = AuthContext;
 
         render() {
             return (

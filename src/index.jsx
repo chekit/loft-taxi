@@ -6,11 +6,14 @@ import { theme } from "loft-taxi-mui-theme";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 
 import './index.scss';
+import AuthContextProvider from './contexts/AuthContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <MuiThemeProvider theme={theme}>
-      <App />
+      <AuthContextProvider>
+        <App />
+      </AuthContextProvider>
     </MuiThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
