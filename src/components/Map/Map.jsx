@@ -7,9 +7,9 @@ import './Map.scss';
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hla2l0IiwiYSI6ImNrc2psMjM2ajAwOTgyb3BuejRoZzhzNzcifQ.2OQWhKvtLISFfBiyrFV-Cw';
 
 const DEFAULTS = {
-    lng: 37.6160,
-    lat: 55.7515,
-    zoom: 14
+    lng: 4.8936,
+    lat: 52.3700,
+    zoom: 13.3
 };
 
 export const Map = () => {
