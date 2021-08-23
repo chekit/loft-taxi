@@ -24,4 +24,26 @@
             }
         }
     }
+
+    &__link {
+        @extend %reset-button;
+
+        color: white;
+        // @TODO: Remove after adding links
+        cursor: pointer;
+        transition: color 0.15s ease-in-out;
+        text-decoration: none;
+
+        &:hover {
+            color: darken(white, 20%);
+        }
+
+        &:active {
+            color: darken(white, 30%);
+        }
+
+        &.is-active {
+            color: $color-active-nav;
+        }
+        }
 }

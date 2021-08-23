@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { AppPages } from './common/models';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Login from './pages/Login';
 import Profile from './pages/Profile';
@@ -32,13 +33,19 @@ class App extends Component {
     const mainContainerMod = currentPage === AppPages.LOGIN || currentPage === AppPages.REGISTRATION ? 'is-row' : '';
 
     return (
-      <main className={mainContainerMod}>
-        <Header navigate={this.changePage} currentPage={currentPage} showNavigation={currentPage !== AppPages.LOGIN && currentPage !== AppPages.REGISTRATION} />
-        {/* @TODO: Add Layouts wrapper for Logged in and Guest users */}
-        <section>{
-          this.loadPage(currentPage)
-        }</section>
-      </main>
+      <BrowserRouter>
+        <main className={mainContainerMod}>
+          <Header navigate={this.changePage} currentPage={currentPage} showNavigation={currentPage !== AppPages.LOGIN && currentPage !== AppPages.REGISTRATION} />
+          <section>
+            <Switch>
+              <Route path="/" render={() => <Login enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.REGISTRATION)} />} exact></Route>
+              <Route path="/registration" render={() => <Registration enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.LOGIN)} />}></Route>
+              <Route path="/order" component={Order}></Route>
+              <Route path="/profile" component={Profile}></Route>
+            </Switch>
+          </section>
+        </main>
+      </BrowserRouter>
     );
   }
 }

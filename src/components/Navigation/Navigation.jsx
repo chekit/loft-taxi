@@ -1,23 +1,24 @@
 import React from 'react';
 import { AppPages } from '../../common/models';
-import NavigationLink from './NavigationLink';
+import { NavLink, useHistory } from 'react-router-dom';
 
 import './Navigation.scss';
 
 // @TODO: Add logic for mobile devices
 export const Navigation = ({ navigate, currentPage }) => {
+    let history = useHistory();
     return (
         <nav className="navigation">
-            <ul class="navigation-list">
+            <ul className="navigation-list">
                 <li className="navigation-list__item">
-                    <NavigationLink title="Карта" onClickHandler={() => navigate(AppPages.MAP)} isActive={currentPage === AppPages.MAP}></NavigationLink>
+                    <NavLink className="navigation__link" to="/order" activeClassName="is-active">Карта</NavLink>
                 </li>
                 <li className="navigation-list__item">
-                    <NavigationLink title="Профиль" onClickHandler={() => navigate(AppPages.PROFILE)} isActive={currentPage === AppPages.PROFILE}></NavigationLink>
+                    <NavLink className="navigation__link" to="/profile" activeClassName="is-active">Профиль</NavLink>
                 </li>
                 {currentPage !== AppPages.LOGIN && (
                     <li className="navigation-list__item">
-                        <NavigationLink title="Выход" onClickHandler={() => navigate(AppPages.LOGIN)}></NavigationLink>
+                        <button className="navigation__link" onClick={() => history.replace({ pathname: "/" })}>Выход</button>
                     </li>
                 )}
             </ul>
