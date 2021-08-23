@@ -21,7 +21,7 @@ export const Map = () => {
             container: mapContainerRef.current,
             style: 'mapbox://styles/chekit/cksksm53n20af17pjblj9oo1a',
             center: [lng, lat],
-            zoom: zoom,
+            zoom,
         });
 
         // Unmount
