@@ -16,7 +16,7 @@ export const Navigation = ({ navigate, currentPage }) => {
 
     const logoutUser = () => {
         logout();
-        history.replace({ pathname: "/" };
+        history.replace({ pathname: "/" });
     };
 
     return (
