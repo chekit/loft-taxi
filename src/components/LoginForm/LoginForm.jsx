@@ -1,13 +1,22 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Form from '../Form';
 import FormInput from '../Form/Input';
 import SubmitButton from '../Form/SubmitButton';
 
 import './LoginForm.scss';
 
-export class LoginForm extends Component {
+export const LOGIN_FORM_TEST_ID = 'login-form';
+export const REGISTER_BUTTON_TEST_ID = 'register-btn';
+
+export class LoginForm extends PureComponent {
+    static propTypes = {
+        proceed: PropTypes.func,
+        redirect: PropTypes.func
+    };
+
     state = {
-        login: '',
+        email: '',
         password: ''
     };
 
@@ -26,26 +35,27 @@ export class LoginForm extends Component {
 
     submitHandler = e => {
         e.preventDefault();
-        this.props.proceed();
+        const { email, password } = this.state;
+        this.props.proceed(email, password);
     };
 
     render() {
-        const { login, password } = this.state;
+        const { email, password } = this.state;
 
         return (
-            <Form title="Войти" submitHandler={this.submitHandler}>
+            <Form title="Войти" submitHandler={this.submitHandler} testId={LOGIN_FORM_TEST_ID}>
                 <fieldset className="form__fieldset">
-                    <FormInput label="Email" type="email" name="login" placeholder="mail@mail.ru" value={login} onChangeHandler={this.handleInputChange} />
-                    <FormInput label="Пароль" type="password" name="password" placeholder="password" value={password} onChangeHandler={this.handleInputChange} />
+                    <FormInput label="Email" type="email" name="email" placeholder="mail@mail.ru" value={email} onChangeHandler={this.handleInputChange} />
+                    <FormInput label="Пароль" type="password" name="password" placeholder="********" value={password} onChangeHandler={this.handleInputChange} />
                 </fieldset>
                 <div className="form__recall ">
                     {/* @TODO: Change to link */}
                     <span className="form__link" onClick={() => console.log('Recall pass')}>Забыли пароль?</span>
                 </div>
-                <SubmitButton title="Войти" isDisabled={!login || !password}></SubmitButton>
+                <SubmitButton title="Войти" isDisabled={!email || !password}></SubmitButton>
                 <div className="form__register">
                     {/* @TODO: Change to link */}
-                    <p>Новый пользователь? <span className="form__link" onClick={this.onRegisterClick}>Регистрация</span></p>
+                    <p>Новый пользователь? <span className="form__link" onClick={this.onRegisterClick} data-testid={REGISTER_BUTTON_TEST_ID}>Регистрация</span></p>
                 </div>
             </Form>
         );

@@ -1,3 +1,6 @@
 import React from 'react';
+import Map from '../../components/Map';
 
-export const Order = () => <p>Map Page</p>
+import './Order.scss';
+
+export const Order = () => <Map />;

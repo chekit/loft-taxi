@@ -6,6 +6,9 @@ import Profile from './pages/Profile';
 import Registration from './pages/Registration';
 import Order from './pages/Order';
 import Header from './components/Header';
+import PageWrapper from './components/PageWrapper';
+
+import AuthHOC from './hocs/AuthHOC';
 
 import './App.scss';
 
@@ -29,18 +32,13 @@ class App extends Component {
 
   render() {
     const { currentPage } = this.state;
-    const mainContainerMod = currentPage === AppPages.LOGIN || currentPage === AppPages.REGISTRATION ? 'is-row' : '';
-
     return (
-      <main className={mainContainerMod}>
+      <PageWrapper currentPage={currentPage}>
         <Header navigate={this.changePage} currentPage={currentPage} showNavigation={currentPage !== AppPages.LOGIN && currentPage !== AppPages.REGISTRATION} />
-        {/* @TODO: Add Layouts wrapper for Logged in and Guest users */}
-        <section>{
-          this.loadPage(currentPage)
-        }</section>
-      </main>
+        <section>{this.loadPage(currentPage)}</section>
+      </PageWrapper>
     );
   }
 }
 
-export default App;
+export default AuthHOC(App);

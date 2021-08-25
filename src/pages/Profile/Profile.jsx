@@ -1,3 +1,5 @@
 import React from 'react';
 
-export const Profile = () => <p>Profile Page</p>
+import './Profile.scss';
+
+export const Profile = () => <p className="tmp">Profile Page</p>

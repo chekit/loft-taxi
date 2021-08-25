@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
     "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "loft-taxi-mui-theme": "^1.2.0",
+    "mapbox-gl": "^2.4.1",
     "node-sass": "^4.14.1",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -15,12 +18,11 @@
   "scripts": {
     "start:win": "cross-env SASS_PATH=./node_modules;./src react-scripts start",
     "start:mac": "cross-env SASS_PATH=node_modules:src react-scripts start",
-
     "build:win": "cross-env SASS_PATH=./node_modules;./src react-scripts build",
     "build:mac": "cross-env SASS_PATH=node_modules:src react-scripts build",
-
     "test:win": "cross-env SASS_PATH=./node_modules;./src react-scripts test",
     "test:mac": "cross-env SASS_PATH=node_modules:src react-scripts test",
+    "coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -42,6 +44,15 @@
     ]
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/react-hooks": "^7.0.1",
+    "cross-env": "^7.0.3",
+    "react-test-renderer": "^17.0.2"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/**/index.{js,jsx}"
+    ]
   }
 }
