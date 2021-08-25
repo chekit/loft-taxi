@@ -4,7 +4,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { NAV_TEST_ID } from '../Navigation/Navigation';
 import { Header, HEADER_TEST_ID } from './Header';
 
-describe('Header Component', () => {
+xdescribe('Header Component', () => {
     it('should render as not logged in', () => {
         render((
             <AuthContext.Provider value={{ isLoggedIn: false }}>

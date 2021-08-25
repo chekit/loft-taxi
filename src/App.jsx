@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AppPages } from './common/models';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import Login from './pages/Login';
 import Profile from './pages/Profile';
@@ -34,19 +34,17 @@ class App extends Component {
   render() {
     const { currentPage } = this.state;
     return (
-      <BrowserRouter>
-        <PageWrapper currentPage={currentPage}>
-          <Header navigate={this.changePage} currentPage={currentPage} showNavigation={currentPage !== AppPages.LOGIN && currentPage !== AppPages.REGISTRATION} />
-          <section>
-            <Switch>
-              <Route path="/" render={() => <Login enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.REGISTRATION)} />} exact></Route>
-              <Route path="/registration" render={() => <Registration enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.LOGIN)} />}></Route>
-              <Route path="/order" component={Order}></Route>
-              <Route path="/profile" component={Profile}></Route>
-            </Switch>
-          </section>
-        </PageWrapper>
-      </BrowserRouter>
+      <PageWrapper currentPage={currentPage}>
+        <Header navigate={this.changePage} currentPage={currentPage} showNavigation={currentPage !== AppPages.LOGIN && currentPage !== AppPages.REGISTRATION} />
+        <section>
+          <Switch>
+            <Route path="/" render={() => <Login enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.REGISTRATION)} />} exact></Route>
+            <Route path="/registration" render={() => <Registration enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.LOGIN)} />}></Route>
+            <Route path="/order" component={Order}></Route>
+            <Route path="/profile" component={Profile}></Route>
+          </Switch>
+        </section>
+      </PageWrapper>
     );
   }
 }

@@ -1,18 +1,18 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import { AppPages } from '../../common/models';
 import { NavLink, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 
 import './Navigation.scss';
 
 export const NAV_TEST_ID = 'navigation';
+export const LINK_TEST_ID = 'navigation-link';
 
 // @TODO: Add logic for mobile devices
 export const Navigation = ({ navigate, currentPage }) => {
     let history = useHistory();
-    const { logout } = useContext(AuthContext);
+    const { logout, isLoggedIn } = useContext(AuthContext);
 
     const logoutUser = () => {
         logout();
@@ -28,7 +28,7 @@ export const Navigation = ({ navigate, currentPage }) => {
                 <li className="navigation-list__item">
                     <NavLink className="navigation__link" to="/profile" activeClassName="is-active">Профиль</NavLink>
                 </li>
-                {currentPage !== AppPages.LOGIN && (
+                {isLoggedIn && (
                     <li className="navigation-list__item">
                         <button className="navigation__link" onClick={logoutUser}>Выход</button>
                     </li>

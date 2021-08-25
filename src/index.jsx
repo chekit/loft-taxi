@@ -7,12 +7,15 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 
 import './index.scss';
 import AuthContextProvider from './contexts/AuthContext';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
     <MuiThemeProvider theme={theme}>
       <AuthContextProvider>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </AuthContextProvider>
     </MuiThemeProvider>
   </React.StrictMode>,
