@@ -7,6 +7,9 @@ import Profile from './pages/Profile';
 import Registration from './pages/Registration';
 import Order from './pages/Order';
 import Header from './components/Header';
+import PageWrapper from './components/PageWrapper';
+
+import AuthHOC from './hocs/AuthHOC';
 
 import './App.scss';
 
@@ -30,11 +33,9 @@ class App extends Component {
 
   render() {
     const { currentPage } = this.state;
-    const mainContainerMod = currentPage === AppPages.LOGIN || currentPage === AppPages.REGISTRATION ? 'is-row' : '';
-
     return (
       <BrowserRouter>
-        <main className={mainContainerMod}>
+        <PageWrapper currentPage={currentPage}>
           <Header navigate={this.changePage} currentPage={currentPage} showNavigation={currentPage !== AppPages.LOGIN && currentPage !== AppPages.REGISTRATION} />
           <section>
             <Switch>
@@ -44,10 +45,10 @@ class App extends Component {
               <Route path="/profile" component={Profile}></Route>
             </Switch>
           </section>
-        </main>
+        </PageWrapper>
       </BrowserRouter>
     );
   }
 }
 
-export default App;
+export default AuthHOC(App);
