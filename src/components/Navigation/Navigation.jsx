@@ -40,6 +40,5 @@ export const Navigation = () => {
 };
 
 Navigation.propTypes = {
-    navigate: PropTypes.func,
     currentPage: PropTypes.number,
 };

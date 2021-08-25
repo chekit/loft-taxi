@@ -9,19 +9,18 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 export const HEADER_TEST_ID = 'header';
 
-export const Header = ({ navigate, currentPage }) => {
+export const Header = ({ currentPage }) => {
     const { isLoggedIn } = useContext(AuthContext);
 
     return (
         <header className={`header ${!isLoggedIn && 'is-vertical'}`} data-testid={HEADER_TEST_ID}>
             <Logo currentPage={currentPage} />
-            {isLoggedIn && <Navigation navigate={navigate} currentPage={currentPage} />}
+            {isLoggedIn && <Navigation />}
         </header>
     );
 };
 
 Header.propTypes = {
-    navigate: PropTypes.func,
     currentPage: PropTypes.number,
     isLoggedIn: PropTypes.bool
 };

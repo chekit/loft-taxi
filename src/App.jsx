@@ -35,7 +35,7 @@ class App extends Component {
     const { currentPage } = this.state;
     return (
       <PageWrapper currentPage={currentPage}>
-        <Header navigate={this.changePage} currentPage={currentPage} showNavigation={currentPage !== AppPages.LOGIN && currentPage !== AppPages.REGISTRATION} />
+        <Header currentPage={currentPage} showNavigation={currentPage !== AppPages.LOGIN && currentPage !== AppPages.REGISTRATION} />
         <section>
           <Switch>
             <Route path="/" render={() => <Login enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.REGISTRATION)} />} exact></Route>

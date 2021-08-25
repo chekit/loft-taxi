@@ -1,25 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from "react-router-dom";
 import { AuthContext } from '../../contexts/AuthContext';
-import { BrowserRouter } from 'react-router-dom';
 import { Navigation } from './Navigation';
-
-const RouterHOC = (WrappedComponent) => {
-    return class extends Component {
-        static displayName = 'RouterHOC';
-
-        render() {
-            return (
-                <BrowserRouter>
-                    <WrappedComponent {...this.props} />
-                </BrowserRouter>
-            );
-        }
-    }
-};
-
-const Nav = RouterHOC(Navigation);
 
 fdescribe('Navigation', () => {
     const logout = jest.fn();
@@ -27,7 +10,9 @@ fdescribe('Navigation', () => {
     it('should render', () => {
         render((
             <AuthContext.Provider value={{ logout, isLoggedIn: true }}>
-                <Nav />
+                <MemoryRouter initialEntries={['/order']}>
+                    <Navigation />
+                </MemoryRouter>
             </AuthContext.Provider>
         ));
 
@@ -50,10 +35,12 @@ fdescribe('Navigation', () => {
         expect(MapLink.classList.contains('is-active')).toBeTruthy();
     });
 
-    xit('should call navigate with page enum value', () => {
+    it('should set profile link as active', () => {
         render((
             <AuthContext.Provider value={{ logout, isLoggedIn: true }}>
-                <Nav />
+                <MemoryRouter initialEntries={['/order']}>
+                    <Navigation />
+                </MemoryRouter>
             </AuthContext.Provider>
         ));
 
@@ -67,10 +54,12 @@ fdescribe('Navigation', () => {
         expect(ProfileLink.classList.contains('is-active')).toBeTruthy();
     });
 
-    xit('should call logout and navigate to login', () => {
+    it('should call logout and navigate to login', () => {
         render((
             <AuthContext.Provider value={{ logout, isLoggedIn: true }}>
-                <Nav />
+                <MemoryRouter initialEntries={['/order']}>
+                    <Navigation />
+                </MemoryRouter>
             </AuthContext.Provider>
         ));
 
