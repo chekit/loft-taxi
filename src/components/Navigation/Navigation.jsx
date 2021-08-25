@@ -10,7 +10,7 @@ export const NAV_TEST_ID = 'navigation';
 export const LINK_TEST_ID = 'navigation-link';
 
 // @TODO: Add logic for mobile devices
-export const Navigation = ({ navigate, currentPage }) => {
+export const Navigation = () => {
     let history = useHistory();
     const { logout, isLoggedIn } = useContext(AuthContext);
 

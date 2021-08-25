@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { AppPages } from '../../common/models';
+import { MemoryRouter } from "react-router-dom";
 import { AuthContext } from '../../contexts/AuthContext';
-import { LINK_TEST_ID, Navigation } from './Navigation';
 import { BrowserRouter } from 'react-router-dom';
+import { Navigation } from './Navigation';
 
 const RouterHOC = (WrappedComponent) => {
     return class extends Component {
@@ -12,7 +12,7 @@ const RouterHOC = (WrappedComponent) => {
         render() {
             return (
                 <BrowserRouter>
-                    <wrappedComponent {...this.props} />
+                    <WrappedComponent {...this.props} />
                 </BrowserRouter>
             );
         }
@@ -21,70 +21,63 @@ const RouterHOC = (WrappedComponent) => {
 
 const Nav = RouterHOC(Navigation);
 
-xdescribe('Navigation', () => {
+fdescribe('Navigation', () => {
     const logout = jest.fn();
 
     it('should render', () => {
         render((
-            <AuthContext.Provider value={{ logout }}>
+            <AuthContext.Provider value={{ logout, isLoggedIn: true }}>
                 <Nav />
             </AuthContext.Provider>
         ));
 
-        const links = screen.getAllByTestId(LINK_TEST_ID);
+        const links = document.querySelectorAll('.navigation__link');
 
         expect(links.length).toBe(3);
     });
 
     it('should render with Map link as active', () => {
         render((
-            <AuthContext.Provider value={{ logout }}>
-                <Nav currentPage={AppPages.MAP} />
+            <AuthContext.Provider value={{ logout, isLoggedIn: true }}>
+                <MemoryRouter initialEntries={['/order']}>
+                    <Navigation />
+                </MemoryRouter>
             </AuthContext.Provider>
         ));
 
-        const [MapLink] = screen.getAllByTestId(LINK_TEST_ID);
+        const MapLink = screen.getByText('Карта');
 
         expect(MapLink.classList.contains('is-active')).toBeTruthy();
     });
 
-    it('should call navigate with page enum value', () => {
-        let currentPage = AppPages.MAP;
-        const navigate = jest.fn(page => currentPage = page);
-
+    xit('should call navigate with page enum value', () => {
         render((
-            <AuthContext.Provider value={{ logout }}>
-                <Nav currentPage={currentPage} navigate={navigate} />
+            <AuthContext.Provider value={{ logout, isLoggedIn: true }}>
+                <Nav />
             </AuthContext.Provider>
         ));
 
-        const [MapLink, ProfileLink] = screen.getAllByTestId(LINK_TEST_ID);
+        const MapLink = screen.getByText('Карта');
+        const ProfileLink = screen.getByText('Профиль');
 
         expect(MapLink.classList.contains('is-active')).toBeTruthy();
 
         fireEvent.click(ProfileLink);
 
-        expect(navigate).toHaveBeenCalledWith(AppPages.PROFILE);
-        expect(currentPage).toBe(AppPages.PROFILE);
+        expect(ProfileLink.classList.contains('is-active')).toBeTruthy();
     });
 
-    it('should call logout and navigate to login', () => {
-        let currentPage = AppPages.MAP;
-        const navigate = jest.fn(page => currentPage = page);
-
+    xit('should call logout and navigate to login', () => {
         render((
-            <AuthContext.Provider value={{ logout }}>
-                <Nav currentPage={currentPage} navigate={navigate} />
+            <AuthContext.Provider value={{ logout, isLoggedIn: true }}>
+                <Nav />
             </AuthContext.Provider>
         ));
 
-        const links = screen.getAllByTestId(LINK_TEST_ID);
-        const Logout = links[links.length - 1];
+        const Logout = screen.getByText('Выход');
 
         fireEvent.click(Logout);
 
-        expect(navigate).toHaveBeenCalledWith(AppPages.LOGIN);
-        expect(currentPage).toBe(AppPages.LOGIN);
         expect(logout).toHaveBeenCalled();
     });
 });
