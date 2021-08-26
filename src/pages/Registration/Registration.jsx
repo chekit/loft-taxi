@@ -1,23 +1,17 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 import RegistrationForm from '../../components/RegistrationForm';
 import PageWithForm from '../../components/PageWithForm';
 import { AuthContext } from '../../contexts/AuthContext';
 
 import './Registration.scss';
+import { AppRoutes } from '../../common/app.routes';
 
-export const Registration = ({ enter, redirect }) => {
-    const { login } = useContext(AuthContext);
+export const Registration = () => {
+    const { login, isLoggedIn } = useContext(AuthContext);
 
-    return (
-        <PageWithForm>
-            <RegistrationForm proceed={(email, password) => { login(email, password); enter() }} redirect={redirect} />
-        </PageWithForm>
-    );
-}
-
-Registration.propTypes = {
-    enter: PropTypes.func,
-    redirect: PropTypes.func
+    return isLoggedIn
+        ? <Redirect to={AppRoutes.ORDER} />
+        : <PageWithForm><RegistrationForm proceed={login} /></PageWithForm>;
 };

@@ -7,12 +7,13 @@ import { INPUT_TEST_ID } from './components/Form/Input/Input';
 import { SUBMIT_TEST_ID } from './components/Form/SubmitButton/SubmitButton';
 import AuthContextProvider from './contexts/AuthContext';
 import { MemoryRouter } from 'react-router-dom';
+import { AppRoutes } from './common/app.routes';
 
 jest.mock('./components/Map', () => (() => <p>Mocked Map</p>));
 
-xdescribe('App', () => {
+describe('App', () => {
     const AppWithProvider = () => (<AuthContextProvider>
-        <MemoryRouter initialEntries={['/']}>
+        <MemoryRouter initialEntries={[AppRoutes.MAIN]}>
             <App />
         </MemoryRouter>
     </AuthContextProvider>);

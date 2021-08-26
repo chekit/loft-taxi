@@ -30,7 +30,7 @@ describe('AuthContext', () => {
         </AuthContextProvider>);
 
         expect(isLoggedIn).toBe(false);
-        act(() => login());
+        act(() => login('login', 'password'));
 
         expect(isLoggedIn).toBe(true);
     });
@@ -50,7 +50,7 @@ describe('AuthContext', () => {
         </AuthContextProvider>);
 
         expect(isLoggedIn).toBe(false);
-        act(() => login());
+        act(() => login('login', 'password'));
 
         expect(isLoggedIn).toBe(true);
 

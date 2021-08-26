@@ -8,6 +8,7 @@ export const PAGE_WRAPPER_TEST_ID = 'page-wrapper';
 
 export const PageWrapper = ({ children }) => {
     const { isLoggedIn } = useContext(AuthContext);
+
     const mainContainerMod = !isLoggedIn ? 'is-row' : '';
 
     return (

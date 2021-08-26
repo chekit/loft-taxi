@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import Form from '../Form';
 import FormInput from '../Form/Input';
 import SubmitButton from '../Form/SubmitButton';
+import { NavLink } from 'react-router-dom';
 
 import './RegistrationForm.scss';
+import { AppRoutes } from '../../common/app.routes';
 
 export const REGISTRATION_FORM_TEST_ID = 'registration-form';
 export const LOGIN_BUTTON_TEST_ID = 'login-btn';
@@ -12,18 +14,12 @@ export const LOGIN_BUTTON_TEST_ID = 'login-btn';
 export class RegistrationForm extends PureComponent {
     static propTypes = {
         proceed: PropTypes.func,
-        redirect: PropTypes.func
     };
 
     state = {
         email: '',
         name: '',
         password: ''
-    };
-
-    onLoginClick = e => {
-        e.preventDefault();
-        this.props.redirect();
     };
 
     handleInputChange = e => {
@@ -36,8 +32,10 @@ export class RegistrationForm extends PureComponent {
 
     submitHandler = e => {
         e.preventDefault();
-        const { email, password } = this.state;
-        this.props.proceed(email, password);
+        const { email, password/* , name */ } = this.state;
+        const { proceed } = this.props;
+
+       proceed(email, password);
     };
 
     render() {
@@ -52,8 +50,7 @@ export class RegistrationForm extends PureComponent {
                 </fieldset>
                 <SubmitButton title="Зарегистрироваться" isDisabled={!email || !password || !name}></SubmitButton>
                 <div className="form__register">
-                    {/* @TODO: Change to link */}
-                    <p>Уже зарегестрированны? <span className="form__link" onClick={this.onLoginClick} data-testid={LOGIN_BUTTON_TEST_ID}>Войти</span></p>
+                    <p>Уже зарегестрированны? <NavLink className="form__link" to={AppRoutes.MAIN} data-testid={LOGIN_BUTTON_TEST_ID}>Войти</NavLink></p>
                 </div>
             </Form>
         );

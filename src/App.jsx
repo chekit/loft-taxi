@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { AppPages } from './common/models';
 import { Switch, Route } from 'react-router-dom';
 
 import Login from './pages/Login';
@@ -12,36 +11,24 @@ import PageWrapper from './components/PageWrapper';
 import AuthHOC from './hocs/AuthHOC';
 
 import './App.scss';
+import { AppRoutes } from './common/app.routes';
+import PrivateRoute from './components/PrivateRoute';
 
 class App extends Component {
-  state = {
-    currentPage: AppPages.LOGIN
-  };
-
-  changePage = currentPage => {
-    this.setState({ currentPage });
-  };
-
-  loadPage(pageType) {
-    return ({
-      [AppPages.LOGIN]: <Login enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.REGISTRATION)} />,
-      [AppPages.REGISTRATION]: <Registration enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.LOGIN)} />,
-      [AppPages.MAP]: <Order />,
-      [AppPages.PROFILE]: <Profile />,
-    }[pageType]);
-  }
-
   render() {
-    const { currentPage } = this.state;
     return (
-      <PageWrapper currentPage={currentPage}>
-        <Header currentPage={currentPage} showNavigation={currentPage !== AppPages.LOGIN && currentPage !== AppPages.REGISTRATION} />
+      <PageWrapper>
+        <Header />
         <section>
           <Switch>
-            <Route path="/" render={() => <Login enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.REGISTRATION)} />} exact></Route>
-            <Route path="/registration" render={() => <Registration enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.LOGIN)} />}></Route>
-            <Route path="/order" component={Order}></Route>
-            <Route path="/profile" component={Profile}></Route>
+            <Route path={AppRoutes.MAIN} component={Login} exact></Route>
+            <Route path={AppRoutes.REGISTRATION} component={Registration}></Route>
+            <PrivateRoute path={AppRoutes.ORDER} redirectPath={AppRoutes.REGISTRATION}>
+              <Order />
+            </PrivateRoute>
+            <PrivateRoute path={AppRoutes.PROFILE} redirectPath={AppRoutes.REGISTRATION}>
+              <Profile />
+            </PrivateRoute>
           </Switch>
         </section>
       </PageWrapper>

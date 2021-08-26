@@ -1,8 +1,9 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Navigation } from './Navigation';
+import { AppRoutes } from '../../common/app.routes';
 
 fdescribe('Navigation', () => {
     const logout = jest.fn();
@@ -10,7 +11,7 @@ fdescribe('Navigation', () => {
     it('should render', () => {
         render((
             <AuthContext.Provider value={{ logout, isLoggedIn: true }}>
-                <MemoryRouter initialEntries={['/order']}>
+                <MemoryRouter initialEntries={[AppRoutes.ORDER]}>
                     <Navigation />
                 </MemoryRouter>
             </AuthContext.Provider>
@@ -24,7 +25,7 @@ fdescribe('Navigation', () => {
     it('should render with Map link as active', () => {
         render((
             <AuthContext.Provider value={{ logout, isLoggedIn: true }}>
-                <MemoryRouter initialEntries={['/order']}>
+                <MemoryRouter initialEntries={[AppRoutes.ORDER]}>
                     <Navigation />
                 </MemoryRouter>
             </AuthContext.Provider>
@@ -38,7 +39,7 @@ fdescribe('Navigation', () => {
     it('should set profile link as active', () => {
         render((
             <AuthContext.Provider value={{ logout, isLoggedIn: true }}>
-                <MemoryRouter initialEntries={['/order']}>
+                <MemoryRouter initialEntries={[AppRoutes.ORDER]}>
                     <Navigation />
                 </MemoryRouter>
             </AuthContext.Provider>
@@ -57,7 +58,7 @@ fdescribe('Navigation', () => {
     it('should call logout and navigate to login', () => {
         render((
             <AuthContext.Provider value={{ logout, isLoggedIn: true }}>
-                <MemoryRouter initialEntries={['/order']}>
+                <MemoryRouter initialEntries={[AppRoutes.ORDER]}>
                     <Navigation />
                 </MemoryRouter>
             </AuthContext.Provider>

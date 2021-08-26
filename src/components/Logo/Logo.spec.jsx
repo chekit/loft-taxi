@@ -1,11 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { AppPages } from '../../common/models';
 import { Logo } from './Logo';
 
 describe('Logo Component', () => {
     it('should render only mobile logo and unauth logo', () => {
-        render(<Logo currentPage={AppPages.LOGIN} />);
+        render(<Logo isLoggedIn={false} />);
 
         const mobileLogo = screen.queryByTestId('logo-mobile');
         const unauthLogo = screen.queryByTestId('logo-unauth');
@@ -17,7 +16,7 @@ describe('Logo Component', () => {
     });
 
     it('should render only mobile logo and auth logo', () => {
-        render(<Logo />);
+        render(<Logo isLoggedIn={true} />);
 
         const mobileLogo = screen.queryByTestId('logo-mobile');
         const unauthLogo = screen.queryByTestId('logo-unauth');

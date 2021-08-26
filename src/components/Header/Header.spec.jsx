@@ -1,14 +1,17 @@
-import { render, screen } from '@testing-library/react';
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
 import { AuthContext } from '../../contexts/AuthContext';
 import { NAV_TEST_ID } from '../Navigation/Navigation';
 import { Header, HEADER_TEST_ID } from './Header';
 
-xdescribe('Header Component', () => {
+describe('Header Component', () => {
     it('should render as not logged in', () => {
         render((
             <AuthContext.Provider value={{ isLoggedIn: false }}>
-                <Header />
+                <MemoryRouter>
+                    <Header />
+                </MemoryRouter>
             </AuthContext.Provider>
         ));
 
@@ -22,7 +25,9 @@ xdescribe('Header Component', () => {
     it('should render as logged in', () => {
         render((
             <AuthContext.Provider value={{ isLoggedIn: true }}>
-                <Header />
+                <MemoryRouter>
+                    <Header />
+                </MemoryRouter>
             </AuthContext.Provider>
         ));
 

@@ -8,12 +8,13 @@ class AuthContextProvider extends Component {
     };
 
     login = (email, password) => {
-        // @TODO: Remove debug
-        console.log(`[DEBUG] ${email}:${password}`);
+        // @TODO: Add Check up
+        if (email && password) {
 
-        this.setState({
-            isLoggedIn: true
-        });
+            this.setState({
+                isLoggedIn: true
+            });
+        }
     };
 
     logout = () => {

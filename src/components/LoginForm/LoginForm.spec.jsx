@@ -1,19 +1,20 @@
-import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { INPUT_TEST_ID } from '../Form/Input/Input';
 import { SUBMIT_TEST_ID } from '../Form/SubmitButton/SubmitButton';
 import { LoginForm } from './LoginForm';
 
 describe('Login Form', () => {
     it('should show submit button as disabled', () => {
-        render(<LoginForm />);
+        render(<MemoryRouter><LoginForm /></MemoryRouter>);
 
         const submit = screen.getByTestId(SUBMIT_TEST_ID);
         expect(submit.disabled).toBeTruthy();
     });
 
     it('should show submit button as enabled', () => {
-        render(<LoginForm />);
+        render(<MemoryRouter><LoginForm /></MemoryRouter>);
 
         const submit = screen.getByTestId(SUBMIT_TEST_ID);
         const inputs = screen.getAllByTestId(INPUT_TEST_ID);
@@ -35,7 +36,7 @@ describe('Login Form', () => {
     });
 
     it('should toggle disabled / enabled submit button state', () => {
-        render(<LoginForm />);
+        render(<MemoryRouter><LoginForm /></MemoryRouter>);
 
         const submit = screen.getByTestId(SUBMIT_TEST_ID);
         const inputs = screen.getAllByTestId(INPUT_TEST_ID);
