@@ -1,0 +1,11 @@
+@import 'styles/globals.scss';
+
+.logo {
+    &.is-auth {
+        display: none;
+
+        @media screen and (min-width: $desktop) {
+            display: block;
+        }
+    }
+}

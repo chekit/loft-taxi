@@ -5,7 +5,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { Navigation } from './Navigation';
 import { AppRoutes } from '../../common/app.routes';
 
-fdescribe('Navigation', () => {
+describe('Navigation', () => {
     const logout = jest.fn();
 
     it('should render', () => {

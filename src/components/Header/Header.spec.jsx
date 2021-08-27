@@ -18,7 +18,7 @@ describe('Header Component', () => {
         const header = screen.getByTestId(HEADER_TEST_ID);
         const nav = screen.queryByTestId(NAV_TEST_ID);
 
-        expect(header.classList.contains('is-vertical')).toBeTruthy();
+        expect(header.classList.contains('is-not-auth')).toBeTruthy();
         expect(nav).toBeFalsy();
     });
 
@@ -34,7 +34,7 @@ describe('Header Component', () => {
         const header = screen.getByTestId(HEADER_TEST_ID);
         const nav = screen.queryByTestId(NAV_TEST_ID);
 
-        expect(header.classList.contains('is-vertical')).toBeFalsy();
+        expect(header.classList.contains('is-not-auth')).toBeFalsy();
         expect(nav).toBeTruthy();
     });
 });

@@ -12,12 +12,16 @@
     &__label {
         margin-bottom: $base-step;
         font-weight: bold;
+
+        &.is-light {
+            color: $color-form-subtle;
+            font-weight: 400;
+        }
     }
 
     &__input {
         box-sizing: border-box;
         padding: $base-step 0;
-        margin-bottom: $base-step * 2.5;
         border: none;
         border-bottom: 2px solid $color-input-border;
 

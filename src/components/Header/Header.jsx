@@ -14,7 +14,7 @@ export const Header = () => {
     const { isLoggedIn } = useContext(AuthContext);
 
     return (
-        <header className={`header ${!isLoggedIn && 'is-vertical'}`} data-testid={HEADER_TEST_ID}>
+        <header className={`header ${!isLoggedIn && 'is-not-auth'}`} data-testid={HEADER_TEST_ID}>
             <Logo isLoggedIn={isLoggedIn} />
             {isLoggedIn && <Navigation />}
         </header>

@@ -1,26 +1,110 @@
 @import 'styles/globals.scss';
 
-// @TODO: Add implementation for Mobile devices
+// @TODO: Add implementation for Mobile devices!
+.open-nav-button {
+    @extend %reset-button;
+
+    display: block;
+
+    @media screen and (min-width: $desktop) {
+        display: none;
+    }
+
+    &__item {
+        display: block;
+        margin-bottom: 4px;
+        height: 3px;
+        width: 25px;
+        background-color: black;
+        border-radius: 4px;
+
+        &.is-short {
+            width: 17px;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.close-nav-button {
+    @extend %reset-button;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    margin: $base-step * 2;
+    color: black;
+    font-weight: bold;
+
+    @media screen and (min-width: $desktop) {
+        display: none;
+    }
+}
+
 .navigation {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    z-index: 10;
+    height: 100vh;
+    width: 100%;
     font-size: 2.1em;
     line-height: (25/21);
+    background-color: #fff;
+    transition: right 0.15s ease-in-out;
+
+    &.is-visible {
+        right: 0;
+    }
+
+    @media screen and (min-width: $desktop) {
+        position: static;
+        height: auto;
+        width: auto;
+        background-color: transparent;
+    }
 
     &-list {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
+        flex-direction: column;
         margin: 0;
         padding: 0;
+        width: 90%;
+        margin: 0 auto;
         list-style-type: none;
 
+        @media screen and (min-width: $desktop) {
+            flex-direction: row;
+            align-items: center;
+            width: auto;
+            margin: auto;
+        }
+
         &__item {
-            margin: 0 20px;
+            margin: $base-step * 2 0;
 
             &:first-child {
-                margin-left: 0;
+                margin-top: 0;
             }
 
             &:last-child {
-                margin-right: 0;
+                margin-bottom: 0;
+            }
+
+            @media screen and (min-width: $desktop) {
+                margin: 0 $base-step * 2;
+
+                &:first-child {
+                    margin-left: 0;
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                }
             }
         }
     }
@@ -28,22 +112,26 @@
     &__link {
         @extend %reset-button;
 
-        color: white;
+        color: black;
         // @TODO: Remove after adding links
         cursor: pointer;
         transition: color 0.15s ease-in-out;
         text-decoration: none;
 
-        &:hover {
-            color: darken(white, 20%);
-        }
+        @media screen and (min-width: $desktop) {
+            color: white;
 
-        &:active {
-            color: darken(white, 30%);
+            &:hover {
+                color: darken(white, 20%);
+            }
+
+            &:active {
+                color: darken(white, 30%);
+            }
         }
 
         &.is-active {
             color: $color-active-nav;
         }
-        }
+    }
 }

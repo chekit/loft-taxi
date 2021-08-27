@@ -6,6 +6,7 @@
 
         margin: $base-step * 3 auto;
         width: 100%;
+        max-width: $submit-button-max-width;
         height: $base-step * 6;
         background-color: $color-submit-bg-default;
         border-radius: $base-step * 7;
@@ -28,6 +29,11 @@
         &:hover,
         &:active {
             background-color: $color-submit-bg-active;
+        }
+
+        &.is-dense {
+            margin-top: 0;
+            margin-bottom: 0;
         }
     }
 }
