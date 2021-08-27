@@ -18,17 +18,17 @@ import { StorageKeys, LocalStorageService } from './services';
 import { authUser } from './store/actions';
 
 class App extends Component {
-  unsubscribe;
+  subscriptions = [];
   localStorageService = new LocalStorageService();
 
   componentDidMount() {
     const { authContext } = this.props;
     const userData = this.localStorageService.fetch(StorageKeys.USER_DATA);
 
-    this.subscription = store.subscribe(() => {
+    this.subscriptions.push(store.subscribe(() => {
       const { userData } = store.getState();
       authContext.login(userData.login, userData.password);
-    });
+    }));
 
     if (userData) {
       store.dispatch(authUser(userData));
@@ -36,7 +36,7 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    this.unsubscribe();
+    this.subscriptions.forEach(unsubscribe => unsubscribe());
   }
 
   render() {

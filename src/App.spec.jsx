@@ -18,6 +18,10 @@ describe('App', () => {
         </MemoryRouter>
     </AuthContextProvider>);
 
+    beforeEach(() => {
+        App.prototype.unsubscribe = jest.fn();
+    });
+
     it(`should render with login form`, () => {
         render(<AppWithProvider />);
 
