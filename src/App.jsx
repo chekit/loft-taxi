@@ -13,8 +13,32 @@ import AuthHOC from './hocs/AuthHOC';
 import './App.scss';
 import { AppRoutes } from './common/app.routes';
 import PrivateRoute from './components/PrivateRoute';
+import store from './store';
+import { StorageKeys, LocalStorageService } from './services';
+import { authUser } from './store/actions';
 
 class App extends Component {
+  unsubscribe;
+  localStorageService = new LocalStorageService();
+
+  componentDidMount() {
+    const { authContext } = this.props;
+    const userData = this.localStorageService.fetch(StorageKeys.USER_DATA);
+
+    this.subscription = store.subscribe(() => {
+      const { userData } = store.getState();
+      authContext.login(userData.login, userData.password);
+    });
+
+    if (userData) {
+      store.dispatch(authUser(userData));
+    }
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
   render() {
     return (
       <PageWrapper>

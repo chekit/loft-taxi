@@ -1,8 +1,11 @@
 import React, { Component, createContext } from 'react';
+import { StorageKeys, LocalStorageService } from '../services';
 
 export const AuthContext = createContext();
 
 class AuthContextProvider extends Component {
+    localStorageService = new LocalStorageService();
+
     state = {
         isLoggedIn: false
     };
@@ -10,6 +13,7 @@ class AuthContextProvider extends Component {
     login = (email, password) => {
         // @TODO: Add Check up
         if (email && password) {
+            this.localStorageService.save(StorageKeys.USER_DATA, { login: email, password });
 
             this.setState({
                 isLoggedIn: true
@@ -18,6 +22,7 @@ class AuthContextProvider extends Component {
     };
 
     logout = () => {
+        this.localStorageService.delete(StorageKeys.USER_DATA);
         this.setState({
             isLoggedIn: false
         });

@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import Form from '../Form';
 import FormInput from '../Form/Input';
 import SubmitButton from '../Form/SubmitButton';
@@ -7,15 +6,13 @@ import { NavLink } from 'react-router-dom';
 
 import './LoginForm.scss';
 import { AppRoutes } from '../../common/app.routes';
+import { authUser } from '../../store/actions';
+import store from '../../store';
 
 export const LOGIN_FORM_TEST_ID = 'login-form';
 export const REGISTER_BUTTON_TEST_ID = 'register-btn';
 
 export class LoginForm extends PureComponent {
-    static propTypes = {
-        proceed: PropTypes.func,
-    };
-
     state = {
         email: '',
         password: ''
@@ -32,9 +29,8 @@ export class LoginForm extends PureComponent {
     submitHandler = e => {
         e.preventDefault();
         const { email, password } = this.state;
-        const { proceed } = this.props;
 
-        proceed(email, password);
+        store.dispatch(authUser({ login: email, password }));
     };
 
     render() {

@@ -1,5 +1,12 @@
 import React from 'react';
+import PageWithForm from '../../components/PageWithForm';
 
 import './Profile.scss';
 
-export const Profile = () => <p className="tmp">Profile Page</p>
+export const Profile = () => {
+    return (
+        <PageWithForm>
+            <p className="tmp">Profile Page</p>
+        </PageWithForm>
+    );
+}
