@@ -13,7 +13,7 @@ class AuthContextProvider extends Component {
     login = (email, password) => {
         // @TODO: Add Check up
         if (email && password) {
-            this.localStorageService.save(StorageKeys.USER_DATA, { login: email, password });
+            this.localStorageService.save(StorageKeys.LOGIN_DATA, { login: email, password });
 
             this.setState({
                 isLoggedIn: true
@@ -22,10 +22,15 @@ class AuthContextProvider extends Component {
     };
 
     logout = () => {
-        this.localStorageService.delete(StorageKeys.USER_DATA);
+        this.localStorageService.delete(StorageKeys.LOGIN_DATA);
         this.setState({
             isLoggedIn: false
         });
+    };
+
+    // @TODO: Refactor
+    updateProfile = ({ name, card, exp, cvc }) => {
+        this.localStorageService.save(StorageKeys.PROFILE_DATA, { name, card, exp, cvc });
     };
 
     render() {

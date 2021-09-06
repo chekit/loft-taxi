@@ -8,13 +8,20 @@ import { CardTypes } from '../../../common/models/card-types';
 import './ProfileForm.scss';
 import Card from './Card';
 
+import store from '../../../store';
+import { updateProfile } from '../../../store/actions';
+import { LocalStorageService, StorageKeys } from '../../../services';
+
 export const PROFILE_FORM_TEST_ID = 'profile-form';
 export const PROFILE_FORM_SUBHEADING_TEST_ID = 'profile-form-subheading';
 
 export class ProfileForm extends PureComponent {
     static propTypes = {
-        redirect: PropTypes.func
+        redirect: PropTypes.func,
+        save: PropTypes.func
     };
+
+    localStorageService = new LocalStorageService();
 
     cardType = CardTypes.MASTERCARD;
 
@@ -26,6 +33,8 @@ export class ProfileForm extends PureComponent {
         isFilled: false
     };
 
+    subscriptions = [];
+
     handleInputChange = e => {
         const { target: { name, value } } = e;
 
@@ -34,9 +43,29 @@ export class ProfileForm extends PureComponent {
         });
     };
 
-    submitHandler = () => {
+    submitHandler = e => {
+        e.preventDeefault();
+
+        const { name, card_num: card, expires: exp, cvc } = this.state;
+        store.dispatch(updateProfile({ name, card, exp, cvc }));
+
         this.setState({ isFilled: true });
     };
+
+    componentDidMount() {
+        const profileData = this.localStorageService.fetch(StorageKeys.PROFILE_DATA);
+
+        if (profileData) {
+            this.setState(prev => ({
+                ...prev,
+                ...profileData
+            }));
+        }
+    }
+
+    componentWillUnmount() {
+        this.subscriptions.forEach(unsubscribe => unsubscribe());
+    }
 
     render() {
         const { name, card_num, expires, cvc, isFilled } = this.state;

@@ -11,7 +11,18 @@ export default function loftTaxi(state = initialState, action) {
                     login: action.payload.login,
                     password: action.payload.password
                 }
-            }
+            };
+
+        case ActionTypes.UPDATE_PROFILE:
+            return {
+                ...state,
+                profileData: {
+                    name: action.payload.login,
+                    card: action.payload.card,
+                    exp: action.payload.exp,
+                    cvc: action.payload.cvc
+                }
+            };
         default:
             return state;
     }

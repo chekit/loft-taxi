@@ -23,7 +23,7 @@ class App extends Component {
 
   componentDidMount() {
     const { authContext } = this.props;
-    const userData = this.localStorageService.fetch(StorageKeys.USER_DATA);
+    const userData = this.localStorageService.fetch(StorageKeys.LOGIN_DATA);
 
     this.subscriptions.push(store.subscribe(() => {
       const { userData } = store.getState();

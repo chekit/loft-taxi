@@ -1,5 +1,6 @@
 export const StorageKeys = {
-    USER_DATA: 'user_data'
+    LOGIN_DATA: 'login_data',
+    PROFILE_DATA: 'profile_data'
 };
 
 export class LocalStorageService {
