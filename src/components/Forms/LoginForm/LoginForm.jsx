@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react';
-import Form from '../Form';
-import FormInput from '../Form/Input';
-import SubmitButton from '../Form/SubmitButton';
+import Form from '../../FormElements/Form';
+import FormInput from '../../FormElements/Input';
+import SubmitButton from '../../FormElements/SubmitButton';
 import { NavLink } from 'react-router-dom';
 
 import './LoginForm.scss';
-import { AppRoutes } from '../../common/app.routes';
-import { authUser } from '../../store/actions';
-import store from '../../store';
+import { AppRoutes } from '../../../common/app.routes';
+import { authUser } from '../../../store/actions';
+import store from '../../../store';
 
 export const LOGIN_FORM_TEST_ID = 'login-form';
 export const REGISTER_BUTTON_TEST_ID = 'register-btn';

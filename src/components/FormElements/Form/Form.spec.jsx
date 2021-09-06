@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { Form } from './Form';
-import { SUBMIT_TEST_ID, SubmitButton } from './SubmitButton/SubmitButton';
+import { SUBMIT_TEST_ID, SubmitButton } from './../SubmitButton/SubmitButton';
 
 describe('Form Component', () => {
     const FORM_TITLE = 'Form Title';

@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { AppRoutes } from '../../common/app.routes';
 
-import LoginForm from '../../components/LoginForm';
-import PageWithForm from '../../components/PageWithForm';
+import LoginForm from '../../components/Forms/LoginForm';
+import PageWithForm from '../../components/Struct/PageWithForm';
 import { AuthContext } from '../../contexts/AuthContext';
 
 import './Login.scss';

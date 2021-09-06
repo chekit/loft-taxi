@@ -1,10 +1,10 @@
 import React from 'react';
 import App from './App';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { LOGIN_FORM_TEST_ID, REGISTER_BUTTON_TEST_ID } from './components/LoginForm/LoginForm';
-import { LOGIN_BUTTON_TEST_ID, REGISTRATION_FORM_TEST_ID } from './components/RegistrationForm/RegistrationForm';
-import { INPUT_TEST_ID } from './components/Form/Input/Input';
-import { SUBMIT_TEST_ID } from './components/Form/SubmitButton/SubmitButton';
+import { LOGIN_FORM_TEST_ID, REGISTER_BUTTON_TEST_ID } from './components/Forms/LoginForm/LoginForm';
+import { LOGIN_BUTTON_TEST_ID, REGISTRATION_FORM_TEST_ID } from './components/Forms/RegistrationForm/RegistrationForm';
+import { INPUT_TEST_ID } from './components/FormElements/Input/Input';
+import { SUBMIT_TEST_ID } from './components/FormElements/SubmitButton/SubmitButton';
 import AuthContextProvider from './contexts/AuthContext';
 import { MemoryRouter } from 'react-router-dom';
 import { AppRoutes } from './common/app.routes';

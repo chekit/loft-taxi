@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { AuthContext } from '../../contexts/AuthContext';
+import { AuthContext } from '../../../contexts/AuthContext';
 import { PageWrapper, PAGE_WRAPPER_TEST_ID } from './PageWrapper';
 
 describe('Page Wrapper', () => {

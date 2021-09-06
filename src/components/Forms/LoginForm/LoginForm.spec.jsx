@@ -1,8 +1,8 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { INPUT_TEST_ID } from '../Form/Input/Input';
-import { SUBMIT_TEST_ID } from '../Form/SubmitButton/SubmitButton';
+import { INPUT_TEST_ID } from '../../FormElements/Input/Input';
+import { SUBMIT_TEST_ID } from '../../FormElements/SubmitButton/SubmitButton';
 import { LoginForm } from './LoginForm';
 
 describe('Login Form', () => {

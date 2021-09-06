@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Form from '../Form';
-import FormInput from '../Form/Input';
-import SubmitButton from '../Form/SubmitButton';
+import Form from '../../FormElements/Form';
+import FormInput from '../../FormElements/Input';
+import SubmitButton from '../../FormElements/SubmitButton';
 import { NavLink } from 'react-router-dom';
 
 import './RegistrationForm.scss';
-import { AppRoutes } from '../../common/app.routes';
+import { AppRoutes } from '../../../common/app.routes';
 
 export const REGISTRATION_FORM_TEST_ID = 'registration-form';
 export const LOGIN_BUTTON_TEST_ID = 'login-btn';
