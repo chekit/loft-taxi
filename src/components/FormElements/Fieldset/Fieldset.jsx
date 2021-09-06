@@ -1,9 +1,10 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 
 import './Fieldset.scss';
 
 export const FieldsetOrientation = {
+    DEFAULT: '',
     HORIZONTAL: 'is-horizontal'
 };
 
@@ -20,10 +21,10 @@ Fieldset.propTypes = {
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node
     ]),
-    type: PropTypes.string
+    type: PropTypes.oneOf([FieldsetOrientation.DEFAULT, FieldsetOrientation.HORIZONTAL]),
 };
 
 
 Fieldset.defaultProps = {
-    type: ''
+    type: FieldsetOrientation.DEFAULT
 };

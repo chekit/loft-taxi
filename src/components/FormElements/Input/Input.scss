@@ -17,6 +17,10 @@
             color: $color-form-subtle;
             font-weight: 400;
         }
+
+        &.is-error {
+            color: $color-form-error;
+        }
     }
 
     &__input {

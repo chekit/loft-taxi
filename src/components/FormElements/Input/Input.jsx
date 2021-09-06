@@ -6,10 +6,20 @@ import Fieldset from '../Fieldset';
 
 export const INPUT_TEST_ID = 'input';
 
-export const FormInput = ({ label, value, type, name, placeholder, onChangeHandler, isRequired, isDisabled, maxlength, isLight }) => {
+export const FormInput = ({ label, value, type, name, placeholder, onChangeHandler, isRequired, isDisabled, maxlength, isLight, hasError }) => {
+    const labelClasses = [];
+
+    if (isLight) {
+        labelClasses.push('is-light');
+    }
+
+    if (hasError) {
+        labelClasses.push('is-error');
+    }
+
     return (
         <Fieldset>
-            {label && <label htmlFor={name} className={`form__label ${isLight && 'is-light'}`} data-testid="label">{label}{isRequired && '*'}:</label>}
+            {label && <label htmlFor={name} className={`form__label ${labelClasses.join(' ')}`} data-testid="label">{label}{isRequired && '*'}:</label>}
             <input
                 className="form__input"
                 type={type}
@@ -38,7 +48,8 @@ FormInput.propTypes = {
     isRequired: PropTypes.bool,
     isDisabled: PropTypes.bool,
     maxlength: PropTypes.number,
-    isLight: PropTypes.bool
+    isLight: PropTypes.bool,
+    hasError: PropTypes.bool,
 };
 
 FormInput.defaultProps = {
@@ -48,5 +59,6 @@ FormInput.defaultProps = {
     isRequired: false,
     isDisabled: false,
     isLight: false,
+    hasError: false,
     onChangeHandler: () => {}
 };

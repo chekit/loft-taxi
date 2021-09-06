@@ -16,6 +16,8 @@ import { authUser } from './store/actions';
 import AuthHOC from './hocs/AuthHOC';
 
 import './App.scss';
+import { connect } from 'react-redux';
+import Loader from './components/Loader';
 
 class App extends Component {
   subscriptions = [];
@@ -23,15 +25,18 @@ class App extends Component {
 
   componentDidMount() {
     const { authContext } = this.props;
-    const userData = this.localStorageService.fetch(StorageKeys.LOGIN_DATA);
+    const storedUserData = this.localStorageService.fetch(StorageKeys.LOGIN_DATA);
 
     this.subscriptions.push(store.subscribe(() => {
-      const { userData } = store.getState();
-      authContext.login(userData.login, userData.password);
+      const { userData, isLoading } = store.getState();
+
+      if (!isLoading) {
+        authContext.login(userData.login, userData.password);
+      }
     }));
 
-    if (userData) {
-      store.dispatch(authUser(userData));
+    if (storedUserData) {
+      store.dispatch(authUser(storedUserData));
     }
   }
 
@@ -40,9 +45,12 @@ class App extends Component {
   }
 
   render() {
+    const { isLoading } = this.props;
+
     return (
       <PageWrapper>
         <Header />
+        {isLoading && <Loader />}
         <section>
           <Switch>
             <Route path={AppRoutes.MAIN} component={Login} exact></Route>
@@ -56,4 +64,8 @@ class App extends Component {
   }
 }
 
-export default AuthHOC(App);
+const mapStateToProps = state => ({
+  isLoading: state.isLoading
+})
+
+export default connect(mapStateToProps)(AuthHOC(App));

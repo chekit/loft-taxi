@@ -99,5 +99,7 @@ describe('Input Component', () => {
 
             expect(label.textContent).toBe(`${LABEL_NAME}*:`);
         });
+
+        it.todo('Add error handling reaction');
     });
 });
