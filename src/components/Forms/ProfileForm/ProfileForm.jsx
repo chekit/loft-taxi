@@ -27,8 +27,8 @@ export class ProfileForm extends PureComponent {
 
     state = {
         name: '',
-        card_num: '',
-        expires: '',
+        card: '',
+        exp: '',
         cvc: '',
         isFilled: false
     };
@@ -43,10 +43,8 @@ export class ProfileForm extends PureComponent {
         });
     };
 
-    submitHandler = e => {
-        e.preventDeefault();
-
-        const { name, card_num: card, expires: exp, cvc } = this.state;
+    submitHandler = () => {
+        const { name, card, exp, cvc } = this.state;
         store.dispatch(updateProfile({ name, card, exp, cvc }));
 
         this.setState({ isFilled: true });
@@ -68,7 +66,7 @@ export class ProfileForm extends PureComponent {
     }
 
     render() {
-        const { name, card_num, expires, cvc, isFilled } = this.state;
+        const { name, card, exp, cvc, isFilled } = this.state;
         const { redirect } = this.props;
 
         return (
@@ -87,13 +85,13 @@ export class ProfileForm extends PureComponent {
                 </div>
                 {
                     !isFilled && <>
-                        <Card cardNum={card_num} cardType={this.cardType} expires={expires} />
+                        <Card cardNum={card} cardType={this.cardType} expires={exp} />
                         {/* Refactor with form component */}
                         <form className="profile__form profile-form" data-testid={PROFILE_FORM_TEST_ID}>
                             <FormInput label="Имя владельца" name="name" placeholder="Vasiliy Vasiliev" isLight={true} value={name} />
-                            <FormInput label="Номер карты" name="card_num" placeholder="1234567809874321" isLight={true} value={card_num} maxlength={16} />
+                            <FormInput label="Номер карты" name="card" placeholder="1234567809874321" isLight={true} value={card} maxlength={16} />
                             <div className="profile-form__group">
-                                <FormInput label="MM/YY" name="expires" placeholder="08/21" isLight={true} value={expires} />
+                                <FormInput label="MM/YY" name="exp" placeholder="08/21" isLight={true} value={exp} />
                                 <FormInput label="CVC" name="cvc" type="number" maxlength={3} isLight={true} value={cvc} />
                             </div>
                         </form>
@@ -104,8 +102,7 @@ export class ProfileForm extends PureComponent {
                         isFilled
                             ? <SubmitButton title="Перейти на карту" modificators={['is-dense']} onClickHandler={redirect} />
                             : <>
-                                <SubmitButton title="Сохранить" modificators={['is-dense']} isDisabled={!name || !card_num || !expires || !cvc} />
-                                {/* <SubmitButton title="Сохранить" modificators={['is-dense']} onClickHandler={this.submitHandler} /> */}
+                                <SubmitButton title="Сохранить" modificators={['is-dense']} isDisabled={!name || !card || !exp || !cvc} onClickHandler={this.submitHandler} />
                             </>
                     }
                 </div>
