@@ -3,4 +3,4 @@ import { updateProfileSuccess } from '../profile';
 
 export const profileData = handleActions({
     [updateProfileSuccess]: (_state, { payload }) => payload
-}, null);
+}, { profileData: null });

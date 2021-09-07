@@ -12,7 +12,3 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
-
-export { selectUserData } from './user-data.reducer';
-export { selectIsLoading } from './loading.reducer';
-export { selectError } from './error.reducer';

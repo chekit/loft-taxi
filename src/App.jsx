@@ -19,7 +19,6 @@ import { StorageKeys, LocalStorageService } from './services';
 import AuthHOC from './hocs/AuthHOC';
 
 import './App.scss';
-import { selectError, selectIsLoading, selectUserData } from './store/reducers';
 
 class App extends Component {
   subscriptions = [];
@@ -70,9 +69,9 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  isLoading: selectIsLoading(state),
-  error: selectError(state),
-  userData: selectUserData(state)
+  isLoading: state.isLoading,
+  error: state.error,
+  userData: state.userData
 });
 
 const mapDispatchToProps = { authUserRequest };

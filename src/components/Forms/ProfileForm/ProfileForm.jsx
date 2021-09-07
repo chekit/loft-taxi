@@ -1,17 +1,15 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import FormInput from '../../FormElements/Input';
 import SubmitButton from '../../FormElements/SubmitButton';
 import { CardTypes } from '../../../common/models/card-types';
-
-import './ProfileForm.scss';
-import Card from './Card';
-
-import store from '../../../store';
 import { updateProfileRequest } from '../../../store/profile';
 import { LocalStorageService, StorageKeys } from '../../../services';
-import { connect } from 'react-redux';
+import Card from './Card';
+
+import './ProfileForm.scss';
 
 export const PROFILE_FORM_TEST_ID = 'profile-form';
 export const PROFILE_FORM_SUBHEADING_TEST_ID = 'profile-form-subheading';
@@ -47,7 +45,7 @@ class ProfileForm extends PureComponent {
     submitHandler = () => {
         const { name, card, exp, cvc } = this.state;
         const { updateProfileRequest } = this.props;
-        store.dispatch(updateProfileRequest({ name, card, exp, cvc }));
+        updateProfileRequest({ name, card, exp, cvc });
 
         this.setState({ isFilled: true });
     };
