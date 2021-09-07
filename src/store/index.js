@@ -1,10 +1,17 @@
 import { applyMiddleware, compose, createStore } from 'redux'
-import { authMiddleware } from './middlewares';
-import { registerMiddleware } from './middlewares/register-middleware';
-import loftTaxi from './reducers';
+import { authMiddleware, registerMiddleware } from './middlewares';
+import rootReducer from './reducers';
+
+const initialState = {
+    userData: null,
+    profileData: null,
+    error: null,
+    isLoading: false
+};
 
 const store = createStore(
-    loftTaxi,
+    rootReducer,
+    initialState,
     compose(
         applyMiddleware(authMiddleware),
         applyMiddleware(registerMiddleware),
