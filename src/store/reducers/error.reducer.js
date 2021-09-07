@@ -1,10 +1,13 @@
 import { handleActions } from 'redux-actions';
-import { authUserFailure } from '../auth';
-import { updateProfileFailure } from '../profile';
-import { registerUserFailure } from '../register';
+import { authUserFailure, authUserRequest } from '../auth';
+import { updateProfileFailure, updateProfileRequest } from '../profile';
+import { registerUserFailure, registerUserRequest } from '../register';
 
-export const error = handleActions({
+export const errorReducer = handleActions({
+    [authUserRequest]: () => null,
     [authUserFailure]: (_state, { payload }) => payload,
+    [updateProfileRequest]: () => null,
     [updateProfileFailure]: (_state, { payload }) => payload,
+    [registerUserRequest]: () => null,
     [registerUserFailure]: (_state, { payload }) => payload,
 }, {error: null});

@@ -1,14 +1,14 @@
-import { error } from './error.reducer';
-import { isLoading } from './loading.reducer';
-import { profileData } from './profile-data.reducer';
-import { userData } from './user-data.reducer';
+import { errorReducer } from './error.reducer';
+import { isLoadingReducer } from './loading.reducer';
+import { profileDataReducer } from './profile-data.reducer';
+import { userDataReducer } from './user-data.reducer';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
-    userData,
-    profileData,
-    isLoading,
-    error
+    userData: userDataReducer,
+    profileData: profileDataReducer,
+    isLoading: isLoadingReducer,
+    error: errorReducer
 });
 
 export default rootReducer;

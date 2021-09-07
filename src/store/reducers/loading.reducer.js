@@ -3,7 +3,7 @@ import { authUserFailure, authUserRequest, authUserSuccess } from '../auth';
 import { updateProfileFailure, updateProfileRequest, updateProfileSuccess } from '../profile';
 import { registerUserFailure, registerUserRequest, registerUserSuccess } from '../register';
 
-export const isLoading = handleActions({
+export const isLoadingReducer = handleActions({
     [authUserRequest]: () => true,
     [authUserSuccess]: () => false,
     [authUserFailure]: () => false,
