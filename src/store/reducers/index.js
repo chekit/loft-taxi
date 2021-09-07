@@ -3,7 +3,7 @@ import { ActionTypes } from '../actions';
 const initialState = {
     userData: null,
     profileData: null,
-    isError: null,
+    error: null,
     isLoading: false
 };
 
@@ -14,7 +14,7 @@ export default function loftTaxi(state = initialState, action) {
             return {
                 ...state,
                 userData: { ...action.payload },
-                isError: null,
+                error: null,
                 isLoading: true
             };
 
@@ -28,7 +28,7 @@ export default function loftTaxi(state = initialState, action) {
         case ActionTypes.REGISTER:
             return {
                 ...state,
-                isError: null,
+                error: null,
                 isLoading: true
             };
 
@@ -62,7 +62,7 @@ export default function loftTaxi(state = initialState, action) {
                 ...state,
                 userData: null,
                 profileData: null,
-                isError: action.payload,
+                error: action.payload,
                 isLoading: false
             };
 

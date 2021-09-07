@@ -29,9 +29,9 @@ class App extends Component {
     const storedUserData = this.localStorageService.fetch(StorageKeys.LOGIN_DATA);
 
     this.subscriptions.push(store.subscribe(() => {
-      const { userData, isLoading, isError } = store.getState();
+      const { userData, isLoading, error } = store.getState();
 
-      if (!isLoading && !isError && userData) {
+      if (!isLoading && !error && userData) {
         authContext.login(userData.email, userData.password);
       }
     }));
@@ -46,7 +46,7 @@ class App extends Component {
   }
 
   render() {
-    const { isLoading, isError } = this.props;
+    const { isLoading, error } = this.props;
 
     return (
       <PageWrapper>
@@ -62,7 +62,7 @@ class App extends Component {
         {/* @TODO: Use Portal */}
         {isLoading ? <Loader /> : <></>}
         {/* @TODO: Use Portal */}
-        {isError ? <Error message={isError} /> : <></>}
+        {error ? <Error message={error} /> : <></>}
       </PageWrapper>
     );
   }
@@ -70,7 +70,7 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   isLoading: state.isLoading,
-  isError: state.isError,
+  error: state.error,
 })
 
 export default connect(mapStateToProps)(AuthHOC(App));
