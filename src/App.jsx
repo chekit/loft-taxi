@@ -25,7 +25,7 @@ class App extends Component {
   localStorageService = new LocalStorageService();
 
   componentDidMount() {
-    const { authContext } = this.props;
+    const { authContext, authUser } = this.props;
     const storedUserData = this.localStorageService.fetch(StorageKeys.LOGIN_DATA);
 
     this.subscriptions.push(store.subscribe(() => {
@@ -37,7 +37,7 @@ class App extends Component {
     }));
 
     if (storedUserData) {
-      store.dispatch(authUser(storedUserData));
+      authUser(storedUserData);
     }
   }
 
@@ -71,6 +71,8 @@ class App extends Component {
 const mapStateToProps = state => ({
   isLoading: state.isLoading,
   error: state.error,
-})
+});
 
-export default connect(mapStateToProps)(AuthHOC(App));
+const mapDispatchToProps = { authUser };
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthHOC(App));
