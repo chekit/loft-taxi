@@ -32,6 +32,7 @@ describe('Profile Form', () => {
         expect(submit.disabled).toBeTruthy();
     });
 
+    // @FIXME: Doesn't fill in the fields
     xit(`should enable saving`, () => {
         render(<FormWithProvider />);
 
@@ -47,10 +48,10 @@ describe('Profile Form', () => {
                 case 'name':
                     fireEvent.change(input, { target: { value: 'Vasiliy Vasiliev' } });
                     break;
-                case 'card_num':
+                case 'card':
                     fireEvent.change(input, { target: { value: '0000234567891234' } });
                     break;
-                case 'expires':
+                case 'exp':
                     fireEvent.change(input, { target: { value: '08/22' } });
                     break;
                 case 'cvc':

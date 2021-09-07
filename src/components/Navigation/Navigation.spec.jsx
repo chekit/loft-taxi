@@ -43,6 +43,7 @@ describe('Navigation', () => {
     });
 
     // @TODO: Refactor
+    it.todo('Add test for routing. See "Разбор заданий #3"');
     xit('should call logout and navigate to login', () => {
         const Logout = screen.getByText('Выход');
 

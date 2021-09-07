@@ -63,6 +63,7 @@ describe('App', () => {
     });
 
     // @TODO: Include after fix!
+    it.todo('Add test for routing. See "Разбор заданий #3"');
     xit(`should load map page after login`, () => {
         render(<AppWithProvider />);
 

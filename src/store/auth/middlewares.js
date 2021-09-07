@@ -6,6 +6,7 @@ export const authMiddleware = store => next => action => {
     const localStorageService = new LocalStorageService();
 
     if (action.type === AuthActionTypes.AUTHORIZE) {
+        // If we are using asyn/wait we are missing AuthActionTypes.AUTHORIZE action in redux history
         authService.login(action.payload)
             .then(({ success, error }) => {
                 if (success) {
