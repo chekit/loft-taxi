@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import store from './store';
+import { connect } from 'react-redux';
 
 import Login from './pages/Login';
 import Profile from './pages/Profile';
@@ -16,8 +17,8 @@ import { authUser } from './store/actions';
 import AuthHOC from './hocs/AuthHOC';
 
 import './App.scss';
-import { connect } from 'react-redux';
 import Loader from './components/Loader';
+import Error from './components/Error';
 
 class App extends Component {
   subscriptions = [];
@@ -28,10 +29,10 @@ class App extends Component {
     const storedUserData = this.localStorageService.fetch(StorageKeys.LOGIN_DATA);
 
     this.subscriptions.push(store.subscribe(() => {
-      const { userData, isLoading } = store.getState();
+      const { userData, isLoading, isError } = store.getState();
 
-      if (!isLoading) {
-        authContext.login(userData.login, userData.password);
+      if (!isLoading && !isError && userData) {
+        authContext.login(userData.email, userData.password);
       }
     }));
 
@@ -45,12 +46,11 @@ class App extends Component {
   }
 
   render() {
-    const { isLoading } = this.props;
+    const { isLoading, isError } = this.props;
 
     return (
       <PageWrapper>
         <Header />
-        {isLoading && <Loader />}
         <section>
           <Switch>
             <Route path={AppRoutes.MAIN} component={Login} exact></Route>
@@ -59,13 +59,18 @@ class App extends Component {
             <PrivateRoute path={AppRoutes.PROFILE} redirectPath={AppRoutes.REGISTRATION} component={Profile} />
           </Switch>
         </section>
+        {/* @TODO: Use Portal */}
+        {isLoading ? <Loader /> : <></>}
+        {/* @TODO: Use Portal */}
+        {isError ? <Error message={isError} /> : <></>}
       </PageWrapper>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  isLoading: state.isLoading
+  isLoading: state.isLoading,
+  isError: state.isError,
 })
 
 export default connect(mapStateToProps)(AuthHOC(App));

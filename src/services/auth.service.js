@@ -1,31 +1,29 @@
 export class AuthService {
-    baseURL = `https://loft-taxi.glitch.me/`;
+    baseURL = `https://loft-taxi.glitch.me`;
 
     async register(data) {
-        try {
-            const res = await fetch(`${this.baseURL}/register`, {
-                method: 'POST',
-                body: JSON.stringify(data)
-            });
-
-            return await res.json();
-        } catch (e) {
-
-        }
+        return await this.post('register', JSON.stringify(data));
     }
 
     async login(data) {
+        return await this.post('auth', JSON.stringify(data));
+    }
+
+    logout() { }
+
+    async post(uri, body) {
         try {
-            const res = await fetch(`${this.baseURL}/auth`, {
+            const res = await fetch(`${this.baseURL}/${uri}`, {
                 method: 'POST',
-                body: JSON.stringify(data)
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body
             });
 
             return await res.json();
         } catch (e) {
-
+            return { success: false, error: e.message };
         }
     }
-
-    logout() { }
 }

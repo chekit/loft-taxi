@@ -3,7 +3,7 @@ import { ActionTypes } from '../actions';
 const initialState = {
     userData: null,
     profileData: null,
-    isError: false,
+    isError: null,
     isLoading: false
 };
 
@@ -14,6 +14,7 @@ export default function loftTaxi(state = initialState, action) {
             return {
                 ...state,
                 userData: { ...action.payload },
+                isError: null,
                 isLoading: true
             };
 
@@ -26,25 +27,30 @@ export default function loftTaxi(state = initialState, action) {
         // @TODO: Refactor
         case ActionTypes.REGISTER:
             return {
-                ...state
+                ...state,
+                isError: null,
+                isLoading: true
             };
 
         case ActionTypes.REGISTER_SUCCESS:
             return {
                 ...state,
-                userData: { ...action.payload }
+                userData: { ...action.payload },
+                isLoading: false
             };
         // Update
         // @TODO: Refactor
         case ActionTypes.UPDATE_PROFILE:
             return {
                 ...state,
-                profileData: { ...action.payload }
+                profileData: { ...action.payload },
+                isLoading: true
             };
 
         case ActionTypes.UPDATE_PROFILE_SUCCESS:
             return {
                 ...state,
+                isLoading: false
             };
 
 
@@ -56,7 +62,8 @@ export default function loftTaxi(state = initialState, action) {
                 ...state,
                 userData: null,
                 profileData: null,
-                isError: true
+                isError: action.payload,
+                isLoading: false
             };
 
         default:

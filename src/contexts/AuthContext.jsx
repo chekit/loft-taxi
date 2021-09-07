@@ -13,7 +13,7 @@ class AuthContextProvider extends Component {
     login = (email, password) => {
         // @TODO: Add Check up
         if (email && password) {
-            this.localStorageService.save(StorageKeys.LOGIN_DATA, { login: email, password });
+            this.localStorageService.save(StorageKeys.LOGIN_DATA, { email, password });
 
             this.setState({
                 isLoggedIn: true

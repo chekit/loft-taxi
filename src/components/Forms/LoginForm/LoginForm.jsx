@@ -30,7 +30,7 @@ export class LoginForm extends PureComponent {
         e.preventDefault();
         const { email, password } = this.state;
 
-        store.dispatch(authUser({ login: email, password }));
+        store.dispatch(authUser({ email, password }));
     };
 
     render() {
