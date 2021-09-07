@@ -1,9 +1,8 @@
-import { combineReducers } from 'redux';
+import { error } from './error.reducer';
+import { isLoading } from './loading.reducer';
 import { profileData } from './profile-data.reducer';
 import { userData } from './user-data.reducer';
-import { isLoading } from './loading.reducer';
-import { error } from './error.reducer';
-import { createSelector } from 'reselect';
+import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
     userData,
@@ -12,8 +11,8 @@ const rootReducer = combineReducers({
     error
 });
 
-export const selectUserData = createSelector(state => state.userData);
-export const selectIsLoading = createSelector(state => state.isLoading);
-export const selectError = createSelector(state => state.error);
-
 export default rootReducer;
+
+export { selectUserData } from './user-data.reducer';
+export { selectIsLoading } from './loading.reducer';
+export { selectError } from './error.reducer';

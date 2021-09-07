@@ -9,13 +9,14 @@ import './ProfileForm.scss';
 import Card from './Card';
 
 import store from '../../../store';
-import { updateProfileRequest } from '../../../store/actions';
+import { updateProfileRequest } from '../../../store/profile';
 import { LocalStorageService, StorageKeys } from '../../../services';
+import { connect } from 'react-redux';
 
 export const PROFILE_FORM_TEST_ID = 'profile-form';
 export const PROFILE_FORM_SUBHEADING_TEST_ID = 'profile-form-subheading';
 
-export class ProfileForm extends PureComponent {
+class ProfileForm extends PureComponent {
     static propTypes = {
         redirect: PropTypes.func,
         save: PropTypes.func
@@ -45,6 +46,7 @@ export class ProfileForm extends PureComponent {
 
     submitHandler = () => {
         const { name, card, exp, cvc } = this.state;
+        const { updateProfileRequest } = this.props;
         store.dispatch(updateProfileRequest({ name, card, exp, cvc }));
 
         this.setState({ isFilled: true });
@@ -110,3 +112,8 @@ export class ProfileForm extends PureComponent {
         );
     }
 }
+
+const mapStateToProps = state => state;
+const mapDispatchToProps = { updateProfileRequest };
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm);

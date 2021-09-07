@@ -1,6 +1,7 @@
-import { applyMiddleware, compose, createStore } from 'redux'
-import { authMiddleware, registerMiddleware } from './middlewares';
+import { authMiddleware } from './auth';
 import rootReducer from './reducers';
+import { registerMiddleware } from './register';
+import { applyMiddleware, compose, createStore } from 'redux';
 
 const initialState = {
     userData: null,

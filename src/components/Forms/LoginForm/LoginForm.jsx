@@ -6,13 +6,13 @@ import { NavLink } from 'react-router-dom';
 
 import './LoginForm.scss';
 import { AppRoutes } from '../../../common/app.routes';
-import { authUserRequest } from '../../../store/actions';
-import store from '../../../store';
+import { authUserRequest } from '../../../store/auth';
+import { connect } from 'react-redux';
 
 export const LOGIN_FORM_TEST_ID = 'login-form';
 export const REGISTER_BUTTON_TEST_ID = 'register-btn';
 
-export class LoginForm extends PureComponent {
+class LoginForm extends PureComponent {
     state = {
         email: '',
         password: ''
@@ -29,8 +29,9 @@ export class LoginForm extends PureComponent {
     submitHandler = e => {
         e.preventDefault();
         const { email, password } = this.state;
+        const { authUserRequest } = this.props;
 
-        store.dispatch(authUserRequest({ email, password }));
+        authUserRequest({ email, password });
     };
 
     render() {
@@ -54,3 +55,8 @@ export class LoginForm extends PureComponent {
         );
     }
 }
+
+const mapStateToProps = state => state;
+const mapDispatchToProps = { authUserRequest };
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

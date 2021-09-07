@@ -1,5 +1,8 @@
 import { handleActions } from 'redux-actions';
-import { authUserRequest, authUserFailure, authUserSuccess, registerUserRequest, registerUserFailure, registerUserSuccess, updateProfileRequest, updateProfileFailure, updateProfileSuccess } from '../actions';
+import { createSelector } from 'reselect';
+import { authUserFailure, authUserRequest, authUserSuccess } from '../auth';
+import { updateProfileFailure, updateProfileRequest, updateProfileSuccess } from '../profile';
+import { registerUserFailure, registerUserRequest, registerUserSuccess } from '../register';
 
 export const isLoading = handleActions({
     [authUserRequest]: () => true,
@@ -12,3 +15,5 @@ export const isLoading = handleActions({
     [updateProfileSuccess]: () => false,
     [updateProfileFailure]: () => false,
 }, false);
+
+export const selectIsLoading = createSelector(state => state && state.isLoading);

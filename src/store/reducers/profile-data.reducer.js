@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
-import { updateProfileSuccess } from '../actions';
+import { updateProfileSuccess } from '../profile';
 
 export const profileData = handleActions({
-    [updateProfileSuccess]: (_state, action) => action.payload
+    [updateProfileSuccess]: (_state, { payload }) => payload
 }, null);

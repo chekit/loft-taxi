@@ -10,7 +10,6 @@ import { MemoryRouter } from 'react-router-dom';
 import { AppRoutes } from './common/app.routes';
 import { Provider } from 'react-redux';
 import store from './store';
-import { AuthService } from './services/auth.service';
 
 jest.mock('./components/Map', () => (() => <p>Mocked Map</p>));
 

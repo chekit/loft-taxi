@@ -7,13 +7,13 @@ import { NavLink } from 'react-router-dom';
 
 import './RegistrationForm.scss';
 import { AppRoutes } from '../../../common/app.routes';
-import store from '../../../store';
-import { registerUserRequest } from '../../../store/actions';
+import { registerUserRequest } from '../../../store/register';
+import { connect } from 'react-redux';
 
 export const REGISTRATION_FORM_TEST_ID = 'registration-form';
 export const LOGIN_BUTTON_TEST_ID = 'login-btn';
 
-export class RegistrationForm extends PureComponent {
+class RegistrationForm extends PureComponent {
     static propTypes = {
         proceed: PropTypes.func,
     };
@@ -35,8 +35,10 @@ export class RegistrationForm extends PureComponent {
     submitHandler = e => {
         e.preventDefault();
         const { email, password, name } = this.state;
+        const { registerUserRequest } = this.props;
 
-        store.dispatch(registerUserRequest({ email, password, name: name.split(' ')[0], surname: name.split(' ')[1] }));
+        // @FIXME: Refactor Name Splitting
+        registerUserRequest({ email, password, name: name.split(' ')[0], surname: name.split(' ')[1] });
     };
 
     render() {
@@ -57,3 +59,8 @@ export class RegistrationForm extends PureComponent {
         );
     }
 }
+
+const mapStateToProps = state => state;
+const mapDispatchToProps = { registerUserRequest };
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);

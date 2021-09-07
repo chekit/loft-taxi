@@ -1,14 +1,24 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router';
 import { AppRoutes } from '../../../common/app.routes';
-import { PROFILE_FORM_SUBHEADING_TEST_ID, ProfileForm, PROFILE_FORM_TEST_ID } from './ProfileForm';
-import { SUBMIT_TEST_ID } from '../../FormElements/SubmitButton/SubmitButton';
+import store from '../../../store';
 import { INPUT_TEST_ID } from '../../FormElements/Input/Input';
+import { SUBMIT_TEST_ID } from '../../FormElements/SubmitButton/SubmitButton';
+import ProfileForm, { PROFILE_FORM_SUBHEADING_TEST_ID, PROFILE_FORM_TEST_ID } from './ProfileForm';
 
 describe('Profile Form', () => {
+    const FormWithProvider = () => (
+        <MemoryRouter initialEntries={[AppRoutes.PROFILE]}>
+            <Provider store={store}>
+                <ProfileForm />
+            </Provider>
+        </MemoryRouter>
+    );
+
     it(`should render empty form`, () => {
-        render(<MemoryRouter initialEntries={[AppRoutes.PROFILE]}><ProfileForm /></MemoryRouter>);
+        render(<FormWithProvider />);
 
         const subheading = screen.getByTestId(PROFILE_FORM_SUBHEADING_TEST_ID);
         const form = screen.getByTestId(PROFILE_FORM_TEST_ID);
@@ -23,7 +33,7 @@ describe('Profile Form', () => {
     });
 
     xit(`should enable saving`, () => {
-        render(<MemoryRouter initialEntries={[AppRoutes.PROFILE]}><ProfileForm /></MemoryRouter>);
+        render(<FormWithProvider />);
 
         const submit = screen.getByTestId(SUBMIT_TEST_ID);
         const inputs = screen.getAllByTestId(INPUT_TEST_ID);

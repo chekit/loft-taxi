@@ -1,5 +1,5 @@
 import { AuthService } from '../../services/auth.service';
-import { RegisterActionTypes, registerUserFailure, registerUserSuccess } from '../actions';
+import { RegisterActionTypes, registerUserFailure, registerUserSuccess } from './actions';
 
 export const registerMiddleware = store => next => action => {
     const authService = new AuthService();

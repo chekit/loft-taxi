@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import store from './store';
-import { authUserRequest } from './store/actions';
-import { selectError, selectIsLoading, selectUserData } from './store/reducers';
+import { authUserRequest } from './store/auth';
 
 import Login from './pages/Login';
 import Profile from './pages/Profile';
@@ -20,6 +19,7 @@ import { StorageKeys, LocalStorageService } from './services';
 import AuthHOC from './hocs/AuthHOC';
 
 import './App.scss';
+import { selectError, selectIsLoading, selectUserData } from './store/reducers';
 
 class App extends Component {
   subscriptions = [];
