@@ -9,8 +9,6 @@ export class AuthService {
         return await this.post('auth', JSON.stringify(data));
     }
 
-    logout() { }
-
     async post(uri, body) {
         try {
             const res = await fetch(`${this.baseURL}/${uri}`, {
