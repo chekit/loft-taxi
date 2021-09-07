@@ -6,6 +6,6 @@ export const ProfileActionTypes = {
     UPDATE_PROFILE_FAILURE: '[Api] Update profile Failure',
 };
 
-export const updateProfile = createAction(ProfileActionTypes.UPDATE_PROFILE);
+export const updateProfileRequest = createAction(ProfileActionTypes.UPDATE_PROFILE);
 export const updateProfileSuccess = createAction(ProfileActionTypes.UPDATE_PROFILE_SUCCESS);
 export const updateProfileFailure = createAction(ProfileActionTypes.UPDATE_PROFILE_FAILURE);

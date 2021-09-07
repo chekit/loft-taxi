@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import store from './store';
 import { connect } from 'react-redux';
+import store from './store';
+import { authUserRequest } from './store/actions';
+import { selectError, selectIsLoading, selectUserData } from './store/reducers';
 
 import Login from './pages/Login';
 import Profile from './pages/Profile';
@@ -11,21 +13,20 @@ import Header from './components/Header';
 import { AppRoutes } from './common/app.routes';
 import PageWrapper from './components/Struct/PageWrapper';
 import PrivateRoute from './components/Struct/PrivateRoute';
+import Loader from './components/Loader';
+import Error from './components/Error';
 import { StorageKeys, LocalStorageService } from './services';
-import { authUser } from './store/actions';
 
 import AuthHOC from './hocs/AuthHOC';
 
 import './App.scss';
-import Loader from './components/Loader';
-import Error from './components/Error';
 
 class App extends Component {
   subscriptions = [];
   localStorageService = new LocalStorageService();
 
   componentDidMount() {
-    const { authContext, authUser } = this.props;
+    const { authContext, authUserRequest } = this.props;
     const storedUserData = this.localStorageService.fetch(StorageKeys.LOGIN_DATA);
 
     this.subscriptions.push(store.subscribe(() => {
@@ -37,7 +38,7 @@ class App extends Component {
     }));
 
     if (storedUserData) {
-      authUser(storedUserData);
+      authUserRequest(storedUserData);
     }
   }
 
@@ -69,10 +70,11 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  isLoading: state.isLoading,
-  error: state.error,
+  isLoading: selectIsLoading(state),
+  error: selectError(state),
+  userData: selectUserData(state)
 });
 
-const mapDispatchToProps = { authUser };
+const mapDispatchToProps = { authUserRequest };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthHOC(App));

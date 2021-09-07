@@ -1,14 +1,14 @@
 import { handleActions } from 'redux-actions';
-import { authUser, authUserFailure, authUserSuccess, registerUser, registerUserFailure, registerUserSuccess, updateProfile, updateProfileFailure, updateProfileSuccess } from '../actions';
+import { authUserRequest, authUserFailure, authUserSuccess, registerUserRequest, registerUserFailure, registerUserSuccess, updateProfileRequest, updateProfileFailure, updateProfileSuccess } from '../actions';
 
 export const isLoading = handleActions({
-    [authUser]: () => true,
+    [authUserRequest]: () => true,
     [authUserSuccess]: () => false,
     [authUserFailure]: () => false,
-    [registerUser]: () => true,
+    [registerUserRequest]: () => true,
     [registerUserSuccess]: () => false,
     [registerUserFailure]: () => false,
-    [updateProfile]: () => true,
+    [updateProfileRequest]: () => true,
     [updateProfileSuccess]: () => false,
     [updateProfileFailure]: () => false,
 }, false);

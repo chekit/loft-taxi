@@ -9,7 +9,7 @@ import './ProfileForm.scss';
 import Card from './Card';
 
 import store from '../../../store';
-import { updateProfile } from '../../../store/actions';
+import { updateProfileRequest } from '../../../store/actions';
 import { LocalStorageService, StorageKeys } from '../../../services';
 
 export const PROFILE_FORM_TEST_ID = 'profile-form';
@@ -45,7 +45,7 @@ export class ProfileForm extends PureComponent {
 
     submitHandler = () => {
         const { name, card, exp, cvc } = this.state;
-        store.dispatch(updateProfile({ name, card, exp, cvc }));
+        store.dispatch(updateProfileRequest({ name, card, exp, cvc }));
 
         this.setState({ isFilled: true });
     };

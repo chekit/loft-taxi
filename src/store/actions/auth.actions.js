@@ -6,6 +6,6 @@ export const AuthActionTypes = {
     AUTHORIZE_FAILURE: '[Api] Authorize user Failure',
 };
 
-export const authUser = createAction(AuthActionTypes.AUTHORIZE);
+export const authUserRequest = createAction(AuthActionTypes.AUTHORIZE);
 export const authUserSuccess = createAction(AuthActionTypes.AUTHORIZE_SUCCESS);
 export const authUserFailure = createAction(AuthActionTypes.AUTHORIZE_FAILURE);

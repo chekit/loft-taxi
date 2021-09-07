@@ -6,6 +6,6 @@ export const RegisterActionTypes = {
     REGISTER_FAILURE: '[Api] Register user Failure',
 };
 
-export const registerUser = createAction(RegisterActionTypes.REGISTER);
+export const registerUserRequest = createAction(RegisterActionTypes.REGISTER);
 export const registerUserSuccess = createAction(RegisterActionTypes.REGISTER_SUCCESS);
 export const registerUserFailure = createAction(RegisterActionTypes.REGISTER_FAILURE);

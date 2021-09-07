@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 import './LoginForm.scss';
 import { AppRoutes } from '../../../common/app.routes';
-import { authUser } from '../../../store/actions';
+import { authUserRequest } from '../../../store/actions';
 import store from '../../../store';
 
 export const LOGIN_FORM_TEST_ID = 'login-form';
@@ -30,7 +30,7 @@ export class LoginForm extends PureComponent {
         e.preventDefault();
         const { email, password } = this.state;
 
-        store.dispatch(authUser({ email, password }));
+        store.dispatch(authUserRequest({ email, password }));
     };
 
     render() {

@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 import './RegistrationForm.scss';
 import { AppRoutes } from '../../../common/app.routes';
 import store from '../../../store';
-import { registerUser } from '../../../store/actions';
+import { registerUserRequest } from '../../../store/actions';
 
 export const REGISTRATION_FORM_TEST_ID = 'registration-form';
 export const LOGIN_BUTTON_TEST_ID = 'login-btn';
@@ -36,7 +36,7 @@ export class RegistrationForm extends PureComponent {
         e.preventDefault();
         const { email, password, name } = this.state;
 
-        store.dispatch(registerUser({ email, password, name: name.split(' ')[0], surname: name.split(' ')[1] }));
+        store.dispatch(registerUserRequest({ email, password, name: name.split(' ')[0], surname: name.split(' ')[1] }));
     };
 
     render() {
