@@ -3,6 +3,7 @@ import { StorageKeys, LocalStorageService } from '../services';
 
 export const AuthContext = createContext();
 
+// @TODO: REMOVE!!!
 class AuthContextProvider extends Component {
     localStorageService = new LocalStorageService();
 

@@ -5,16 +5,14 @@ import Logo from '../Logo';
 import Navigation from '../Navigation';
 
 import './Header.scss';
-import { useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
 
 export const HEADER_TEST_ID = 'header';
 
-export const Header = () => {
-    const { isLoggedIn } = useContext(AuthContext);
+export const Header = props => {
+    const { isLoggedIn } = props;
 
     return (
-        <header className={`header ${!isLoggedIn && 'is-not-auth'}`} data-testid={HEADER_TEST_ID}>
+        <header className={`header ${isLoggedIn ? '' : 'is-not-auth'}`} data-testid={HEADER_TEST_ID}>
             <Logo isLoggedIn={isLoggedIn} />
             {isLoggedIn && <Navigation />}
         </header>

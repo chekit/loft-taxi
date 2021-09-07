@@ -9,7 +9,7 @@ import './Logo.scss';
 
 export const Logo = ({ isLoggedIn }) => {
     return (
-        <picture className={`logo ${isLoggedIn && 'is-auth'}`}>
+        <picture className={`logo ${isLoggedIn ? 'is-auth' : ''}`}>
             {
                 !isLoggedIn
                     ? <source media="(min-width:1024px)" srcSet={logo_desktop} data-testid="logo-unauth" />

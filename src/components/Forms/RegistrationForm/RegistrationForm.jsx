@@ -15,7 +15,7 @@ export const LOGIN_BUTTON_TEST_ID = 'login-btn';
 
 class RegistrationForm extends PureComponent {
     static propTypes = {
-        proceed: PropTypes.func,
+        registerUserRequest: PropTypes.func,
     };
 
     state = {

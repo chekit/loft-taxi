@@ -8,7 +8,6 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import { Provider } from 'react-redux';
 import store from './store';
 
-import AuthContextProvider from './contexts/AuthContext';
 import App from './App';
 
 import './index.scss';
@@ -16,13 +15,11 @@ import './index.scss';
 ReactDOM.render(
   <React.StrictMode>
     <MuiThemeProvider theme={theme}>
-      <AuthContextProvider>
         <BrowserRouter>
           <Provider store={store}>
             <App />
           </Provider>
         </BrowserRouter>
-      </AuthContextProvider>
     </MuiThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -1,21 +1,18 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { Registration } from './Registration';
+import Registration from './Registration';
 import { render } from '@testing-library/react';
-import AuthContextProvider from '../../contexts/AuthContext';
 import { AppRoutes } from '../../common/app.routes';
 import { Provider } from 'react-redux';
 import store from '../../store';
 
 describe('Registration Page', () => {
     const PageWithProvider = () => (
-        <AuthContextProvider>
-            <MemoryRouter initialEntries={[AppRoutes.REGISTRATION]}>
-                <Provider store={store}>
-                    <Registration />
-                </Provider>
-            </MemoryRouter>
-        </AuthContextProvider>
+        <MemoryRouter initialEntries={[AppRoutes.REGISTRATION]}>
+            <Provider store={store}>
+                <Registration />
+            </Provider>
+        </MemoryRouter>
     );
 
     it(`renders Registration Form`, () => {

@@ -1,17 +1,23 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { AppRoutes } from '../../common/app.routes';
 
 import LoginForm from '../../components/Forms/LoginForm';
 import PageWithForm from '../../components/Struct/PageWithForm';
-import { AuthContext } from '../../contexts/AuthContext';
 
 import './Login.scss';
 
-export const Login = () => {
-    const { login, isLoggedIn } = useContext(AuthContext);
+const Login = props => {
+    const { isLoggedIn } = props;
 
     return isLoggedIn
         ? <Redirect to={AppRoutes.ORDER} />
-        : <PageWithForm><LoginForm proceed={login} /></PageWithForm>;
+        : <PageWithForm><LoginForm /></PageWithForm>;
 };
+
+const mapStateToProps = state => ({
+    isLoggedIn: state.isLoggedIn
+});
+
+export default connect(mapStateToProps)(Login);

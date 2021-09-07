@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AuthContext } from './../contexts/AuthContext';
 
+// @TODO: REMOVE!!!
 function AuthHOC(WrappedComponent) {
     return class extends Component {
         static displayName = 'AuthHOC';

@@ -1,8 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
+import { logoutRequest } from './../../store/logout';
 import { NavLink, useHistory } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
 
 import './Navigation.scss';
 
@@ -10,13 +11,13 @@ export const NAV_TEST_ID = 'navigation';
 export const LINK_TEST_ID = 'navigation-link';
 
 // @TODO: Add logic for mobile devices
-export const Navigation = () => {
+const Navigation = props => {
     let history = useHistory();
-    const { logout, isLoggedIn } = useContext(AuthContext);
     const [isVisible, toggleNav] = useState(false);
+    const { logoutRequest } = props;
 
     const logoutUser = () => {
-        logout();
+        logoutRequest();
         history.replace({ pathname: "/" });
     };
 
@@ -43,11 +44,9 @@ export const Navigation = () => {
                     <li className="navigation-list__item">
                         <NavLink className="navigation__link" to="/profile" onClick={closeNav} activeClassName="is-active">Профиль</NavLink>
                     </li>
-                    {isLoggedIn && (
-                        <li className="navigation-list__item">
-                            <button className="navigation__link" onClick={logoutUser}>Выход</button>
-                        </li>
-                    )}
+                    <li className="navigation-list__item">
+                        <button className="navigation__link" onClick={logoutUser}>Выход</button>
+                    </li>
                 </ul>
                 <button className="close-nav-button" onClick={closeNav}>X</button>
             </nav>
@@ -58,3 +57,8 @@ export const Navigation = () => {
 Navigation.propTypes = {
     currentPage: PropTypes.number,
 };
+
+const mapDispatchToProps = { logoutRequest };
+
+
+export default connect(null, mapDispatchToProps)(Navigation);

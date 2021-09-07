@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Form from '../../FormElements/Form';
 import FormInput from '../../FormElements/Input';
 import SubmitButton from '../../FormElements/SubmitButton';
@@ -13,6 +14,10 @@ export const LOGIN_FORM_TEST_ID = 'login-form';
 export const REGISTER_BUTTON_TEST_ID = 'register-btn';
 
 class LoginForm extends PureComponent {
+    static propTypes = {
+        authUserRequest: PropTypes.func,
+    };
+
     state = {
         email: '',
         password: ''

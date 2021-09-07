@@ -1,20 +1,17 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { Login } from './Login';
+import Login from './Login';
 import { render } from '@testing-library/react';
-import AuthContextProvider from '../../contexts/AuthContext';
 import { Provider } from 'react-redux';
 import store from '../../store';
 
 describe('Login Page', () => {
     const PageWithProvider = () => (
-        <AuthContextProvider>
-            <MemoryRouter>
-                <Provider store={store}>
-                    <Login />
-                </Provider>
-            </MemoryRouter>
-        </AuthContextProvider>
+        <MemoryRouter>
+            <Provider store={store}>
+                <Login />
+            </Provider>
+        </MemoryRouter>
     );
 
     it(`renders login Form`, () => {

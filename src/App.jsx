@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import store from './store';
 import { authUserRequest } from './store/auth';
 
 import Login from './pages/Login';
@@ -16,8 +15,6 @@ import Loader from './components/Loader';
 import Error from './components/Error';
 import { StorageKeys, LocalStorageService } from './services';
 
-import AuthHOC from './hocs/AuthHOC';
-
 import './App.scss';
 
 class App extends Component {
@@ -25,32 +22,20 @@ class App extends Component {
   localStorageService = new LocalStorageService();
 
   componentDidMount() {
-    const { authContext, authUserRequest } = this.props;
+    const { authUserRequest } = this.props;
     const storedUserData = this.localStorageService.fetch(StorageKeys.LOGIN_DATA);
-
-    this.subscriptions.push(store.subscribe(() => {
-      const { userData, isLoading, error } = store.getState();
-
-      if (!isLoading && !error && userData) {
-        authContext.login(userData.email, userData.password);
-      }
-    }));
 
     if (storedUserData) {
       authUserRequest(storedUserData);
     }
   }
 
-  componentWillUnmount() {
-    this.subscriptions.forEach(unsubscribe => unsubscribe());
-  }
-
   render() {
-    const { isLoading, error } = this.props;
+    const { isLoading, error, isLoggedIn } = this.props;
 
     return (
-      <PageWrapper>
-        <Header />
+      <PageWrapper isLoggedIn={isLoggedIn}>
+        <Header isLoggedIn={isLoggedIn} />
         <section>
           <Switch>
             <Route path={AppRoutes.MAIN} component={Login} exact></Route>
@@ -71,9 +56,10 @@ class App extends Component {
 const mapStateToProps = state => ({
   isLoading: state.isLoading,
   error: state.error,
-  userData: state.userData
+  userData: state.userData,
+  isLoggedIn: state.isLoggedIn
 });
 
 const mapDispatchToProps = { authUserRequest };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthHOC(App));
+export default connect(mapStateToProps, mapDispatchToProps)(App);

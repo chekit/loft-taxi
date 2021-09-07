@@ -5,7 +5,6 @@ import { LOGIN_FORM_TEST_ID, REGISTER_BUTTON_TEST_ID } from './components/Forms/
 import { LOGIN_BUTTON_TEST_ID, REGISTRATION_FORM_TEST_ID } from './components/Forms/RegistrationForm/RegistrationForm';
 import { INPUT_TEST_ID } from './components/FormElements/Input/Input';
 import { SUBMIT_TEST_ID } from './components/FormElements/SubmitButton/SubmitButton';
-import AuthContextProvider from './contexts/AuthContext';
 import { MemoryRouter } from 'react-router-dom';
 import { AppRoutes } from './common/app.routes';
 import { Provider } from 'react-redux';
@@ -15,13 +14,11 @@ jest.mock('./components/Map', () => (() => <p>Mocked Map</p>));
 
 describe('App', () => {
     const AppWithProvider = () => (
-        <AuthContextProvider>
-            <MemoryRouter initialEntries={[AppRoutes.MAIN]}>
-                <Provider store={store}>
-                    <App />
-                </Provider>
-            </MemoryRouter>
-        </AuthContextProvider>
+        <MemoryRouter initialEntries={[AppRoutes.MAIN]}>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </MemoryRouter>
     );
 
     it(`should render with login form`, () => {
