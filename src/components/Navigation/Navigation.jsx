@@ -19,7 +19,7 @@ const Navigation = props => {
 
     const logoutUser = () => {
         logoutRequest();
-        history.replace({ pathname: "/" });
+        history.replace({ pathname: AppRoutes.MAIN });
     };
 
     const openNav = () => {

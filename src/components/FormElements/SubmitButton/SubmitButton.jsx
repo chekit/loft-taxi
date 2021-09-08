@@ -15,7 +15,9 @@ SubmitButton.propTypes = {
     title: PropTypes.string.isRequired,
     isDisabled: PropTypes.bool,
     onClickHandler: PropTypes.func,
-    modificators: PropTypes.arrayOf(PropTypes.string)
+    modificators: PropTypes.arrayOf(
+        PropTypes.oneOf(['is-dense', 'is-fill'])
+    )
 };
 
 SubmitButton.defaultProps = {
