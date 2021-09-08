@@ -6,6 +6,7 @@ import { logoutRequest } from './../../store/logout';
 import { NavLink, useHistory } from 'react-router-dom';
 
 import './Navigation.scss';
+import { AppRoutes } from '../../common/app.routes';
 
 export const NAV_TEST_ID = 'navigation';
 export const LINK_TEST_ID = 'navigation-link';
@@ -18,7 +19,7 @@ const Navigation = props => {
 
     const logoutUser = () => {
         logoutRequest();
-        history.replace({ pathname: "/" });
+        history.replace({ pathname: AppRoutes.MAIN });
     };
 
     const openNav = () => {
