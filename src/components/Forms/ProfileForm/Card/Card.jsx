@@ -12,26 +12,26 @@ export const CARD_DISPLAY_TEST_ID = 'card-display';
 
 export const Card = ({cardType, expires, cardNum }) => {
     return (
-        <div className="cc-display" data-testid={CARD_DISPLAY_TEST_ID}>
-            <div className="cc-display__header">
-                <div className="cc-display__logo">
+        <div className="card" data-testid={CARD_DISPLAY_TEST_ID}>
+            <div className="card__header">
+                <div className="card__logo">
                     <img src={app_logo} alt="Loft Taxi" data-testid="card-app-logo" />
                 </div>
-                <p className="cc-display__expires">{expires}</p>
+                <p className="card__expires">{expires}</p>
             </div>
-            <div className="cc-display__body">
-                <p className="cc-display__num card-num">
+            <div className="card__body">
+                <p className="card__num card-num">
                     <span className="card-num__section">{cardNum.slice(0, 4)}</span>
                     <span className="card-num__section">{cardNum.slice(4, 8)}</span>
                     <span className="card-num__section">{cardNum.slice(8, 12)}</span>
                     <span className="card-num__section">{cardNum.slice(12, 16)}</span>
                 </p>
             </div>
-            <div className="cc-display__footer">
-                <div className="cc-display__chip">
+            <div className="card__footer">
+                <div className="card__chip">
                     <img src={chip} alt="Chip" data-testid="card-chip-ico" />
                 </div>
-                <div className="cc-display__vendor vendor-icons">
+                <div className="card__vendor vendor-icons">
                     <div className={`vendor-icons__item ${cardType === CardTypes.MASTERCARD ? 'is-active' : ''}`}>
                         <MCIcon classes={{ icon: `mc-icon` }} />
                     </div>
