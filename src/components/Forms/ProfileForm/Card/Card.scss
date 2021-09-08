@@ -1,0 +1,59 @@
+@import 'styles/globals.scss';
+
+.cc-display {
+    grid-area: Card;
+    box-sizing: border-box;
+    margin: 0 auto $base-step * 4;
+    padding: $base-step * 2 $base-step * 2 $base-step * 2 $base-step * 3;
+    width: 347px;
+    max-height: 190px;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+
+    &__header,
+    &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__expires {
+        font-size: 1.4em;
+    }
+
+    &__num {
+        margin: $base-step * 3 0;
+        font-size: 2.1em;
+    }
+}
+
+.card-num {
+    display: flex;
+    align-items: center;
+
+    &__section {
+        display: block;
+        margin-right: $base-step * 3;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+.vendor-icons {
+    &__item {
+        position: relative;
+        filter: grayscale(90%);
+        opacity: 0.5;
+        transition: filter, opacity 0.15s ease-in-out;
+
+        &.is-active {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+    }
+
+    .mc-icon {
+        position: static;
+    }
+}

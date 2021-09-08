@@ -1,37 +1,64 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import { AppPages } from '../../common/models';
-import { AuthContext } from '../../contexts/AuthContext';
-import NavigationLink from './NavigationLink';
+import { logoutRequest } from './../../store/logout';
+import { NavLink, useHistory } from 'react-router-dom';
 
 import './Navigation.scss';
 
 export const NAV_TEST_ID = 'navigation';
+export const LINK_TEST_ID = 'navigation-link';
 
 // @TODO: Add logic for mobile devices
-export const Navigation = ({ navigate, currentPage }) => {
-    const { logout } = useContext(AuthContext);
+const Navigation = props => {
+    let history = useHistory();
+    const [isVisible, toggleNav] = useState(false);
+    const { logoutRequest } = props;
+
+    const logoutUser = () => {
+        logoutRequest();
+        history.replace({ pathname: "/" });
+    };
+
+    const openNav = () => {
+        toggleNav(true);
+    }
+
+    const closeNav = () => {
+        toggleNav(false);
+    }
 
     return (
-        <nav className="navigation" data-testid={NAV_TEST_ID}>
-            <ul className="navigation-list">
-                <li className="navigation-list__item">
-                    <NavigationLink title="Карта" onClickHandler={() => navigate(AppPages.MAP)} isActive={currentPage === AppPages.MAP}></NavigationLink>
-                </li>
-                <li className="navigation-list__item">
-                    <NavigationLink title="Профиль" onClickHandler={() => navigate(AppPages.PROFILE)} isActive={currentPage === AppPages.PROFILE}></NavigationLink>
-                </li>
-                <li className="navigation-list__item">
-                    <NavigationLink title="Выход" onClickHandler={() => { logout(); navigate(AppPages.LOGIN) }}></NavigationLink>
-                </li>
-            </ul>
-        </nav>
-
+        <>
+            <button className="open-nav-button" onClick={openNav}>
+                <span className="open-nav-button__item"></span>
+                <span className="open-nav-button__item is-short"></span>
+                <span className="open-nav-button__item"></span>
+            </button>
+            <nav className={`navigation ${isVisible ? 'is-visible' : ''}`} data-testid={NAV_TEST_ID}>
+                <ul className="navigation-list">
+                    <li className="navigation-list__item">
+                        <NavLink className="navigation__link" to="/order" onClick={closeNav} activeClassName="is-active">Карта</NavLink>
+                    </li>
+                    <li className="navigation-list__item">
+                        <NavLink className="navigation__link" to="/profile" onClick={closeNav} activeClassName="is-active">Профиль</NavLink>
+                    </li>
+                    <li className="navigation-list__item">
+                        <button className="navigation__link" onClick={logoutUser}>Выход</button>
+                    </li>
+                </ul>
+                <button className="close-nav-button" onClick={closeNav}>X</button>
+            </nav>
+        </>
     );
 };
 
 Navigation.propTypes = {
-    navigate: PropTypes.func,
     currentPage: PropTypes.number,
 };
+
+const mapDispatchToProps = { logoutRequest };
+
+
+export default connect(null, mapDispatchToProps)(Navigation);

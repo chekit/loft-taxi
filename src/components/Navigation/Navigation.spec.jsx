@@ -1,74 +1,52 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { AppPages } from '../../common/models';
-import { AuthContext } from '../../contexts/AuthContext';
-import { Navigation } from './Navigation';
-import { LINK_TEST_ID } from './NavigationLink/NavigationLink';
+import { MemoryRouter } from 'react-router-dom';
+import Navigation from './Navigation';
+import { AppRoutes } from '../../common/app.routes';
+import { Provider } from 'react-redux';
+import store from '../../store';
 
 describe('Navigation', () => {
-    const logout = jest.fn();
+    const NavWithProviders = ({ route = AppRoutes.ORDER }) => (
+        <MemoryRouter initialEntries={[route]}>
+            <Provider store={store}>
+                <Navigation />
+            </Provider>
+        </MemoryRouter>
+    );
+
+    beforeEach(() => {
+        render(<NavWithProviders />);
+    })
 
     it('should render', () => {
-        render((
-            <AuthContext.Provider value={{ logout }}>
-                <Navigation />
-            </AuthContext.Provider>
-        ));
-
-        const links = screen.getAllByTestId(LINK_TEST_ID);
+        const links = document.querySelectorAll('.navigation__link');
 
         expect(links.length).toBe(3);
     });
 
     it('should render with Map link as active', () => {
-        render((
-            <AuthContext.Provider value={{ logout }}>
-                <Navigation currentPage={AppPages.MAP} />
-            </AuthContext.Provider>
-        ));
-
-        const [MapLink] = screen.getAllByTestId(LINK_TEST_ID);
+        const MapLink = screen.getByText('Карта');
 
         expect(MapLink.classList.contains('is-active')).toBeTruthy();
     });
 
-    it('should call navigate with page enum value', () => {
-        let currentPage = AppPages.MAP;
-        const navigate = jest.fn(page => currentPage = page);
-
-        render((
-            <AuthContext.Provider value={{ logout }}>
-                <Navigation currentPage={currentPage} navigate={navigate} />
-            </AuthContext.Provider>
-        ));
-
-        const [MapLink, ProfileLink] = screen.getAllByTestId(LINK_TEST_ID);
+    it('should set profile link as active', () => {
+        const MapLink = screen.getByText('Карта');
+        const ProfileLink = screen.getByText('Профиль');
 
         expect(MapLink.classList.contains('is-active')).toBeTruthy();
 
         fireEvent.click(ProfileLink);
 
-        expect(navigate).toHaveBeenCalledWith(AppPages.PROFILE);
-        expect(currentPage).toBe(AppPages.PROFILE);
+        expect(ProfileLink.classList.contains('is-active')).toBeTruthy();
     });
 
-    it('should call logout and navigate to login', () => {
-        let currentPage = AppPages.MAP;
-        const navigate = jest.fn(page => currentPage = page);
-
-        render((
-            <AuthContext.Provider value={{ logout }}>
-                <Navigation currentPage={currentPage} navigate={navigate} />
-            </AuthContext.Provider>
-        ));
-
-        const links = screen.getAllByTestId(LINK_TEST_ID);
-        const Logout = links[links.length - 1];
+    // @TODO: Refactor
+    it.todo('Add test for routing. See "Разбор заданий #3"');
+    xit('should dispatch logout action and navigate to login', () => {
+        const Logout = screen.getByText('Выход');
 
         fireEvent.click(Logout);
-
-        expect(navigate).toHaveBeenCalledWith(AppPages.LOGIN);
-        expect(currentPage).toBe(AppPages.LOGIN);
-        expect(logout).toHaveBeenCalled();
     });
 });
