@@ -5,6 +5,10 @@
     @return ($base / ($context / 1px)) * 100%;
 }
 
+@function gap($multiplier: 1, $step: $base-step) {
+    @return flexwidth(($step * $multiplier) / 1px);
+}
+
 %reset-button {
     display: block;
     padding: 0;
