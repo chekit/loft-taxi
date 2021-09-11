@@ -1,6 +1,6 @@
 import { logoutRequest } from '../logout';
 import { registerUserSuccess } from '../register';
-import { isLoggedInReducer } from './logged-in.reducer';
+import { isLoggedInReducer } from './reducers';
 
 describe('LoggedIn Reducer', () => {
     it('should set LoggedIn property to true', () => {

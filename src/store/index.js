@@ -1,9 +1,9 @@
 import { authMiddleware } from './auth';
-import rootReducer from './reducers';
 import { registerMiddleware } from './register';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { logoutMiddleware } from './logout';
 import { profileMiddleware } from './profile';
+import rootReducer from './reducer';
 
 const initialState = {
     userData: null,

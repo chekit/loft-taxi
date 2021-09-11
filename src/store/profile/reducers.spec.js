@@ -1,5 +1,5 @@
 import { updateProfileSuccess } from '../profile';
-import { profileDataReducer } from './profile-data.reducer';
+import { profileDataReducer } from './reducers';
 
 const PROFILE_DATA = {
     name: 'Bob Marley',

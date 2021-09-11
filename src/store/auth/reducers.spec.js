@@ -1,6 +1,6 @@
 import { authUserSuccess } from '../auth';
 import { logoutRequest } from '../logout';
-import { userDataReducer } from './user-data.reducer';
+import { userDataReducer } from './reducers';
 
 const USER_DATA = { email: 'test@test.com', password: '000' };
 

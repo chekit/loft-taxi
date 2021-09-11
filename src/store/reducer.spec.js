@@ -1,7 +1,7 @@
-import rootReducer from '.';
-import { authUserFailure, authUserRequest, authUserSuccess } from '../auth';
-import { logoutRequest } from '../logout';
-import { updateProfileSuccess } from '../profile';
+import rootReducer from './reducer';
+import { authUserFailure, authUserRequest, authUserSuccess } from './auth';
+import { logoutRequest } from './logout';
+import { updateProfileSuccess } from './profile';
 
 const PROFILE_DATA = {
     name: 'Bob Marley',
