@@ -70,7 +70,7 @@ class ProfileForm extends PureComponent {
         const { history } = this.props;
 
         return (
-            <div className={`profile ${isFilled && 'is-center'}`}>
+            <div className={`profile ${isFilled ? 'is-center' : ''}`}>
                 <div className="profile__header">
                     <h1 className="profile__title">Профиль</h1>
                     <div className="profile__add-data add-data">
@@ -101,9 +101,7 @@ class ProfileForm extends PureComponent {
                     {
                         isFilled
                             ? <SubmitButton title="Перейти на карту" modificators={['is-dense']} onClickHandler={() => history.push(AppRoutes.ORDER)} />
-                            : <>
-                                <SubmitButton title="Сохранить" modificators={['is-dense']} isDisabled={!name || !card || !exp || !cvc} onClickHandler={this.submitHandler} />
-                            </>
+                            : <SubmitButton title="Сохранить" modificators={['is-dense']} isDisabled={!name || !card || !exp || !cvc} onClickHandler={this.submitHandler} />
                     }
                 </div>
             </div>

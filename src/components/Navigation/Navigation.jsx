@@ -6,6 +6,7 @@ import { logoutRequest } from './../../store/logout';
 import { NavLink, useHistory } from 'react-router-dom';
 
 import './Navigation.scss';
+import { AppRoutes } from '../../common/app.routes';
 
 export const NAV_TEST_ID = 'navigation';
 export const LINK_TEST_ID = 'navigation-link';
@@ -39,10 +40,10 @@ const Navigation = props => {
             <nav className={`navigation ${isVisible ? 'is-visible' : ''}`} data-testid={NAV_TEST_ID}>
                 <ul className="navigation-list">
                     <li className="navigation-list__item">
-                        <NavLink className="navigation__link" to="/order" onClick={closeNav} activeClassName="is-active">Карта</NavLink>
+                        <NavLink className="navigation__link" to={AppRoutes.ORDER} onClick={closeNav} activeClassName="is-active">Карта</NavLink>
                     </li>
                     <li className="navigation-list__item">
-                        <NavLink className="navigation__link" to="/profile" onClick={closeNav} activeClassName="is-active">Профиль</NavLink>
+                        <NavLink className="navigation__link" to={AppRoutes.PROFILE} onClick={closeNav} activeClassName="is-active">Профиль</NavLink>
                     </li>
                     <li className="navigation-list__item">
                         <button className="navigation__link" onClick={logoutUser}>Выход</button>
