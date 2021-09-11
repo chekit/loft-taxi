@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './PageWrapper.scss';
+import { connect } from 'react-redux';
 
 export const PAGE_WRAPPER_TEST_ID = 'page-wrapper';
 
-export const PageWrapper = props => {
-    const { children, isLoggedIn } = props;
-
+export const PageWrapper = ({ children, isLoggedIn }) => {
     const mainContainerMod = isLoggedIn ? 'is-column' : '';
 
     return (
@@ -18,8 +17,11 @@ export const PageWrapper = props => {
 };
 
 PageWrapper.propTypes = {
-    children: PropTypes.arrayOf(PropTypes.element),
-    isLoggedIn: PropTypes.bool
+    children: PropTypes.arrayOf(PropTypes.element)
 };
 
-export default PageWrapper;
+const mapStateToProps = state => ({
+    isLoggedIn: state.isLoggedIn
+});
+
+export default connect(mapStateToProps)(PageWrapper);

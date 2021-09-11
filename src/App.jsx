@@ -31,17 +31,17 @@ class App extends Component {
   }
 
   render() {
-    const { isLoading, error, isLoggedIn } = this.props;
+    const { isLoading, error } = this.props;
 
     return (
-      <PageWrapper isLoggedIn={isLoggedIn}>
-        <Header isLoggedIn={isLoggedIn} />
+      <PageWrapper>
+        <Header />
         <section>
           <Switch>
             <Route path={AppRoutes.MAIN} component={Login} exact></Route>
             <Route path={AppRoutes.REGISTRATION} component={Registration}></Route>
-            <PrivateRoute path={AppRoutes.ORDER} redirectPath={AppRoutes.REGISTRATION} component={Order} />
-            <PrivateRoute path={AppRoutes.PROFILE} redirectPath={AppRoutes.REGISTRATION} component={Profile} />
+            <PrivateRoute path={AppRoutes.ORDER} component={Order} />
+            <PrivateRoute path={AppRoutes.PROFILE} component={Profile} />
           </Switch>
         </section>
         {/* @TODO: Use Portal */}

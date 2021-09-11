@@ -5,12 +5,11 @@ import Logo from '../Logo';
 import Navigation from '../Navigation';
 
 import './Header.scss';
+import { connect } from 'react-redux';
 
 export const HEADER_TEST_ID = 'header';
 
-export const Header = props => {
-    const { isLoggedIn } = props;
-
+export const Header = ({ isLoggedIn }) => {
     return (
         <header className={`header ${isLoggedIn ? '' : 'is-not-auth'}`} data-testid={HEADER_TEST_ID}>
             <Logo isLoggedIn={isLoggedIn} />
@@ -22,3 +21,13 @@ export const Header = props => {
 Header.propTypes = {
     isLoggedIn: PropTypes.bool
 };
+
+Header.defaultProps = {
+    isLoggedIn: false
+};
+
+const mapStateToProps = state => ({
+    isLoggedIn: state.isLoggedIn
+});
+
+export default connect(mapStateToProps)(Header);
