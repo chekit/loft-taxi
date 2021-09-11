@@ -1,6 +1,6 @@
 import { authUserFailure } from '../auth';
 import { registerUserRequest } from '../register';
-import { isLoadingReducer } from './loading.reducer';
+import { isLoadingReducer } from './reducers';
 
 describe('Loading Reducer', () => {
     it('should set isLoading property to true', () => {

@@ -1,6 +1,6 @@
+import { errorReducer } from './reducers';
 import { authUserFailure } from '../auth';
 import { registerUserRequest } from '../register';
-import { errorReducer } from './error.reducer';
 
 const ERROR_MESSAGE = 'Test message';
 const PROFILE_DATA = { email: 'test@test.com', password: '123', name: 'Test', surname: 'Testing' };
