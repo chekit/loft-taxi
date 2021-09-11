@@ -6,8 +6,6 @@ import { AppRoutes } from '../../common/app.routes';
 import LoginForm from '../../components/Forms/LoginForm';
 import PageWithForm from '../../components/Struct/PageWithForm';
 
-import './Login.scss';
-
 const Login = props => {
     const { isLoggedIn } = props;
 

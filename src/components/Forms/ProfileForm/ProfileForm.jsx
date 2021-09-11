@@ -10,13 +10,13 @@ import { LocalStorageService, StorageKeys } from '../../../services';
 import Card from './Card';
 
 import './ProfileForm.scss';
+import { AppRoutes } from '../../../common/app.routes';
 
 export const PROFILE_FORM_TEST_ID = 'profile-form';
 export const PROFILE_FORM_SUBHEADING_TEST_ID = 'profile-form-subheading';
 
 class ProfileForm extends PureComponent {
     static propTypes = {
-        redirect: PropTypes.func,
         save: PropTypes.func
     };
 
@@ -67,7 +67,7 @@ class ProfileForm extends PureComponent {
 
     render() {
         const { name, card, exp, cvc, isFilled } = this.state;
-        const { redirect } = this.props;
+        const { history } = this.props;
 
         return (
             <div className={`profile ${isFilled && 'is-center'}`}>
@@ -100,7 +100,7 @@ class ProfileForm extends PureComponent {
                 <div className="profile__footer">
                     {
                         isFilled
-                            ? <SubmitButton title="Перейти на карту" modificators={['is-dense']} onClickHandler={redirect} />
+                            ? <SubmitButton title="Перейти на карту" modificators={['is-dense']} onClickHandler={() => history.push(AppRoutes.ORDER)} />
                             : <>
                                 <SubmitButton title="Сохранить" modificators={['is-dense']} isDisabled={!name || !card || !exp || !cvc} onClickHandler={this.submitHandler} />
                             </>

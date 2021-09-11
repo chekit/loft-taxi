@@ -6,11 +6,11 @@ import { authUserRequest } from './store/auth';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Registration from './pages/Registration';
-import Order from './pages/Order';
 import Header from './components/Header';
 import { AppRoutes } from './common/app.routes';
 import PageWrapper from './components/Struct/PageWrapper';
 import PrivateRoute from './components/Struct/PrivateRoute';
+import Map from './components/Map';
 import Loader from './components/Loader';
 import Error from './components/Error';
 import { StorageKeys, LocalStorageService } from './services';
@@ -40,7 +40,7 @@ class App extends Component {
           <Switch>
             <Route path={AppRoutes.MAIN} component={Login} exact></Route>
             <Route path={AppRoutes.REGISTRATION} component={Registration}></Route>
-            <PrivateRoute path={AppRoutes.ORDER} component={Order} />
+            <PrivateRoute path={AppRoutes.ORDER} component={Map} />
             <PrivateRoute path={AppRoutes.PROFILE} component={Profile} />
           </Switch>
         </section>

@@ -1,15 +1,12 @@
 import React from 'react';
-import { AppRoutes } from '../../common/app.routes';
 
 import ProfileForm from '../../components/Forms/ProfileForm';
 import PageWithForm from '../../components/Struct/PageWithForm';
 
-import './Profile.scss';
-
-export const Profile = ({ history }) => {
+export const Profile = props => {
     return (
         <PageWithForm isFadeout={true}>
-            <ProfileForm redirect={() => history.push(AppRoutes.ORDER)} />
+            <ProfileForm {...props} />
         </PageWithForm>
     );
 }
