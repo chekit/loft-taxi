@@ -6,6 +6,7 @@ export class AuthService extends ApiServiceBase {
     }
 
     async login(data) {
-        return await this.post('auth', JSON.stringify(data));
+        const result = await this.post('auth', JSON.stringify(data));
+        return result;
     }
 }

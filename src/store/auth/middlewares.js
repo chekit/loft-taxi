@@ -17,7 +17,7 @@ export const authMiddleware = store => next => action => {
                 if (error) {
                     store.dispatch(authUserFailure(error));
                 }
-            })
+            });
     }
 
     next(action);
