@@ -90,7 +90,8 @@ class ProfileForm extends PureComponent {
                 </div>
                 {
                     !isFilled && <>
-                        <Card cardNum={cardNumber} cardType={this.cardType} expires={expiryDate} />
+                        {/* @FIXME: Card Number editing too dummy */}
+                        <Card cardNum={cardNumber.split(' ').join('')} cardType={this.cardType} expires={expiryDate} />
                         <Form classes={['profile__form', 'profile-form']} testId={PROFILE_FORM_TEST_ID}>
                             <FormInput label="Имя владельца" name="cardName" placeholder="Vasiliy Vasiliev" isLight={true} value={cardName} onChangeHandler={this.handleInputChange} />
                             <FormInput label="Номер карты" name="cardNumber" placeholder="1234567809874321" isLight={true} value={cardNumber} maxlength={16} onChangeHandler={this.handleInputChange} />
