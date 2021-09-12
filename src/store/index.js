@@ -1,12 +1,12 @@
 // import { authMiddleware } from './auth';
 // import { registerMiddleware } from './register';
-import rootReducer from './reducers';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { logoutMiddleware } from './logout';
 import { profileMiddleware } from './profile';
 import createSagaMiddleware from 'redux-saga';
 import watchAuthorizeUser from './auth/sagas';
 import watchRegisterUser from './register/sagas';
+import rootReducer from './reducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
