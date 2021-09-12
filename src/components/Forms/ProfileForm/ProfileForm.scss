@@ -86,6 +86,11 @@
     }
 
     .profile-form {
+        // reset standart settings
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
+
         &__group {
             display: flex;
             align-items: center;

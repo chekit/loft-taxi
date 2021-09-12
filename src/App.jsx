@@ -42,6 +42,7 @@ class App extends Component {
             <Route path={AppRoutes.REGISTRATION} component={Registration}></Route>
             <PrivateRoute path={AppRoutes.ORDER} component={Map} />
             <PrivateRoute path={AppRoutes.PROFILE} component={Profile} />
+            <Route component={Login} />
           </Switch>
         </section>
         {/* @TODO: Use Portal */}

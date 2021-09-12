@@ -11,6 +11,7 @@ import Card from './Card';
 
 import './ProfileForm.scss';
 import { AppRoutes } from '../../../common/app.routes';
+import Form from '../../FormElements/Form';
 
 export const PROFILE_FORM_TEST_ID = 'profile-form';
 export const PROFILE_FORM_SUBHEADING_TEST_ID = 'profile-form-subheading';
@@ -86,15 +87,14 @@ class ProfileForm extends PureComponent {
                 {
                     !isFilled && <>
                         <Card cardNum={card} cardType={this.cardType} expires={exp} />
-                        {/* Refactor with form component */}
-                        <form className="profile__form profile-form" data-testid={PROFILE_FORM_TEST_ID}>
-                            <FormInput label="Имя владельца" name="name" placeholder="Vasiliy Vasiliev" isLight={true} value={name} />
-                            <FormInput label="Номер карты" name="card" placeholder="1234567809874321" isLight={true} value={card} maxlength={16} />
+                        <Form classes={['profile__form', 'profile-form']} testId={PROFILE_FORM_TEST_ID}>
+                            <FormInput label="Имя владельца" name="name" placeholder="Vasiliy Vasiliev" isLight={true} value={name} onChangeHandler={this.handleInputChange} />
+                            <FormInput label="Номер карты" name="card" placeholder="1234567809874321" isLight={true} value={card} maxlength={16} onChangeHandler={this.handleInputChange} />
                             <div className="profile-form__group">
-                                <FormInput label="MM/YY" name="exp" placeholder="08/21" isLight={true} value={exp} />
-                                <FormInput label="CVC" name="cvc" type="number" maxlength={3} isLight={true} value={cvc} />
+                                <FormInput label="MM/YY" name="exp" placeholder="08/21" isLight={true} value={exp} onChangeHandler={this.handleInputChange} />
+                                <FormInput label="CVC" name="cvc" type="number" maxlength={3} isLight={true} value={cvc} onChangeHandler={this.handleInputChange} />
                             </div>
-                        </form>
+                        </Form>
                     </>
                 }
                 <div className="profile__footer">
