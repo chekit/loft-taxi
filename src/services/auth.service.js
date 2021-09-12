@@ -1,5 +1,12 @@
 import { ApiServiceBase } from './api.service.base';
 
+/**
+ * @deprecated
+ *
+ * @export
+ * @class AuthService
+ * @extends {ApiServiceBase}
+ */
 export class AuthService extends ApiServiceBase {
     async register(data) {
         return await this.post('register', JSON.stringify(data));

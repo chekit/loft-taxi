@@ -6,7 +6,7 @@ const localStorageService = new LocalStorageService();
 const api = new ApiServiceBase();
 
 async function login(data) {
-    const result = await api.post('auth', JSON.stringify(data))
+    const result = await api.post('auth', JSON.stringify(data));
     return result;
 }
 
