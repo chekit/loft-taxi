@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import FormInput from '../../FormElements/Input';
 import SubmitButton from '../../FormElements/SubmitButton';
 import { CardTypes } from '../../../common/models/card-types';
-import { updateProfileRequest } from '../../../store/profile';
-import { LocalStorageService, StorageKeys } from '../../../services';
+import { updateProfileRequest, getProfileRequest } from '../../../store/profile';
+import { LocalStorageService } from '../../../services';
 import Card from './Card';
 
 import './ProfileForm.scss';
@@ -17,6 +17,21 @@ export const PROFILE_FORM_TEST_ID = 'profile-form';
 export const PROFILE_FORM_SUBHEADING_TEST_ID = 'profile-form-subheading';
 
 class ProfileForm extends PureComponent {
+    static getDerivedStateFromProps(props, state) {
+        // Default state is EMPTY
+        if (!state.cardName && !state.cardNumber && !state.expiryDate && !state.cvc) {
+            return {
+                ...state,
+                cardName: props.cardName,
+                cardNumber: props.cardNumber,
+                expiryDate: props.expiryDate,
+                cvc: props.cvc
+            }
+        }
+
+        return null;
+    }
+
     static propTypes = {
         save: PropTypes.func
     };
@@ -26,49 +41,38 @@ class ProfileForm extends PureComponent {
     cardType = CardTypes.MASTERCARD;
 
     state = {
-        name: '',
-        card: '',
-        exp: '',
+        cardName: '',
+        cardNumber: '',
+        expiryDate: '',
         cvc: '',
         isFilled: false
     };
 
-    subscriptions = [];
-
     handleInputChange = e => {
         const { target: { name, value } } = e;
 
+        // @FIXME: Too specific?
         this.setState({
-            [name]: value
+            [name]: name === 'cvc' ? value.substr(0, 3) : value
         });
     };
 
     submitHandler = () => {
-        const { name, card, exp, cvc } = this.state;
+        const { cardName, cardNumber, expiryDate, cvc } = this.state;
         const { updateProfileRequest } = this.props;
-        updateProfileRequest({ name, card, exp, cvc });
+        updateProfileRequest({ cardName, cardNumber, expiryDate, cvc });
 
         this.setState({ isFilled: true });
     };
 
     componentDidMount() {
-        const profileData = this.localStorageService.fetch(StorageKeys.PROFILE_DATA);
-
-        if (profileData) {
-            this.setState(prev => ({
-                ...prev,
-                ...profileData
-            }));
-        }
-    }
-
-    componentWillUnmount() {
-        this.subscriptions.forEach(unsubscribe => unsubscribe());
+        const { getProfileRequest } = this.props;
+        getProfileRequest();
     }
 
     render() {
-        const { name, card, exp, cvc, isFilled } = this.state;
-        const { history } = this.props;
+        const { cardName, cardNumber, expiryDate, cvc, isFilled } = this.state;
+        const { history, isLoading } = this.props;
 
         return (
             <div className={`profile ${isFilled ? 'is-center' : ''}`}>
@@ -77,21 +81,21 @@ class ProfileForm extends PureComponent {
                     <div className="profile__add-data add-data">
                         <p className="add-data__link link" data-testid={PROFILE_FORM_SUBHEADING_TEST_ID}>
                             {
-                                isFilled
+                                isFilled && !isLoading
                                     ? <>Платёжные данные обновлены. Теперь вы можете заказывать такси.</>
-                                    : <><span className="link__icon">&#12296;</span>Введите платежные данные</>
+                                    : !isLoading && <><span className="link__icon">&#12296;</span>Введите платежные данные</>
                             }
                         </p>
                     </div>
                 </div>
                 {
                     !isFilled && <>
-                        <Card cardNum={card} cardType={this.cardType} expires={exp} />
+                        <Card cardNum={cardNumber} cardType={this.cardType} expires={expiryDate} />
                         <Form classes={['profile__form', 'profile-form']} testId={PROFILE_FORM_TEST_ID}>
-                            <FormInput label="Имя владельца" name="name" placeholder="Vasiliy Vasiliev" isLight={true} value={name} onChangeHandler={this.handleInputChange} />
-                            <FormInput label="Номер карты" name="card" placeholder="1234567809874321" isLight={true} value={card} maxlength={16} onChangeHandler={this.handleInputChange} />
+                            <FormInput label="Имя владельца" name="cardName" placeholder="Vasiliy Vasiliev" isLight={true} value={cardName} onChangeHandler={this.handleInputChange} />
+                            <FormInput label="Номер карты" name="cardNumber" placeholder="1234567809874321" isLight={true} value={cardNumber} maxlength={16} onChangeHandler={this.handleInputChange} />
                             <div className="profile-form__group">
-                                <FormInput label="MM/YY" name="exp" placeholder="08/21" isLight={true} value={exp} onChangeHandler={this.handleInputChange} />
+                                <FormInput label="MM/YY" name="expiryDate" placeholder="MM/YY" isLight={true} value={expiryDate} onChangeHandler={this.handleInputChange} />
                                 <FormInput label="CVC" name="cvc" type="number" maxlength={3} isLight={true} value={cvc} onChangeHandler={this.handleInputChange} />
                             </div>
                         </Form>
@@ -99,9 +103,9 @@ class ProfileForm extends PureComponent {
                 }
                 <div className="profile__footer">
                     {
-                        isFilled
+                        isFilled && !isLoading
                             ? <SubmitButton title="Перейти на карту" modificators={['is-dense']} onClickHandler={() => history.push(AppRoutes.ORDER)} />
-                            : <SubmitButton title="Сохранить" modificators={['is-dense']} isDisabled={!name || !card || !exp || !cvc} onClickHandler={this.submitHandler} />
+                            : <SubmitButton title="Сохранить" modificators={['is-dense']} isDisabled={!cardName || !cardNumber || !expiryDate || !cvc} onClickHandler={this.submitHandler} />
                     }
                 </div>
             </div>
@@ -109,7 +113,10 @@ class ProfileForm extends PureComponent {
     }
 }
 
-const mapStateToProps = state => state;
-const mapDispatchToProps = { updateProfileRequest };
+const mapStateToProps = ({ profileData, isLoading }) => ({
+    ...profileData,
+    isLoading
+});
+const mapDispatchToProps = { updateProfileRequest, getProfileRequest };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm);

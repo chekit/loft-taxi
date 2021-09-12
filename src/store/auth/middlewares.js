@@ -8,10 +8,10 @@ export const authMiddleware = store => next => action => {
     if (action.type === AuthActionTypes.AUTHORIZE) {
         // If we are using asyn/wait we are missing AuthActionTypes.AUTHORIZE action in redux history
         authService.login(action.payload)
-            .then(({ success, error }) => {
+            .then(({ success, error, token }) => {
                 if (success) {
                     localStorageService.save(StorageKeys.LOGIN_DATA, { email: action.payload.email, password: action.payload.password });
-                    store.dispatch(authUserSuccess(action.payload));
+                    store.dispatch(authUserSuccess({ ...action.payload, token }));
                 }
 
                 if (error) {
