@@ -114,9 +114,9 @@ class ProfileForm extends PureComponent {
     }
 }
 
-const mapStateToProps = ({ profileData, isLoading, userData: { token } }) => ({
+const mapStateToProps = ({ profileData, isLoading, userData }) => ({
     ...profileData,
-    token,
+    token: userData?.token,
     isLoading
 });
 const mapDispatchToProps = { updateProfileRequest, getProfileRequest };

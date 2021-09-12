@@ -12,11 +12,11 @@ async function login(data) {
 
 function* authorizeUser(action) {
     try {
-        const { success, error } = yield call(login, action.payload);
+        const { success, error, token } = yield call(login, action.payload);
 
         if (success) {
             localStorageService.save(StorageKeys.LOGIN_DATA, { email: action.payload.email, password: action.payload.password });
-            yield put(authUserSuccess(action.payload));
+            yield put(authUserSuccess({ ...action.payload, token }));
         }
 
         if (error) {
