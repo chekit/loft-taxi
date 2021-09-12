@@ -6,7 +6,7 @@ function* logoutUser() {
     const localStorageService = new LocalStorageService();
 
     localStorageService.delete(StorageKeys.LOGIN_DATA);
-    yield put(logoutSuccess)
+    yield put(logoutSuccess())
 }
 
 export default function* watchLogout() {
