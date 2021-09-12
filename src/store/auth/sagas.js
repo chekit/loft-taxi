@@ -1,20 +1,12 @@
-import { LocalStorageService, StorageKeys } from '../../services';
+import { ApiServiceBase, LocalStorageService, StorageKeys } from '../../services';
 import { authUserFailure, authUserRequest, authUserSuccess } from './actions';
 import { takeLatest, put, call } from 'redux-saga/effects';
-import { BASE_API_URL } from '../../common/constants';
 
 const localStorageService = new LocalStorageService();
+const api = new ApiServiceBase();
 
 async function login(data) {
-    const response = await fetch(`${BASE_API_URL}/auth`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
-    const result = await response.json();
-
+    const result = await api.post('auth', JSON.stringify(data))
     return result;
 }
 
