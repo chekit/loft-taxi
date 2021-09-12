@@ -59,15 +59,15 @@ class ProfileForm extends PureComponent {
 
     submitHandler = () => {
         const { cardName, cardNumber, expiryDate, cvc } = this.state;
-        const { updateProfileRequest } = this.props;
-        updateProfileRequest({ cardName, cardNumber, expiryDate, cvc });
+        const { updateProfileRequest, token } = this.props;
+        updateProfileRequest({ cardName, cardNumber, expiryDate, cvc, token });
 
         this.setState({ isFilled: true });
     };
 
     componentDidMount() {
-        const { getProfileRequest } = this.props;
-        getProfileRequest();
+        const { getProfileRequest, token } = this.props;
+        getProfileRequest(token);
     }
 
     render() {
@@ -91,12 +91,12 @@ class ProfileForm extends PureComponent {
                 {
                     !isFilled && <>
                         {/* @FIXME: Card Number editing too dummy */}
-                        <Card cardNum={cardNumber.split(' ').join('')} cardType={this.cardType} expires={expiryDate} />
+                        <Card cardNum={(cardNumber || '').split(' ').join('')} cardType={this.cardType} expires={expiryDate} />
                         <Form classes={['profile__form', 'profile-form']} testId={PROFILE_FORM_TEST_ID}>
                             <FormInput label="Имя владельца" name="cardName" placeholder="Vasiliy Vasiliev" isLight={true} value={cardName} onChangeHandler={this.handleInputChange} />
                             <FormInput label="Номер карты" name="cardNumber" placeholder="1234567809874321" isLight={true} value={cardNumber} maxlength={16} onChangeHandler={this.handleInputChange} />
                             <div className="profile-form__group">
-                                <FormInput label="MM/YY" name="expiryDate" placeholder="MM/YY" isLight={true} value={expiryDate} onChangeHandler={this.handleInputChange} />
+                                <FormInput label="MM/YY" name="expiryDate" placeholder="MM/YY" maxlength={5} isLight={true} value={expiryDate} onChangeHandler={this.handleInputChange} />
                                 <FormInput label="CVC" name="cvc" type="number" maxlength={3} isLight={true} value={cvc} onChangeHandler={this.handleInputChange} />
                             </div>
                         </Form>
@@ -114,8 +114,9 @@ class ProfileForm extends PureComponent {
     }
 }
 
-const mapStateToProps = ({ profileData, isLoading }) => ({
+const mapStateToProps = ({ profileData, isLoading, userData: { token } }) => ({
     ...profileData,
+    token,
     isLoading
 });
 const mapDispatchToProps = { updateProfileRequest, getProfileRequest };

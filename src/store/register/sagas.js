@@ -1,20 +1,12 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 import { registerUserFailure, registerUserRequest, registerUserSuccess } from '.';
-import { BASE_API_URL } from '../../common/constants';
-import { LocalStorageService, StorageKeys } from '../../services';
+import { ApiServiceBase, LocalStorageService, StorageKeys } from '../../services';
 
 const localStorageService = new LocalStorageService();
+const api = new ApiServiceBase();
 
 async function register(data) {
-    const response = await fetch(`${BASE_API_URL}/register`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
-    const result = await response.json();
-
+    const result = await api.post('register', JSON.stringify(data));
     return result;
 }
 
