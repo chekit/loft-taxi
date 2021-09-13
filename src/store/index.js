@@ -8,6 +8,7 @@ import { watchRegisterUser } from './register';
 import { watchGetProfileData, watchProfileUpdate } from './profile';
 import { watchLogout } from './logout';
 import { watchAddressList } from './addressList';
+import { watchRouteRequest } from './route';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -37,5 +38,6 @@ sagaMiddleware.run(watchProfileUpdate);
 sagaMiddleware.run(watchGetProfileData);
 sagaMiddleware.run(watchAddressList);
 sagaMiddleware.run(watchLogout);
+sagaMiddleware.run(watchRouteRequest);
 
 export default store;
