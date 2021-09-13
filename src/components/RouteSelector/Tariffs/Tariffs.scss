@@ -1,0 +1,19 @@
+@import 'styles/globals.scss';
+
+.tariffs {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    &__item {
+        opacity: .5;
+
+        &:not(last-child) {
+            margin-right: $base-step * 2;
+        }
+
+        &.is-active {
+            opacity: 1;
+        }
+    }
+}
