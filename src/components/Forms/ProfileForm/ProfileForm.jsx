@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import FormInput from '../../FormElements/Input';
 import SubmitButton from '../../FormElements/SubmitButton';
 import { CardTypes } from '../../../common/models/card-types';
-import { updateProfileRequest, getProfileRequest } from '../../../store/profile';
+import { updateProfile, requestProfile } from '../../../store/profile';
 import { LocalStorageService } from '../../../services';
 import Card from './Card';
 
@@ -59,15 +59,15 @@ class ProfileForm extends PureComponent {
 
     submitHandler = () => {
         const { cardName, cardNumber, expiryDate, cvc } = this.state;
-        const { updateProfileRequest, token } = this.props;
-        updateProfileRequest({ cardName, cardNumber, expiryDate, cvc, token });
+        const { updateProfile, token } = this.props;
+        updateProfile({ cardName, cardNumber, expiryDate, cvc, token });
 
         this.setState({ isFilled: true });
     };
 
     componentDidMount() {
-        const { getProfileRequest, token } = this.props;
-        getProfileRequest(token);
+        const { requestProfile, token } = this.props;
+        requestProfile(token);
     }
 
     render() {
@@ -119,6 +119,6 @@ const mapStateToProps = ({ profileData, isLoading, userData }) => ({
     token: userData?.token,
     isLoading
 });
-const mapDispatchToProps = { updateProfileRequest, getProfileRequest };
+const mapDispatchToProps = { updateProfile, requestProfile };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm);

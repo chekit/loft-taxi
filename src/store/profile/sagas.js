@@ -1,7 +1,7 @@
-import { getProfileRequest, updateProfileRequest } from './actions';
+import { requestProfile, updateProfile } from './actions';
 import { takeLatest, put, call } from 'redux-saga/effects';
 import { ApiServiceBase } from '../../services';
-import { getProfileFailure, getProfileSuccess, updateProfileFailure, updateProfileSuccess } from './actions';
+import { requestProfileFailure, requestProfileSuccess, updateProfileFailure, updateProfileSuccess } from './actions';
 
 const api = new ApiServiceBase();
 
@@ -16,7 +16,7 @@ async function updateData(data) {
 
 }
 
-function* updateProfile(action) {
+function* updateProfileData(action) {
     try {
         const { success, error } = yield call(updateData, action.payload);
 
@@ -29,7 +29,7 @@ function* updateProfile(action) {
             yield put(updateProfileFailure(error));
         }
     } catch (e) {
-        yield put(getProfileFailure(e.message))
+        yield put(requestProfileFailure(e.message))
     }
 }
 
@@ -38,22 +38,22 @@ function* getProfile(action) {
         const { success, error, ...data } = yield call(getData, action.payload);
 
         if (data) {
-            yield put(getProfileSuccess(data));
+            yield put(requestProfileSuccess(data));
         }
 
         if (!success && error) {
-            yield put(getProfileFailure(error));
+            yield put(requestProfileFailure(error));
         }
     } catch (e) {
-        yield put(getProfileFailure(e.message))
+        yield put(requestProfileFailure(e.message))
     }
 }
 
 
 export function* watchProfileUpdate() {
-    yield takeLatest(updateProfileRequest, updateProfile);
+    yield takeLatest(updateProfile, updateProfileData);
 }
 
 export function* watchGetProfileData() {
-    yield takeLatest(getProfileRequest, getProfile);
+    yield takeLatest(requestProfile, getProfile);
 }

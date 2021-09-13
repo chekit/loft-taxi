@@ -5,6 +5,7 @@ import { profileDataReducer } from './profile';
 import { userDataReducer } from './auth';
 import { isLoggedInReducer } from './logout';
 import { errorReducer } from './error';
+import { addressListReducer } from './addressList';
 
 const rootReducer = combineReducers({
     userData: userDataReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     isLoading: isLoadingReducer,
     error: errorReducer,
     isLoggedIn: isLoggedInReducer,
+    addressList: addressListReducer
 });
 
 export default rootReducer;
