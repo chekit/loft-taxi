@@ -27,8 +27,6 @@ function* registerUser(action) {
     }
 }
 
-function* watchRegisterUser() {
+export function* watchRegisterUser() {
     yield takeLatest(registerUserRequest, registerUser);
 }
-
-export default watchRegisterUser;
