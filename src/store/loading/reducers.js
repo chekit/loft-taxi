@@ -3,7 +3,7 @@ import { requestAddressList, requestAddressListFailure, requestAddressListSucces
 import { authUserFailure, authUserRequest, authUserSuccess } from '../auth';
 import { updateProfileFailure, updateProfile, updateProfileSuccess, requestProfile, requestProfileSuccess, requestProfileFailure } from '../profile';
 import { registerUserFailure, registerUserRequest, registerUserSuccess } from '../register';
-import { requestRoute, requestRouteFailure, requestRouteSuccess } from '../route/actions';
+import { requestRoute, requestRouteFailure, requestRouteSuccess, cancelRequestRoute } from '../route/actions';
 
 export const isLoadingReducer = handleActions({
     [authUserRequest]: () => true,
@@ -24,4 +24,5 @@ export const isLoadingReducer = handleActions({
     [requestRoute]: () => true,
     [requestRouteSuccess]: () => false,
     [requestRouteFailure]: () => false,
+    [cancelRequestRoute]: () => false,
 }, { isLoading: false });

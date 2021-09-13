@@ -6,7 +6,7 @@ const api = new ApiServiceBase();
 
 async function fetchData({ address1, address2 }) {
     const result = await api.get(`route?address1=${address1}&address2=${address2}`);
-    return result;
+    return Array.isArray(result) ? { route: result } : result;
 }
 
 function* getRoute(action) {
