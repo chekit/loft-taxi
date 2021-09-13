@@ -1,7 +1,9 @@
 import { handleActions } from 'redux-actions';
+import { requestAddressList, requestAddressListFailure, requestAddressListSuccess } from '../addressList';
 import { authUserFailure, authUserRequest, authUserSuccess } from '../auth';
-import { updateProfileFailure, updateProfileRequest, updateProfileSuccess } from '../profile';
+import { updateProfileFailure, updateProfile, updateProfileSuccess, requestProfile, requestProfileSuccess, requestProfileFailure } from '../profile';
 import { registerUserFailure, registerUserRequest, registerUserSuccess } from '../register';
+import { requestRoute, requestRouteFailure, requestRouteSuccess } from '../route/actions';
 
 export const isLoadingReducer = handleActions({
     [authUserRequest]: () => true,
@@ -10,7 +12,16 @@ export const isLoadingReducer = handleActions({
     [registerUserRequest]: () => true,
     [registerUserSuccess]: () => false,
     [registerUserFailure]: () => false,
-    [updateProfileRequest]: () => true,
+    [requestProfile]: () => true,
+    [requestProfileSuccess]: () => false,
+    [requestProfileFailure]: () => false,
+    [updateProfile]: () => true,
     [updateProfileSuccess]: () => false,
     [updateProfileFailure]: () => false,
+    [requestAddressList]: () => true,
+    [requestAddressListSuccess]: () => false,
+    [requestAddressListFailure]: () => false,
+    [requestRoute]: () => true,
+    [requestRouteSuccess]: () => false,
+    [requestRouteFailure]: () => false,
 }, { isLoading: false });

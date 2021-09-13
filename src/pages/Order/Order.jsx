@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { AppRoutes } from '../../common/app.routes';
 import SubmitButton from '../../components/FormElements/SubmitButton';
 import Map from '../../components/Map';
+import { requestAddressList } from '../../store/addressList';
 
 import './Order.scss';
 
-export const Order = ({ history }) => (
-    <div className="wrapper">
+export const Order = props => {
+    const { history, requestAddressList, profileData } = props;
+
+    useEffect(() => {
+        requestAddressList();
+    }, [requestAddressList, profileData]);
+
+    return (<div className="wrapper">
         {/* @TODO: Move to Component */}
 
         {/* <div className="route-select">
@@ -21,7 +29,7 @@ export const Order = ({ history }) => (
             </div>
         </div> */}
         {/* @TODO: Move to Component */}
-        <div className="route-select">
+        {!profileData && <div className="route-select">
             <div className="route-select__header">
                 <h2 className="route-select__title">Заполните платежные данные</h2>
             </div>
@@ -31,8 +39,16 @@ export const Order = ({ history }) => (
             <div className="route-select__footer">
                 <SubmitButton title={'Перейти в профиль'} modificators={['is-dense', 'is-fill']} onClickHandler={() => history.push(AppRoutes.PROFILE)} />
             </div>
-        </div>
-
+        </div>}
         <Map />
-    </div>
-);
+    </div>)
+};
+
+const mapStateToProps = ({addressList, profileData}) => ({
+    addressList,
+    profileData
+});
+
+const mapDispatchToProps = { requestAddressList };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Order);
