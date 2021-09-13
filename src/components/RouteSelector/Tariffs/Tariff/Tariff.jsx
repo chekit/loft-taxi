@@ -8,7 +8,7 @@ export const Tariff = ({ title, price, visual }) => {
             <p className="tariff__title">{title}</p>
             <p className="tariff__text">Стоимость</p>
             <p className="tariff__price">{price}&#8381;</p>
-            <p className="tariff__visual">{visual}</p>
+            <img src={visual} className="tariff__visual" />
         </div>
     );
 }
