@@ -22,7 +22,8 @@ const initialState = {
     profileData: null,
     error: null,
     isLoading: false,
-    isLoggedIn: false
+    isLoggedIn: false,
+    addressList: null,
 };
 
 describe('Root Reducer', () => {
