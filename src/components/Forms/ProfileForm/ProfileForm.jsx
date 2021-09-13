@@ -83,7 +83,7 @@ class ProfileForm extends PureComponent {
                             {
                                 isFilled && !isLoading
                                     ? <>Платёжные данные обновлены. Теперь вы можете заказывать такси.</>
-                                    : !isLoading && <><span className="link__icon">&#12296;</span>Введите платежные данные</>
+                                    : <><span className="link__icon">&#12296;</span>Введите платежные данные</>
                             }
                         </p>
                     </div>
