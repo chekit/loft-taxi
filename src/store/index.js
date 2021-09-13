@@ -1,10 +1,10 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import watchAuthorizeUser from './auth/sagas';
-import watchRegisterUser from './register/sagas';
+import { watchAuthorizeUser } from './auth';
+import { watchRegisterUser } from './register';
 import rootReducer from './reducer';
-import { watchGetProfileData, watchProfileUpdate } from './profile/sagas';
-import watchLogout from './logout/sagas';
+import { watchGetProfileData, watchProfileUpdate } from './profile';
+import { watchLogout } from './logout';
 
 const sagaMiddleware = createSagaMiddleware();
 

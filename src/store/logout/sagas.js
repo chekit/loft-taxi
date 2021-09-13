@@ -9,6 +9,6 @@ function* logoutUser() {
     yield put(logoutSuccess())
 }
 
-export default function* watchLogout() {
+export function* watchLogout() {
     yield takeLatest(logoutRequest, logoutUser);
 }

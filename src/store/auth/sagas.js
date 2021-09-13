@@ -27,8 +27,6 @@ function* authorizeUser(action) {
     }
 }
 
-function* watchAuthorizeUser() {
+export function* watchAuthorizeUser() {
     yield takeLatest(authUserRequest, authorizeUser);
 }
-
-export default watchAuthorizeUser;
