@@ -12,6 +12,7 @@ import Tariffs from './Tariffs';
 
 export const RouteSelector = ({ history }) => {
     const [isOrdered, toOrder] = useState(false);
+    const [isProfileFilled, setIsProfileFilled] = useState(false);
     const [start, setStart] = useState(false);
     const [finish, setFinish] = useState(false);
 
@@ -23,6 +24,13 @@ export const RouteSelector = ({ history }) => {
         if (profileData) {
             dispatch(requestAddressList());
         }
+
+        setIsProfileFilled(!!profileData &&
+            !!profileData.cardName &&
+            !!profileData.cardNumber &&
+            !!profileData.expiryDate &&
+            !!profileData.cvc
+        );
     }, [dispatch, profileData]);
 
     const getAddressList = current => addressList.filter(address => address !== current)
@@ -32,8 +40,8 @@ export const RouteSelector = ({ history }) => {
             <div className="route-select">
                 <div className="route-select__header">
                     {isOrdered && <h2 className="route-select__title">Заказ размещен</h2>}
-                    {!profileData && <h2 className="route-select__title">Заполните платежные данные</h2>}
-                    {profileData && !isOrdered && <>
+                    {!isProfileFilled && <h2 className="route-select__title">Заполните платежные данные</h2>}
+                    {isProfileFilled && !isOrdered && <>
                         <FormSelect options={getAddressList(finish)} onSelectionChange={value => setStart(value)} name="start" />
                         <br />
                         <FormSelect options={getAddressList(start)} onSelectionChange={value => setFinish(value)} name="finish" />
@@ -41,8 +49,8 @@ export const RouteSelector = ({ history }) => {
                 </div>
                 <div className="route-select__body">
                     {isOrdered && <p className="route-select__text">Ваше такси уже едет к вам. Прибудет приблизительно через 10 минут.</p>}
-                    {!profileData && <p className="route-select__text">Укажите информацию о банковской карте, чтобы сделать заказ.</p>}
-                    {profileData && !isOrdered && <Tariffs />}
+                    {!isProfileFilled && <p className="route-select__text">Укажите информацию о банковской карте, чтобы сделать заказ.</p>}
+                    {isProfileFilled && !isOrdered && <Tariffs />}
                 </div>
                 <div className="route-select__footer">
                     {isOrdered && <SubmitButton title='Сделать новый заказ' modificators={['is-dense', 'is-fill']} onClickHandler={() => {
@@ -51,9 +59,9 @@ export const RouteSelector = ({ history }) => {
                         setFinish('');
                         dispatch(cancelRequestRoute());
                     }} />}
-                    {!profileData && <SubmitButton title='Перейти в профиль' modificators={['is-dense', 'is-fill']} onClickHandler={() => history.push(AppRoutes.PROFILE)} />}
+                    {!isProfileFilled && <SubmitButton title='Перейти в профиль' modificators={['is-dense', 'is-fill']} onClickHandler={() => history.push(AppRoutes.PROFILE)} />}
                     {
-                        profileData && !isOrdered && <SubmitButton title='Заказать' modificators={['is-dense', 'is-fill']} isDisabled={!start || !finish} onClickHandler={() => {
+                        isProfileFilled && !isOrdered && <SubmitButton title='Заказать' modificators={['is-dense', 'is-fill']} isDisabled={!start || !finish} onClickHandler={() => {
                             toOrder(true);
                             dispatch(requestRoute({
                                 address1: start,
