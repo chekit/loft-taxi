@@ -3,7 +3,13 @@
 .tariffs {
     display: flex;
     align-items: stretch;
-    justify-content: center;
+    justify-content: flex-start;
+    overflow: auto;
+
+    @media screen and (min-width: $desktop) {
+        overflow: visible;
+        justify-content: center;
+    }
 
     &__item {
         display: flex;
