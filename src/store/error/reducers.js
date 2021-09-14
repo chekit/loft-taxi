@@ -7,15 +7,15 @@ import { requestRoute, requestRouteFailure } from '../route/actions';
 
 export const errorReducer = handleActions({
     [authUserRequest]: () => null,
-    [authUserFailure]: (_state, { payload }) => payload,
+    [authUserFailure]: (_, { payload }) => payload,
     [requestProfile]: () => null,
-    [requestProfileFailure]: (_state, { payload }) => payload,
+    [requestProfileFailure]: (_, { payload }) => payload,
     [updateProfile]: () => null,
-    [updateProfileFailure]: (_state, { payload }) => payload,
+    [updateProfileFailure]: (_, { payload }) => payload,
     [registerUserRequest]: () => null,
-    [registerUserFailure]: (_state, { payload }) => payload,
+    [registerUserFailure]: (_, { payload }) => payload,
     [requestAddressList]: () => null,
-    [requestAddressListFailure]: (_state, { payload }) => payload,
+    [requestAddressListFailure]: (_, { payload }) => payload,
     [requestRoute]: () => null,
-    [requestRouteFailure]: (_state, { payload }) => payload,
+    [requestRouteFailure]: (_, { payload }) => payload,
 }, {error: null});

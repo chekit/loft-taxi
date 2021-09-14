@@ -12,46 +12,56 @@ import Tariffs from './Tariffs';
 
 export const RouteSelector = ({ history }) => {
     const [isOrdered, toOrder] = useState(false);
+    const [start, setStart] = useState(false);
+    const [finish, setFinish] = useState(false);
+
     const dispatch = useDispatch();
     const store = useStore();
-    const { profileData } = store.getState();
+    const { profileData, addressList, isLoading } = store.getState();
 
     useEffect(() => {
-        dispatch(requestAddressList());
-    }, [dispatch]);
+        if (profileData) {
+            dispatch(requestAddressList());
+        }
+    }, [dispatch, profileData]);
 
-    return (
-        <div className="route-select">
-            <div className="route-select__header">
-                {isOrdered && <h2 className="route-select__title">Заказ размещен</h2>}
-                {!profileData && <h2 className="route-select__title">Заполните платежные данные</h2>}
-                {profileData && !isOrdered && <>
-                    <FormSelect value="Эрмитаж" name="address1" />
-                    <br />
-                    <FormSelect value="Мариинский театр" name="address2" />
-                </>}
+    const getAddressList = current => addressList.filter(address => address !== current)
+
+    return !isLoading &&
+        (
+            <div className="route-select">
+                <div className="route-select__header">
+                    {isOrdered && <h2 className="route-select__title">Заказ размещен</h2>}
+                    {!profileData && <h2 className="route-select__title">Заполните платежные данные</h2>}
+                    {profileData && !isOrdered && <>
+                        <FormSelect options={getAddressList(finish)} onSelectionChange={value => setStart(value)} name="start" />
+                        <br />
+                        <FormSelect options={getAddressList(start)} onSelectionChange={value => setFinish(value)} name="finish" />
+                    </>}
+                </div>
+                <div className="route-select__body">
+                    {isOrdered && <p className="route-select__text">Ваше такси уже едет к вам. Прибудет приблизительно через 10 минут.</p>}
+                    {!profileData && <p className="route-select__text">Укажите информацию о банковской карте, чтобы сделать заказ.</p>}
+                    {profileData && !isOrdered && <Tariffs />}
+                </div>
+                <div className="route-select__footer">
+                    {isOrdered && <SubmitButton title='Сделать новый заказ' modificators={['is-dense', 'is-fill']} onClickHandler={() => {
+                        toOrder(false);
+                        setStart('');
+                        setFinish('');
+                        dispatch(cancelRequestRoute());
+                    }} />}
+                    {!profileData && <SubmitButton title='Перейти в профиль' modificators={['is-dense', 'is-fill']} onClickHandler={() => history.push(AppRoutes.PROFILE)} />}
+                    {
+                        profileData && !isOrdered && <SubmitButton title='Заказать' modificators={['is-dense', 'is-fill']} isDisabled={!start || !finish} onClickHandler={() => {
+                            toOrder(true);
+                            dispatch(requestRoute({
+                                address1: start,
+                                address2: finish
+                            }));
+                        }} />
+                    }
+                </div>
             </div>
-            <div className="route-select__body">
-                {isOrdered && <p className="route-select__text">Ваше такси уже едет к вам. Прибудет приблизительно через 10 минут.</p>}
-                {!profileData && <p className="route-select__text">Укажите информацию о банковской карте, чтобы сделать заказ.</p>}
-                {profileData && !isOrdered && <Tariffs />}
-            </div>
-            <div className="route-select__footer">
-                {isOrdered && <SubmitButton title='Сделать новый заказ' modificators={['is-dense', 'is-fill']} onClickHandler={() => {
-                    toOrder(false);
-                    dispatch(cancelRequestRoute());
-                }} />}
-                {!profileData && <SubmitButton title='Перейти в профиль' modificators={['is-dense', 'is-fill']} onClickHandler={() => history.push(AppRoutes.PROFILE)} />}
-                {
-                    profileData && !isOrdered && <SubmitButton title='Заказать' modificators={['is-dense', 'is-fill']} onClickHandler={() => {
-                        toOrder(true);
-                        dispatch(requestRoute({
-                            address1: 'Эрмитаж',
-                            address2: 'Мариинский театр'
-                        }));
-                    }} />
-                }
-            </div>
-        </div>
-    );
+        );
 };

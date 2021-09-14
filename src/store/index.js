@@ -9,13 +9,15 @@ import { watchGetProfileData, watchProfileUpdate } from './profile';
 import { watchLogout } from './logout';
 import { watchAddressList } from './addressList';
 import { watchRouteRequest } from './route';
+// import { main } from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const initialState = {
     userData: null,
     profileData: null,
-    addressList: null,
+    addressList: [],
+    currentRoute: [],
     error: null,
     isLoading: false,
     isLoggedIn: false

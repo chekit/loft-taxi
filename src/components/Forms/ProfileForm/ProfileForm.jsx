@@ -6,7 +6,6 @@ import FormInput from '../../FormElements/Input';
 import SubmitButton from '../../FormElements/SubmitButton';
 import { CardTypes } from '../../../common/models/card-types';
 import { updateProfile, requestProfile } from '../../../store/profile';
-import { LocalStorageService } from '../../../services';
 import Card from './Card';
 
 import './ProfileForm.scss';
@@ -17,15 +16,15 @@ export const PROFILE_FORM_TEST_ID = 'profile-form';
 export const PROFILE_FORM_SUBHEADING_TEST_ID = 'profile-form-subheading';
 
 class ProfileForm extends PureComponent {
-    static getDerivedStateFromProps(props, state) {
+    static getDerivedStateFromProps({ profileData }, state) {
         // Default state is EMPTY
-        if (!state.cardName && !state.cardNumber && !state.expiryDate && !state.cvc) {
+        if (!state.cardName && !state.cardNumber && !state.expiryDate && !state.cvc && profileData) {
             return {
                 ...state,
-                cardName: props.cardName,
-                cardNumber: props.cardNumber,
-                expiryDate: props.expiryDate,
-                cvc: props.cvc
+                cardName: profileData.cardName,
+                cardNumber: profileData.cardNumber,
+                expiryDate: profileData.expiryDate,
+                cvc: profileData.cvc
             }
         }
 
@@ -35,8 +34,6 @@ class ProfileForm extends PureComponent {
     static propTypes = {
         save: PropTypes.func
     };
-
-    localStorageService = new LocalStorageService();
 
     cardType = CardTypes.MASTERCARD;
 
@@ -66,8 +63,11 @@ class ProfileForm extends PureComponent {
     };
 
     componentDidMount() {
-        const { requestProfile, token } = this.props;
-        requestProfile(token);
+        const { requestProfile, token, profileData } = this.props;
+
+        if (!profileData) {
+            requestProfile(token);
+        }
     }
 
     render() {
@@ -115,9 +115,9 @@ class ProfileForm extends PureComponent {
 }
 
 const mapStateToProps = ({ profileData, isLoading, userData }) => ({
-    ...profileData,
+    profileData,
+    isLoading,
     token: userData?.token,
-    isLoading
 });
 const mapDispatchToProps = { updateProfile, requestProfile };
 

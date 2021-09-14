@@ -10,7 +10,7 @@ async function login(data) {
     return result;
 }
 
-function* authorizeUser(action) {
+export function* authorizeUser(action) {
     try {
         const { success, error, token } = yield call(login, action.payload);
 
