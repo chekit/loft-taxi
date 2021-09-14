@@ -4,9 +4,9 @@ import { logoutRequest } from '../logout';
 import { registerUserFailure, registerUserSuccess } from '../register';
 
 export const userDataReducer = handleActions({
-    [authUserSuccess]: (_state, { payload }) => payload,
+    [authUserSuccess]: (_, { payload }) => payload,
     [authUserFailure]: () => null,
-    [registerUserSuccess]: (_state, { payload }) => payload,
+    [registerUserSuccess]: (_, { payload }) => payload,
     [registerUserFailure]: () => null,
     [logoutRequest]: () => null,
 }, { userData: null });

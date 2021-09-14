@@ -33,7 +33,7 @@ function* updateProfileData(action) {
     }
 }
 
-function* getProfile(action) {
+export function* getProfile(action) {
     try {
         const { success, error, ...data } = yield call(getData, action.payload);
 

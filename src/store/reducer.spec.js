@@ -23,7 +23,8 @@ const initialState = {
     error: null,
     isLoading: false,
     isLoggedIn: false,
-    addressList: null,
+    addressList: [],
+    currentRoute: [],
 };
 
 describe('Root Reducer', () => {

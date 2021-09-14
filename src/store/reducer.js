@@ -6,6 +6,7 @@ import { userDataReducer } from './auth';
 import { isLoggedInReducer } from './logout';
 import { errorReducer } from './error';
 import { addressListReducer } from './addressList';
+import { routeReducer } from './route';
 
 const rootReducer = combineReducers({
     userData: userDataReducer,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     isLoading: isLoadingReducer,
     error: errorReducer,
     isLoggedIn: isLoggedInReducer,
-    addressList: addressListReducer
+    addressList: addressListReducer,
+    currentRoute: routeReducer,
 });
 
 export default rootReducer;
