@@ -1,5 +1,5 @@
-import { logoutRequest } from '../logout';
 import { registerUserSuccess } from '../register';
+import { logoutSuccess } from './actions';
 import { isLoggedInReducer } from './reducers';
 
 describe('LoggedIn Reducer', () => {
@@ -8,6 +8,6 @@ describe('LoggedIn Reducer', () => {
     });
 
     it('should set LoggedIn property to false', () => {
-        expect(isLoggedInReducer({}, logoutRequest())).toEqual(false);
+        expect(isLoggedInReducer({}, logoutSuccess())).toEqual(false);
     });
 });
