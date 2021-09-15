@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 import { authUserFailure, authUserSuccess } from '../auth';
-import { logoutRequest } from '../logout';
+import { logoutSuccess } from '../logout';
 import { registerUserFailure, registerUserSuccess } from '../register';
 
 export const userDataReducer = handleActions({
@@ -8,5 +8,5 @@ export const userDataReducer = handleActions({
     [authUserFailure]: () => null,
     [registerUserSuccess]: (_, { payload }) => payload,
     [registerUserFailure]: () => null,
-    [logoutRequest]: () => null,
+    [logoutSuccess]: () => null,
 }, { userData: null });

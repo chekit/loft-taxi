@@ -12,11 +12,11 @@ async function register(data) {
 
 function* registerUser(action) {
     try {
-        const { success, error } = yield call(register, action.payload);
+        const { success, error, token } = yield call(register, action.payload);
 
         if (success) {
             localStorageService.save(StorageKeys.LOGIN_DATA, { email: action.payload.email, password: action.payload.password });
-            yield put(registerUserSuccess(action.payload));
+            yield put(registerUserSuccess({ ...action.payload, token }));
         }
 
         if (error) {

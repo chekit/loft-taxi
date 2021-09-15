@@ -3,7 +3,8 @@ import { requestAddressList, requestAddressListFailure } from '../addressList';
 import { authUserFailure, authUserRequest } from '../auth';
 import { updateProfileFailure, updateProfile, requestProfile, requestProfileFailure } from '../profile';
 import { registerUserFailure, registerUserRequest } from '../register';
-import { requestRoute, requestRouteFailure } from '../route/actions';
+import { requestRoute, requestRouteFailure } from '../route';
+import { logoutSuccess } from '../logout';
 
 export const errorReducer = handleActions({
     [authUserRequest]: () => null,
@@ -18,4 +19,5 @@ export const errorReducer = handleActions({
     [requestAddressListFailure]: (_, { payload }) => payload,
     [requestRoute]: () => null,
     [requestRouteFailure]: (_, { payload }) => payload,
+    [logoutSuccess]: () => null,
 }, {error: null});
