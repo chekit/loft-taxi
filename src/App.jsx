@@ -1,44 +1,66 @@
 import React, { Component } from 'react';
-import { AppPages } from './common/models';
+import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { authUserRequest } from './store/auth';
 
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Registration from './pages/Registration';
-import Order from './pages/Order';
 import Header from './components/Header';
-import PageWrapper from './components/PageWrapper';
-
-import AuthHOC from './hocs/AuthHOC';
+import { AppRoutes } from './common/app.routes';
+import PageWrapper from './components/Struct/PageWrapper';
+import PrivateRoute from './components/Struct/PrivateRoute';
+import Map from './components/Map';
+import Loader from './components/Loader';
+import Error from './components/Error';
+import { StorageKeys, LocalStorageService } from './services';
 
 import './App.scss';
 
 class App extends Component {
-  state = {
-    currentPage: AppPages.LOGIN
-  };
+  subscriptions = [];
+  localStorageService = new LocalStorageService();
 
-  changePage = currentPage => {
-    this.setState({ currentPage });
-  };
+  componentDidMount() {
+    const { authUserRequest } = this.props;
+    const storedUserData = this.localStorageService.fetch(StorageKeys.LOGIN_DATA);
 
-  loadPage(pageType) {
-    return ({
-      [AppPages.LOGIN]: <Login enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.REGISTRATION)} />,
-      [AppPages.REGISTRATION]: <Registration enter={() => this.changePage(AppPages.MAP)} redirect={() => this.changePage(AppPages.LOGIN)} />,
-      [AppPages.MAP]: <Order />,
-      [AppPages.PROFILE]: <Profile />,
-    }[pageType]);
+    if (storedUserData) {
+      authUserRequest(storedUserData);
+    }
   }
 
   render() {
-    const { currentPage } = this.state;
+    const { isLoading, error } = this.props;
+
     return (
-      <PageWrapper currentPage={currentPage}>
-        <Header navigate={this.changePage} currentPage={currentPage} showNavigation={currentPage !== AppPages.LOGIN && currentPage !== AppPages.REGISTRATION} />
-        <section>{this.loadPage(currentPage)}</section>
+      <PageWrapper>
+        <Header />
+        <section>
+          <Switch>
+            <Route path={AppRoutes.MAIN} component={Login} exact></Route>
+            <Route path={AppRoutes.REGISTRATION} component={Registration}></Route>
+            <PrivateRoute path={AppRoutes.ORDER} component={Map} />
+            <PrivateRoute path={AppRoutes.PROFILE} component={Profile} />
+            <Route component={Login} />
+          </Switch>
+        </section>
+        {/* @TODO: Use Portal */}
+        {isLoading ? <Loader /> : <></>}
+        {/* @TODO: Use Portal */}
+        {error ? <Error message={error} /> : <></>}
       </PageWrapper>
     );
   }
 }
 
-export default AuthHOC(App);
+const mapStateToProps = state => ({
+  isLoading: state.isLoading,
+  error: state.error,
+  userData: state.userData,
+  isLoggedIn: state.isLoggedIn
+});
+
+const mapDispatchToProps = { authUserRequest };
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

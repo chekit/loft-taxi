@@ -1,27 +1,33 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Logo from '../Logo';
 import Navigation from '../Navigation';
 
 import './Header.scss';
-import { AuthContext } from '../../contexts/AuthContext';
+import { connect } from 'react-redux';
 
 export const HEADER_TEST_ID = 'header';
 
-export const Header = ({ navigate, currentPage }) => {
-    const { isLoggedIn } = useContext(AuthContext);
-
+export const Header = ({ isLoggedIn }) => {
     return (
-        <header className={`header ${!isLoggedIn && 'is-vertical'}`} data-testid={HEADER_TEST_ID}>
-            <Logo currentPage={currentPage} />
-            {isLoggedIn && <Navigation navigate={navigate} currentPage={currentPage} />}
+        <header className={`header ${isLoggedIn ? '' : 'is-not-auth'}`} data-testid={HEADER_TEST_ID}>
+            <Logo isLoggedIn={isLoggedIn} />
+            {isLoggedIn && <Navigation />}
         </header>
     );
 };
 
 Header.propTypes = {
-    navigate: PropTypes.func,
-    currentPage: PropTypes.number,
     isLoggedIn: PropTypes.bool
 };
+
+Header.defaultProps = {
+    isLoggedIn: false
+};
+
+const mapStateToProps = state => ({
+    isLoggedIn: state.isLoggedIn
+});
+
+export default connect(mapStateToProps)(Header);

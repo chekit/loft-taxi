@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import logo_mobile from './../../assets/logo_mobile.svg';
 import logo_desktop from './../../assets/logo_desktop.svg';
 import logo_header_desktop from './../../assets/logo_header_desktop.svg';
-import { AppPages } from '../../common/models';
 
-export const Logo = ({ currentPage }) => {
+import './Logo.scss';
+
+export const Logo = ({ isLoggedIn }) => {
     return (
-        <picture className="logo">
+        <picture className={`logo ${isLoggedIn ? 'is-auth' : ''}`}>
             {
-                currentPage === AppPages.LOGIN || currentPage === AppPages.REGISTRATION
+                !isLoggedIn
                     ? <source media="(min-width:1024px)" srcSet={logo_desktop} data-testid="logo-unauth" />
                     : <source media="(min-width:1024px)" srcSet={logo_header_desktop} data-testid="logo-auth" />
             }
@@ -20,5 +21,5 @@ export const Logo = ({ currentPage }) => {
 };
 
 Logo.propTypes = {
-    currentPage: PropTypes.number
+    isLoggedIn: PropTypes.bool
 };

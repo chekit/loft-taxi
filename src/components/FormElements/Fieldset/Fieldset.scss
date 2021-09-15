@@ -1,0 +1,15 @@
+@import 'styles/globals.scss';
+
+.form {
+    &__fieldset {
+        border: none;
+        padding: 0;
+        margin-bottom: $base-step * 2.5;
+
+        &.is-horizontal {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+    }
+}
