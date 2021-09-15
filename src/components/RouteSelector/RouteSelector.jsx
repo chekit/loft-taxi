@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useStore } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import { requestAddressList } from '../../store/addressList';
 import { cancelRequestRoute, requestRoute } from '../../store/route/actions';
-import FormSelect from '../FormElements/Select';
 import SubmitButton from '../FormElements/SubmitButton';
 import { AppRoutes } from './../../common/app.routes';
 
@@ -43,9 +44,18 @@ export const RouteSelector = ({ history }) => {
                     {isOrdered && <h2 className="route-select__title">Заказ размещен</h2>}
                     {!isProfileFilled && <h2 className="route-select__title">Заполните платежные данные</h2>}
                     {isProfileFilled && !isOrdered && <>
-                        <FormSelect options={getAddressList(finish)} onSelectionChange={value => setStart(value)} name="start" />
-                        <br />
-                        <FormSelect options={getAddressList(start)} onSelectionChange={value => setFinish(value)} name="finish" />
+                        <Autocomplete
+                            id="start-point"
+                            options={getAddressList(finish)}
+                            renderInput={(params) => <TextField {...params} />}
+                            onChange={(_, value) => setStart(value)}
+                        />
+                        <Autocomplete
+                            id="end-point"
+                            options={getAddressList(start)}
+                            renderInput={(params) => <TextField {...params} />}
+                            onChange={(_, value) => setFinish(value)}
+                        />
                     </>}
                 </div>
                 <div className="route-select__body">

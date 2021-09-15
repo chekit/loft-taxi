@@ -22,7 +22,7 @@
     }
 
     &__header {
-        margin-bottom: $base-step * 2;
+        margin-bottom: $base-step * 4;
     }
 
     &__body {
@@ -48,5 +48,24 @@
             font-size: 1.8em;
             line-height: 21/18;
         }
+    }
+}
+
+// Materail-UI Overrides
+.MuiAutocomplete-root {
+    margin-bottom: $base-step;
+}
+
+.MuiInput-underline {
+    &:before {
+        border-bottom-color: $color-autocomplete-border !important;
+    }
+
+    &:after {
+        border-bottom-color: $color-yellow-100 !important;
+    }
+
+    &:hover:not(.Mui-disabled):before {
+        border-bottom-color: $color-header-background !important;
     }
 }
