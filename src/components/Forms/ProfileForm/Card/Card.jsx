@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MCIcon } from 'loft-taxi-mui-theme';
+import classNames from 'classnames';
 
 import { CardTypes } from '../../../../common/models/card-types';
 import app_logo from './../../../../assets/card/app-logo.svg';
@@ -10,7 +11,7 @@ import './Card.scss';
 
 export const CARD_DISPLAY_TEST_ID = 'card-display';
 
-export const Card = ({cardType, expires, cardNum }) => {
+export const Card = ({ cardType, expires, cardNum }) => {
     return (
         <div className="card" data-testid={CARD_DISPLAY_TEST_ID}>
             <div className="card__header">
@@ -32,7 +33,7 @@ export const Card = ({cardType, expires, cardNum }) => {
                     <img src={chip} alt="Chip" data-testid="card-chip-ico" />
                 </div>
                 <div className="card__vendor vendor-icons">
-                    <div className={`vendor-icons__item ${cardType === CardTypes.MASTERCARD ? 'is-active' : ''}`}>
+                    <div className={classNames('vendor-icons__item', { 'is-active': cardType === CardTypes.MASTERCARD })}>
                         <MCIcon classes={{ icon: `mc-icon` }} />
                     </div>
                 </div>

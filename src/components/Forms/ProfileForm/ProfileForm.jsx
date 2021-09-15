@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 
 import FormInput from '../../FormElements/Input';
 import SubmitButton from '../../FormElements/SubmitButton';
@@ -75,7 +76,7 @@ class ProfileForm extends PureComponent {
         const { history, isLoading } = this.props;
 
         return (
-            <div className={`profile ${isFilled ? 'is-center' : ''}`}>
+            <div className={classNames('profile', { 'is-center': isFilled })}>
                 <div className="profile__header">
                     <h1 className="profile__title">Профиль</h1>
                     <div className="profile__add-data add-data">

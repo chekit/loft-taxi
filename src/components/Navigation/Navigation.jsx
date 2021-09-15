@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 
 import { logoutRequest } from './../../store/logout';
 import { NavLink, useHistory } from 'react-router-dom';
@@ -37,7 +38,7 @@ const Navigation = props => {
                 <span className="open-nav-button__item is-short"></span>
                 <span className="open-nav-button__item"></span>
             </button>
-            <nav className={`navigation ${isVisible ? 'is-visible' : ''}`} data-testid={NAV_TEST_ID}>
+            <nav className={classNames('navigation', { 'is-visible': isVisible })} data-testid={NAV_TEST_ID}>
                 <ul className="navigation-list">
                     <li className="navigation-list__item">
                         <NavLink className="navigation__link" to={AppRoutes.ORDER} onClick={closeNav} activeClassName="is-active">Карта</NavLink>

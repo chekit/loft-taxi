@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Tariff from './Tariff';
+import classNames from 'classnames';
 
 import './Tariffs.scss';
 
@@ -18,13 +19,13 @@ export const Tariffs = () => {
 
     return (
         <div className="tariffs">
-            <div className={`tariffs__item ${ selectedTariff === TariffsTypes.STANDART ? 'is-active': '' }`}>
+            <div className={classNames('tariffs__item', { 'is-active': selectedTariff === TariffsTypes.STANDART })}>
                 <Tariff title="Стандарт" price={150} handleSelect={() => setTariff(TariffsTypes.STANDART)} visual={standart} />
             </div>
-            <div className={`tariffs__item ${selectedTariff === TariffsTypes.PREMIUM ? 'is-active': '' }`}>
+            <div className={classNames('tariffs__item', { 'is-active': selectedTariff === TariffsTypes.PREMIUM })}>
                 <Tariff title="Премиум" price={250} handleSelect={() => setTariff(TariffsTypes.PREMIUM)} visual={premium} />
             </div>
-            <div className={`tariffs__item ${selectedTariff === TariffsTypes.BUSINESS ? 'is-active': '' }`}>
+            <div className={classNames('tariffs__item', { 'is-active': selectedTariff === TariffsTypes.BUSINESS })}>
                 <Tariff title="Бизнес" price={300} handleSelect={() => setTariff(TariffsTypes.BUSINESS)} visual={business} />
             </div>
         </div>
