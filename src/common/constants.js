@@ -1,1 +1,1 @@
-export const BASE_API_URL = `https://loft-taxi.glitch.me`;
+export const DESKTOP_SIZE = '1024px';

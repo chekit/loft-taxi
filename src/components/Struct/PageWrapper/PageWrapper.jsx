@@ -1,23 +1,28 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-
-import './PageWrapper.scss';
+import styled, { css } from 'styled-components'
 import { connect } from 'react-redux';
+
+import { DESKTOP_SIZE } from '../../../common/constants';
 
 export const PAGE_WRAPPER_TEST_ID = 'page-wrapper';
 
-export const PageWrapper = ({ children, isLoggedIn }) => {
-    return (
-        <main className={classNames({ 'is-column': isLoggedIn })} data-testid={PAGE_WRAPPER_TEST_ID}>
-            {children}
-        </main>
-    );
-};
+const PageWrapper = styled.main`
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    min-width: $min-width;
 
-PageWrapper.propTypes = {
-    children: PropTypes.arrayOf(PropTypes.element)
-};
+    @media screen and (min-width: ${DESKTOP_SIZE}) {
+        flex-direction: row;
+    }
+
+    ${props => props.isLoggedIn && css`
+        @media screen and (min-width: ${DESKTOP_SIZE}) {
+            flex-direction: column;
+        }
+    `}
+`;
 
 const mapStateToProps = state => ({
     isLoggedIn: state.isLoggedIn

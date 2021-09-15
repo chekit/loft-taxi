@@ -1,23 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import styled, { css } from 'styled-components'
+import { DESKTOP_SIZE } from '../../../common/constants';
 
-import './PageWithForm.scss';
+import background from './../../../assets/login-page-background.png';
 
-export const PageWithForm = ({ children, isFadeout }) => (
-    <div className={classNames('wrapper', { 'is-fadeout': isFadeout })}>
-        {children}
-    </div>
-);
+export const PageWithForm = styled.div`
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex: auto;
+    height: 100%;
 
-PageWithForm.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node
-    ]),
-    isFadeout: PropTypes.bool
-};
+    @media screen and (min-width: ${DESKTOP_SIZE}) {
+        background: transparent url('${background}') center center fixed;
+        background-size: cover;
+    }
 
-PageWithForm.defaultProps = {
-    isFadeout: false
-};
+    ${props => props.isFadeout && css`
+        @media screen and (min-width: ${DESKTOP_SIZE}) {
+            &:after {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 10;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.45);
+                content: '';
+            }
+        }
+    `}
+`;
