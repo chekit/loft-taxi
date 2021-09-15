@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { FormInput, INPUT_TEST_ID } from './Input';
+import { FormInput, INPUT_TEST_ID, LABEL_TEST_ID } from './Input';
 
 describe('Input Component', () => {
     const LABEL_NAME = 'My label';
@@ -78,7 +78,7 @@ describe('Input Component', () => {
         it(`shouldn't render label element by default`, () => {
             render(<FormInput name={'test'} />);
 
-            const label = screen.queryByTestId('label');
+            const label = screen.queryByTestId(LABEL_TEST_ID);
 
             expect(label).toBeFalsy();
         });
@@ -86,7 +86,7 @@ describe('Input Component', () => {
         it(`shouldn render label element`, () => {
             render(<FormInput name={'test'} label={LABEL_NAME} />);
 
-            const label = screen.getByTestId('label');
+            const label = screen.getByTestId(LABEL_TEST_ID);
 
             expect(label).toBeTruthy();
             expect(label.textContent).toBe(`${LABEL_NAME}:`);
@@ -95,11 +95,16 @@ describe('Input Component', () => {
         it('should add * to label name if input required', () => {
             render(<FormInput name={'test'} label={LABEL_NAME} isRequired={true} />);
 
-            const label = screen.getByTestId('label');
+            const label = screen.getByTestId(LABEL_TEST_ID);
 
             expect(label.textContent).toBe(`${LABEL_NAME}*:`);
         });
 
-        it.todo('Add error handling reaction');
+        it('should have error class', () => {
+            render(<FormInput name={'test'} label={LABEL_NAME} hasError={true} />);
+
+            const label = screen.getByTestId(LABEL_TEST_ID);
+            expect(label.classList.contains('is-error')).toBeTruthy();
+        });
     });
 });

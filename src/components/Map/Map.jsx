@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
+import { useStore } from 'react-redux';
+import styled from 'styled-components';
+
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-
-import './Map.scss';
-import { useStore } from 'react-redux';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOXGL_ACCESS_TOKEN;
 
@@ -57,6 +57,11 @@ const drawRoute = (map, coordinates) => {
     }
 };
 
+const MapContainer = styled.div`
+    width: 100%;
+    height: 100%;
+`;
+
 export const Map = () => {
     const mapContainerRef = useRef(null);
     const map = useRef(null);
@@ -81,6 +86,6 @@ export const Map = () => {
 
 
     return (
-        <div className="map-container" ref={mapContainerRef}></div>
+        <MapContainer ref={mapContainerRef} />
     );
 };

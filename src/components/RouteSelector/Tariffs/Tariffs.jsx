@@ -19,14 +19,14 @@ export const Tariffs = () => {
 
     return (
         <div className="tariffs">
-            <div className={classNames('tariffs__item', { 'is-active': selectedTariff === TariffsTypes.STANDART })}>
-                <Tariff title="Стандарт" price={150} handleSelect={() => setTariff(TariffsTypes.STANDART)} visual={standart} />
+            <div className={classNames('tariffs__item', { 'is-active': selectedTariff === TariffsTypes.STANDART })} onClick={() => setTariff(TariffsTypes.STANDART)}>
+                <Tariff title="Стандарт" price={150} visual={standart} />
             </div>
-            <div className={classNames('tariffs__item', { 'is-active': selectedTariff === TariffsTypes.PREMIUM })}>
-                <Tariff title="Премиум" price={250} handleSelect={() => setTariff(TariffsTypes.PREMIUM)} visual={premium} />
+            <div className={classNames('tariffs__item', { 'is-active': selectedTariff === TariffsTypes.PREMIUM })} onClick={() => setTariff(TariffsTypes.PREMIUM)}>
+                <Tariff title="Премиум" price={250} visual={premium} />
             </div>
-            <div className={classNames('tariffs__item', { 'is-active': selectedTariff === TariffsTypes.BUSINESS })}>
-                <Tariff title="Бизнес" price={300} handleSelect={() => setTariff(TariffsTypes.BUSINESS)} visual={business} />
+            <div className={classNames('tariffs__item', { 'is-active': selectedTariff === TariffsTypes.BUSINESS })} onClick={() => setTariff(TariffsTypes.BUSINESS)}>
+                <Tariff title="Бизнес" price={300} visual={business} />
             </div>
         </div>
     );

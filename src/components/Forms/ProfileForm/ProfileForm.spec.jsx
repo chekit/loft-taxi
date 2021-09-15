@@ -32,8 +32,7 @@ describe('Profile Form', () => {
         expect(submit.disabled).toBeTruthy();
     });
 
-    // @FIXME: Doesn't fill in the fields
-    xit(`should enable saving`, () => {
+    it(`should enable saving`, () => {
         render(<FormWithProvider />);
 
         const submit = screen.getByTestId(SUBMIT_TEST_ID);
@@ -42,16 +41,15 @@ describe('Profile Form', () => {
         expect(submit).toBeTruthy();
         expect(submit.disabled).toBeTruthy();
 
-        // @TODO: Form inputs should have patterns to check users input
         inputs.forEach(input => {
             switch (input.name) {
-                case 'name':
+                case 'cardName':
                     fireEvent.change(input, { target: { value: 'Vasiliy Vasiliev' } });
                     break;
-                case 'card':
+                case 'cardNumber':
                     fireEvent.change(input, { target: { value: '0000234567891234' } });
                     break;
-                case 'exp':
+                case 'expiryDate':
                     fireEvent.change(input, { target: { value: '08/22' } });
                     break;
                 case 'cvc':
@@ -61,6 +59,7 @@ describe('Profile Form', () => {
                     break;
             }
         });
+
         expect(submit.disabled).toBeFalsy();
     });
 });

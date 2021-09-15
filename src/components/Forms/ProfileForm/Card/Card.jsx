@@ -10,6 +10,7 @@ import chip from './../../../../assets/card/chip.svg';
 import './Card.scss';
 
 export const CARD_DISPLAY_TEST_ID = 'card-display';
+export const MASTERCARD_ICON_TEST_ID = 'mastercard-icon';
 
 export const Card = ({ cardType, expires, cardNum }) => {
     return (
@@ -33,7 +34,7 @@ export const Card = ({ cardType, expires, cardNum }) => {
                     <img src={chip} alt="Chip" data-testid="card-chip-ico" />
                 </div>
                 <div className="card__vendor vendor-icons">
-                    <div className={classNames('vendor-icons__item', { 'is-active': cardType === CardTypes.MASTERCARD })}>
+                    <div className={classNames('vendor-icons__item', { 'is-active': cardType === CardTypes.MASTERCARD })} data-testid={MASTERCARD_ICON_TEST_ID}>
                         <MCIcon classes={{ icon: `mc-icon` }} />
                     </div>
                 </div>

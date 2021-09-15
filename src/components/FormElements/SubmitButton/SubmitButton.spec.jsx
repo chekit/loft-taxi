@@ -35,4 +35,12 @@ describe('Submit Button Component', () => {
         fireEvent.click(btn);
         expect(handler).not.toHaveBeenCalled();
     });
+
+    it('should add modificator class', () => {
+        render(<SubmitButton title={SUBMIT_TITLE} modificators={['is-dense', 'is-fill']} />);
+        const btn = screen.getByTestId(SUBMIT_TEST_ID);
+
+        expect(btn.classList.contains('is-dense')).toBeTruthy();
+        expect(btn.classList.contains('is-fill')).toBeTruthy();
+    })
 });

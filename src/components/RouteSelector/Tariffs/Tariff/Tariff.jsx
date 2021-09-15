@@ -3,9 +3,9 @@ import React from 'react';
 
 import './Tariff.scss';
 
-export const Tariff = ({ title, price, visual, handleSelect }) => {
+export const Tariff = ({ title, price, visual }) => {
     return (
-        <div className="tariff" onClick={handleSelect}>
+        <div className="tariff">
             <p className="tariff__title">{title}</p>
             <p className="tariff__text">Стоимость</p>
             <p className="tariff__price">{price}&#8381;</p>
@@ -18,11 +18,9 @@ Tariff.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.number,
     visual: PropTypes.string,
-    handleSelect: PropTypes.func
 }
 
 Tariff.defaultProps = {
     price: 0,
     visual: '',
-    handleSelect: () => { }
 }

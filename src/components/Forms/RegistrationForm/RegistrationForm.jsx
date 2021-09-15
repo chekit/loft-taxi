@@ -60,7 +60,6 @@ class RegistrationForm extends PureComponent {
     }
 }
 
-const mapStateToProps = state => state;
 const mapDispatchToProps = { registerUserRequest };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);
+export default connect(null, mapDispatchToProps)(RegistrationForm);

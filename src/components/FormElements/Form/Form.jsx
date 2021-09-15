@@ -2,11 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './Form.scss';
+import classNames from 'classnames';
+
+export const FORM_TITLE_TEST_ID = 'form-title';
+export const DEFAULT_FORM_TEST_ID = 'form';
 
 export const Form = ({ title, submitHandler, children, testId, classes }) => {
     return (
-        <form className={`form ${classes.join(' ')}`} onSubmit={submitHandler} data-testid={testId}>
-            {title && <h2 className="form__title" data-testid="form-title">{title}</h2>}
+        <form className={classNames('form', ...classes)} onSubmit={submitHandler} data-testid={testId}>
+            {title && <h2 className="form__title" data-testid={FORM_TITLE_TEST_ID}>{title}</h2>}
             {children}
         </form>
     );
@@ -25,6 +29,6 @@ Form.propTypes = {
 
 Form.defaultProps = {
     submitHandler: () => { },
-    testId: 'form',
+    testId: DEFAULT_FORM_TEST_ID,
     classes: []
 };

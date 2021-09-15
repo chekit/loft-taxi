@@ -2,25 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './Fieldset.scss';
+import classNames from 'classnames';
 
 export const FieldsetOrientation = {
     DEFAULT: '',
     HORIZONTAL: 'is-horizontal'
 };
 
+export const FIELDSET_TEST_ID = 'test-fieldset'
+
 export const Fieldset = ({ children, type }) => {
     return (
-        <fieldset className={`form__fieldset ${type}`}>
+        <fieldset className={classNames('form__fieldset', type)} data-testid={FIELDSET_TEST_ID}>
             {children}
         </fieldset>
     );
 };
 
 Fieldset.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node
-    ]),
     type: PropTypes.oneOf([FieldsetOrientation.DEFAULT, FieldsetOrientation.HORIZONTAL]),
 };
 

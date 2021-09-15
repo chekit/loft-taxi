@@ -45,10 +45,8 @@ class App extends Component {
             <Route component={Login} />
           </Switch>
         </section>
-        {/* @TODO: Use Portal */}
-        {isLoading ? <Loader /> : <></>}
-        {/* @TODO: Use Portal */}
-        {error ? <Error message={error} /> : <></>}
+        {isLoading && <Loader />}
+        {error && <Error message={error} />}
       </PageWrapper>
     );
   }
