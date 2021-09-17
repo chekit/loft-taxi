@@ -13,17 +13,17 @@ import './RouteSelector.scss';
 import Tariffs from './Tariffs';
 
 export const RouteSelector = ({ history }) => {
-    const [isOrdered, toOrder] = useState(false);
+    const [isOrdered, setOrdered] = useState(false);
     const [isProfileFilled, setIsProfileFilled] = useState(false);
     const [start, setStart] = useState(false);
     const [finish, setFinish] = useState(false);
 
     const dispatch = useDispatch();
     const store = useStore();
-    const { profileData, addressList, isLoading } = store.getState();
+    const { profileData, addressList, isLoading, currentRoute } = store.getState();
 
     useEffect(() => {
-        if (profileData) {
+        if (profileData && !addressList.length) {
             dispatch(requestAddressList());
         }
 
@@ -33,9 +33,11 @@ export const RouteSelector = ({ history }) => {
             !!profileData.expiryDate &&
             !!profileData.cvc
         );
-    }, [dispatch, profileData]);
 
-    const getAddressList = current => addressList.filter(address => address !== current)
+        setOrdered(currentRoute.length > 0);
+    }, [dispatch, profileData, currentRoute, addressList]);
+
+    const getAddressList = current => addressList.filter(address => address !== current);
 
     return !isLoading &&
         (
@@ -65,7 +67,6 @@ export const RouteSelector = ({ history }) => {
                 </div>
                 <div className="route-select__footer">
                     {isOrdered && <SubmitButton title='Сделать новый заказ' modificators={['is-dense', 'is-fill']} onClickHandler={() => {
-                        toOrder(false);
                         setStart('');
                         setFinish('');
                         dispatch(cancelRequestRoute());
@@ -73,7 +74,6 @@ export const RouteSelector = ({ history }) => {
                     {!isProfileFilled && <SubmitButton title='Перейти в профиль' modificators={['is-dense', 'is-fill']} onClickHandler={() => history.push(AppRoutes.PROFILE)} />}
                     {
                         isProfileFilled && !isOrdered && <SubmitButton title='Заказать' modificators={['is-dense', 'is-fill']} isDisabled={!start || !finish} onClickHandler={() => {
-                            toOrder(true);
                             dispatch(requestRoute({
                                 address1: start,
                                 address2: finish

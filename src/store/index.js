@@ -2,14 +2,7 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from './reducer';
-
-import { watchAuthorizeUser } from './auth';
-import { watchRegisterUser } from './register';
-import { watchGetProfileData, watchProfileUpdate } from './profile';
-import { watchLogout } from './logout';
-import { watchAddressList } from './addressList';
-import { watchRouteRequest } from './route';
-// import { main } from './sagas';
+import rootSaga from './saga';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -34,12 +27,6 @@ const store = createStore(
     )
 );
 
-sagaMiddleware.run(watchAuthorizeUser);
-sagaMiddleware.run(watchRegisterUser);
-sagaMiddleware.run(watchProfileUpdate);
-sagaMiddleware.run(watchGetProfileData);
-sagaMiddleware.run(watchAddressList);
-sagaMiddleware.run(watchLogout);
-sagaMiddleware.run(watchRouteRequest);
+sagaMiddleware.run(rootSaga);
 
 export default store;
