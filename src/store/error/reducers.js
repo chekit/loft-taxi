@@ -5,6 +5,7 @@ import { updateProfileFailure, updateProfile, requestProfile, requestProfileFail
 import { registerUserFailure, registerUserRequest } from '../register';
 import { requestRoute, requestRouteFailure } from '../route';
 import { logoutSuccess } from '../logout';
+import { resetErrorRequest } from './actions';
 
 export const errorReducer = handleActions({
     [authUserRequest]: () => null,
@@ -20,4 +21,5 @@ export const errorReducer = handleActions({
     [requestRoute]: () => null,
     [requestRouteFailure]: (_, { payload }) => payload,
     [logoutSuccess]: () => null,
+    [resetErrorRequest]: () => null,
 }, {error: null});
