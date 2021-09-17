@@ -6,7 +6,7 @@ import { AppRoutes } from '../../../common/app.routes';
 import store from '../../../store';
 import { INPUT_TEST_ID } from '../../FormElements/Input/Input';
 import { SUBMIT_TEST_ID } from '../../FormElements/SubmitButton/SubmitButton';
-import ProfileForm, { PROFILE_FORM_SUBHEADING_TEST_ID, PROFILE_FORM_TEST_ID } from './ProfileForm';
+import { PROFILE_FORM_SUBHEADING_TEST_ID, PROFILE_FORM_TEST_ID, ProfileForm } from './ProfileForm';
 
 describe('Profile Form', () => {
     const FormWithProvider = () => (
