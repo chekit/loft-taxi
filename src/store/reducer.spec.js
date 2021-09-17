@@ -1,6 +1,6 @@
 import rootReducer from './reducer';
 import { authUserFailure, authUserRequest, authUserSuccess } from './auth';
-import { logoutRequest } from './logout';
+import { logoutRequest, logoutSuccess } from './logout';
 import { updateProfileSuccess } from './profile';
 
 const PROFILE_DATA = {
@@ -22,7 +22,9 @@ const initialState = {
     profileData: null,
     error: null,
     isLoading: false,
-    isLoggedIn: false
+    isLoggedIn: false,
+    addressList: [],
+    currentRoute: [],
 };
 
 describe('Root Reducer', () => {
@@ -45,6 +47,6 @@ describe('Root Reducer', () => {
     it('should update LogIn adn LogOut message inside store', () => {
         const expected = { ...initialState, userData: USER_DATA, isLoggedIn: true };
         expect(rootReducer(initialState, authUserSuccess(USER_DATA))).toEqual(expected);
-        expect(rootReducer(expected, logoutRequest())).toEqual({ ...expected, userData: null, isLoggedIn: false });
+        expect(rootReducer(expected, logoutSuccess())).toEqual({ ...expected, userData: null, isLoggedIn: false });
     });
 });

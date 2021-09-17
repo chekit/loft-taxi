@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom';
 import RegistrationForm from '../../components/Forms/RegistrationForm';
 import PageWithForm from '../../components/Struct/PageWithForm';
 
-import './Registration.scss';
 import { AppRoutes } from '../../common/app.routes';
 import { connect } from 'react-redux';
 
@@ -16,8 +15,8 @@ const Registration = props => {
         : <PageWithForm><RegistrationForm /></PageWithForm>;
 };
 
-const mapStateToProps = state => ({
-    isLoggedIn: state.isLoggedIn
+const mapStateToProps = ({ isLoggedIn }) => ({
+    isLoggedIn
 });
 
 export default connect(mapStateToProps)(Registration);

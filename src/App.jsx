@@ -10,12 +10,12 @@ import Header from './components/Header';
 import { AppRoutes } from './common/app.routes';
 import PageWrapper from './components/Struct/PageWrapper';
 import PrivateRoute from './components/Struct/PrivateRoute';
-import Map from './components/Map';
 import Loader from './components/Loader';
 import Error from './components/Error';
 import { StorageKeys, LocalStorageService } from './services';
 
 import './App.scss';
+import Order from './pages/Order';
 
 class App extends Component {
   subscriptions = [];
@@ -40,15 +40,13 @@ class App extends Component {
           <Switch>
             <Route path={AppRoutes.MAIN} component={Login} exact></Route>
             <Route path={AppRoutes.REGISTRATION} component={Registration}></Route>
-            <PrivateRoute path={AppRoutes.ORDER} component={Map} />
+            <PrivateRoute path={AppRoutes.ORDER} component={Order} />
             <PrivateRoute path={AppRoutes.PROFILE} component={Profile} />
             <Route component={Login} />
           </Switch>
         </section>
-        {/* @TODO: Use Portal */}
-        {isLoading ? <Loader /> : <></>}
-        {/* @TODO: Use Portal */}
-        {error ? <Error message={error} /> : <></>}
+        {isLoading && <Loader />}
+        {error && <Error message={error} />}
       </PageWrapper>
     );
   }

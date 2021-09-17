@@ -1,13 +1,23 @@
 import { handleActions } from 'redux-actions';
+import { requestAddressList, requestAddressListFailure } from '../addressList';
 import { authUserFailure, authUserRequest } from '../auth';
-import { updateProfileFailure, updateProfileRequest } from '../profile';
+import { updateProfileFailure, updateProfile, requestProfile, requestProfileFailure } from '../profile';
 import { registerUserFailure, registerUserRequest } from '../register';
+import { requestRoute, requestRouteFailure } from '../route';
+import { logoutSuccess } from '../logout';
 
 export const errorReducer = handleActions({
     [authUserRequest]: () => null,
-    [authUserFailure]: (_state, { payload }) => payload,
-    [updateProfileRequest]: () => null,
-    [updateProfileFailure]: (_state, { payload }) => payload,
+    [authUserFailure]: (_, { payload }) => payload,
+    [requestProfile]: () => null,
+    [requestProfileFailure]: (_, { payload }) => payload,
+    [updateProfile]: () => null,
+    [updateProfileFailure]: (_, { payload }) => payload,
     [registerUserRequest]: () => null,
-    [registerUserFailure]: (_state, { payload }) => payload,
+    [registerUserFailure]: (_, { payload }) => payload,
+    [requestAddressList]: () => null,
+    [requestAddressListFailure]: (_, { payload }) => payload,
+    [requestRoute]: () => null,
+    [requestRouteFailure]: (_, { payload }) => payload,
+    [logoutSuccess]: () => null,
 }, {error: null});

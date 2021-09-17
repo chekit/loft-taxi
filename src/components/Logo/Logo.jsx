@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import logo_mobile from './../../assets/logo_mobile.svg';
 import logo_desktop from './../../assets/logo_desktop.svg';
@@ -9,7 +10,7 @@ import './Logo.scss';
 
 export const Logo = ({ isLoggedIn }) => {
     return (
-        <picture className={`logo ${isLoggedIn ? 'is-auth' : ''}`}>
+        <picture className={classNames('logo', { 'is-auth': isLoggedIn })}>
             {
                 !isLoggedIn
                     ? <source media="(min-width:1024px)" srcSet={logo_desktop} data-testid="logo-unauth" />

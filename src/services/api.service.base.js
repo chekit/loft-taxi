@@ -1,9 +1,7 @@
-export class ApiServiceBase {
-    baseURL = `https://loft-taxi.glitch.me`;
-
-    async post(uri, body) {
+export const api = ((baseApiURL) => {
+    const post = async (uri, body) => {
         try {
-            const res = await fetch(`${this.baseURL}/${uri}`, {
+            const res = await fetch(`${baseApiURL}/${uri}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -17,9 +15,9 @@ export class ApiServiceBase {
         }
     }
 
-    async get(uri) {
+    const get = async uri => {
         try {
-            const res = await fetch(`${this.baseURL}/${uri}`, {
+            const res = await fetch(`${baseApiURL}/${uri}`, {
                 method: 'GET',
             });
 
@@ -28,4 +26,6 @@ export class ApiServiceBase {
             return { success: false, error: e.message };
         }
     }
-}
+
+    return { post, get };
+})(`https://loft-taxi.glitch.me`);

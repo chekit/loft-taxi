@@ -1,5 +1,5 @@
 import { authUserSuccess } from '../auth';
-import { logoutRequest } from '../logout';
+import { logoutSuccess } from '../logout';
 import { userDataReducer } from './reducers';
 
 const USER_DATA = { email: 'test@test.com', password: '000' };
@@ -10,6 +10,6 @@ describe('User Data Reducer', () => {
     });
 
     it('should reset usr data inside store', () => {
-        expect(userDataReducer({}, logoutRequest())).toEqual(null);
+        expect(userDataReducer({}, logoutSuccess())).toEqual(null);
     });
 });

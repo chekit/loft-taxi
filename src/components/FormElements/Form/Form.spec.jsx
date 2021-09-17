@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import { Form } from './Form';
+import { DEFAULT_FORM_TEST_ID, Form, FORM_TITLE_TEST_ID } from './Form';
 import { SUBMIT_TEST_ID, SubmitButton } from './../SubmitButton/SubmitButton';
 
 describe('Form Component', () => {
@@ -8,14 +8,14 @@ describe('Form Component', () => {
 
     it('should render with title', () => {
         render(<Form title={FORM_TITLE} />);
-        const title = screen.getByTestId('form-title');
+        const title = screen.getByTestId(FORM_TITLE_TEST_ID);
 
         expect(title.textContent).toBe(FORM_TITLE);
     });
 
     it('should render without title', () => {
         render(<Form />);
-        const title = screen.queryByTestId('form-title');
+        const title = screen.queryByTestId(FORM_TITLE_TEST_ID);
 
         expect(title).toBeFalsy();
     });
@@ -48,10 +48,18 @@ describe('Form Component', () => {
         const handler = jest.fn(e => e.preventDefault());
 
         render(<Form title={FORM_TITLE} submitHandler={handler} />);
-        const form = screen.getByTestId('form');
+        const form = screen.getByTestId(DEFAULT_FORM_TEST_ID);
 
         fireEvent.submit(form);
 
         expect(handler).toHaveBeenCalled();
     });
+
+    it('should apply classes', () => {
+        render(<Form title={FORM_TITLE} classes={['foo', 'bar']} />);
+        const form = screen.getByTestId(DEFAULT_FORM_TEST_ID);
+
+        expect(form.classList.contains('foo')).toBeTruthy();
+        expect(form.classList.contains('bar')).toBeTruthy();
+    })
 });

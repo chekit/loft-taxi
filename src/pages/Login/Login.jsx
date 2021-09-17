@@ -14,8 +14,8 @@ const Login = props => {
         : <PageWithForm><LoginForm /></PageWithForm>;
 };
 
-const mapStateToProps = state => ({
-    isLoggedIn: state.isLoggedIn
+const mapStateToProps = ({ isLoggedIn }) => ({
+    isLoggedIn
 });
 
 export default connect(mapStateToProps)(Login);

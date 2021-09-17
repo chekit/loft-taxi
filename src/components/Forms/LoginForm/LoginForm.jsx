@@ -9,6 +9,7 @@ import './LoginForm.scss';
 import { AppRoutes } from '../../../common/app.routes';
 import { authUserRequest } from '../../../store/auth';
 import { connect } from 'react-redux';
+import Fieldset from '../../FormElements/Fieldset';
 
 export const LOGIN_FORM_TEST_ID = 'login-form';
 export const REGISTER_BUTTON_TEST_ID = 'register-btn';
@@ -33,6 +34,7 @@ class LoginForm extends PureComponent {
 
     submitHandler = e => {
         e.preventDefault();
+
         const { email, password } = this.state;
         const { authUserRequest } = this.props;
 
@@ -44,10 +46,10 @@ class LoginForm extends PureComponent {
 
         return (
             <Form title="Войти" submitHandler={this.submitHandler} testId={LOGIN_FORM_TEST_ID}>
-                <fieldset className="form__fieldset">
+                <Fieldset>
                     <FormInput label="Email" type="email" name="email" placeholder="mail@mail.ru" value={email} onChangeHandler={this.handleInputChange} />
                     <FormInput label="Пароль" type="password" name="password" placeholder="********" value={password} onChangeHandler={this.handleInputChange} />
-                </fieldset>
+                </Fieldset>
                 <div className="form__recall ">
                     {/* @TODO: Change to recall page */}
                     <NavLink className="form__link" to={AppRoutes.REGISTRATION}>Забыли пароль?</NavLink>
@@ -61,7 +63,6 @@ class LoginForm extends PureComponent {
     }
 }
 
-const mapStateToProps = state => state;
 const mapDispatchToProps = { authUserRequest };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default connect(null, mapDispatchToProps)(LoginForm);

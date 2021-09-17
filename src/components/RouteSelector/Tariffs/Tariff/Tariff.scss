@@ -1,0 +1,41 @@
+@import 'styles/globals.scss';
+
+.tariff {
+    display: flex;
+    flex-direction: column;
+    padding: $base-step * 1.5 $base-step;
+    min-width: $base-step * 12;
+    background: #ffffff;
+    border: 1px solid $color-form-subtle;
+    border-radius: 10px;
+    cursor: pointer;
+
+    @media screen and (min-width: $desktop) {
+        border: none;
+        box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    &__title {
+        margin-bottom: $base-step / 2;
+        font-size: 1.6em;
+        line-height: (16/19);
+    }
+
+    &__price {
+        margin-bottom: $base-step * 2;
+        font-size: 2.4em;
+        line-height: (24/28);
+    }
+
+    &__text {
+        margin-bottom: $base-step / 4;
+        font-size: 1.1em;
+        line-height: (11/13);
+        color: $color-form-subtle;
+    }
+
+    &__visual {
+        flex: 0;
+        align-self: center;
+    }
+}

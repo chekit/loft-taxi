@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import Logo from '../Logo';
 import Navigation from '../Navigation';
@@ -11,7 +12,7 @@ export const HEADER_TEST_ID = 'header';
 
 export const Header = ({ isLoggedIn }) => {
     return (
-        <header className={`header ${isLoggedIn ? '' : 'is-not-auth'}`} data-testid={HEADER_TEST_ID}>
+        <header className={classNames('header', { 'is-not-auth': !isLoggedIn })} data-testid={HEADER_TEST_ID}>
             <Logo isLoggedIn={isLoggedIn} />
             {isLoggedIn && <Navigation />}
         </header>
