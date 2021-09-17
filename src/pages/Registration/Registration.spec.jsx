@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import Registration from './Registration';
+import { Registration } from './Registration';
 import { render } from '@testing-library/react';
 import { AppRoutes } from '../../common/app.routes';
 import { Provider } from 'react-redux';
@@ -19,7 +19,7 @@ describe('Registration Page', () => {
         const { getByLabelText } = render(<PageWithProvider />);
 
         expect(getByLabelText(`Email*:`)).toHaveAttribute('name', 'email');
-        expect(getByLabelText(`Как вас зовут?*:`)).toHaveAttribute('name', 'name');
+        expect(getByLabelText(`Как вас зовут?*:`)).toHaveAttribute('name', 'userName');
         expect(getByLabelText(`Придумайте пароль*:`)).toHaveAttribute('name', 'password');
     });
 

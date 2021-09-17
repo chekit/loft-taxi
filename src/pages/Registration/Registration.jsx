@@ -5,18 +5,13 @@ import RegistrationForm from '../../components/Forms/RegistrationForm';
 import PageWithForm from '../../components/Struct/PageWithForm';
 
 import { AppRoutes } from '../../common/app.routes';
-import { connect } from 'react-redux';
+import { useStore } from 'react-redux';
 
-const Registration = props => {
-    const { isLoggedIn } = props;
+export const Registration = () => {
+    const store = useStore();
+    const { isLoggedIn, isLoading } = store.getState();
 
     return isLoggedIn
         ? <Redirect to={AppRoutes.ORDER} />
-        : <PageWithForm><RegistrationForm /></PageWithForm>;
+        : <PageWithForm>{!isLoading && <RegistrationForm />}</PageWithForm>;
 };
-
-const mapStateToProps = ({ isLoggedIn }) => ({
-    isLoggedIn
-});
-
-export default connect(mapStateToProps)(Registration);
