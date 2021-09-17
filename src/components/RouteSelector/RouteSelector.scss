@@ -5,7 +5,7 @@
     top: 0;
     right: 0;
     left: 0;
-    margin: gap(6) auto 0 auto;
+    margin: gap(20) auto 0 auto;
     z-index: 100;
     padding: $base-step * 2;
     width: 85vw;
@@ -16,8 +16,7 @@
 
     @media screen and (min-width: $desktop) {
         right: auto;
-        margin-right: 0;
-        margin-left: gap(7);
+        margin: gap(6) 0 0 gap(7);
         padding: $base-step * 4;
     }
 
