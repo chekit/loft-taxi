@@ -1,30 +1,30 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import { DEFAULT_FORM_TEST_ID, Form, FORM_TITLE_TEST_ID } from './Form';
-import { SUBMIT_TEST_ID, SubmitButton } from './../SubmitButton/SubmitButton';
+import { DEFAULT_FORM_TEST_ID, AppForm, FORM_TITLE_TEST_ID } from './AppForm';
+import { SUBMIT_TEST_ID, SubmitButton } from '../SubmitButton/SubmitButton';
 
 describe('Form Component', () => {
     const FORM_TITLE = 'Form Title';
 
     it('should render with title', () => {
-        render(<Form title={FORM_TITLE} />);
+        render(<AppForm title={FORM_TITLE} />);
         const title = screen.getByTestId(FORM_TITLE_TEST_ID);
 
         expect(title.textContent).toBe(FORM_TITLE);
     });
 
     it('should render without title', () => {
-        render(<Form />);
+        render(<AppForm />);
         const title = screen.queryByTestId(FORM_TITLE_TEST_ID);
 
         expect(title).toBeFalsy();
     });
 
     it('should render children', () => {
-        render((<Form>
+        render((<AppForm>
             <p data-testid="child">Child 1</p>
             <p data-testid="child">Child 2</p>
-        </Form>));
+        </AppForm>));
         const children = screen.getAllByTestId('child');
 
         expect(children.length).toBe(2);
@@ -33,9 +33,9 @@ describe('Form Component', () => {
     it('should call submit handler on submit click', () => {
         const handler = jest.fn(e => e.preventDefault());
 
-        render((<Form title={FORM_TITLE} submitHandler={handler}>
+        render((<AppForm title={FORM_TITLE} submitHandler={handler}>
             <SubmitButton title={'Submit'} />
-        </Form>));
+        </AppForm>));
 
         const btn = screen.getByTestId(SUBMIT_TEST_ID);
 
@@ -47,7 +47,7 @@ describe('Form Component', () => {
     it('should call submit handler on submit event', () => {
         const handler = jest.fn(e => e.preventDefault());
 
-        render(<Form title={FORM_TITLE} submitHandler={handler} />);
+        render(<AppForm title={FORM_TITLE} submitHandler={handler} />);
         const form = screen.getByTestId(DEFAULT_FORM_TEST_ID);
 
         fireEvent.submit(form);
@@ -56,7 +56,7 @@ describe('Form Component', () => {
     });
 
     it('should apply classes', () => {
-        render(<Form title={FORM_TITLE} classes={['foo', 'bar']} />);
+        render(<AppForm title={FORM_TITLE} classes={['foo', 'bar']} />);
         const form = screen.getByTestId(DEFAULT_FORM_TEST_ID);
 
         expect(form.classList.contains('foo')).toBeTruthy();
