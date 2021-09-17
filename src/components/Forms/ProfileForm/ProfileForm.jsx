@@ -60,7 +60,7 @@ export const ProfileForm = ({ history }) => {
 
     return (
         <Form onSubmit={onSubmit} validate={validate} initialValues={profileData}>{
-            ({ handleSubmit, values, submitting, pristine }) => (
+            ({ handleSubmit, values, submitting, pristine, errors }) => (
 
                 <div className={classNames('profile', { 'is-center': isFilled })}>
                     <div className="profile__header">
@@ -146,7 +146,7 @@ export const ProfileForm = ({ history }) => {
                         {
                             isFilled && !isLoading && !submitting
                                 ? <SubmitButton title="Перейти на карту" modificators={['is-dense']} onClickHandler={() => history.push(AppRoutes.ORDER)} />
-                                : <SubmitButton title="Сохранить" modificators={['is-dense']} isDisabled={!values.cardName || !values.cardNumber || !values.expiryDate || !values.cvc || pristine} onClickHandler={handleSubmit} />
+                                : <SubmitButton title="Сохранить" modificators={['is-dense']} isDisabled={!values.cardName || !values.cardNumber || !values.expiryDate || !values.cvc || pristine || Object.keys(errors).length} onClickHandler={handleSubmit} />
                         }
                     </div>
                 </div>
