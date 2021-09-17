@@ -1,9 +1,7 @@
 import { requestProfile, updateProfile } from './actions';
 import { takeLatest, put, call } from 'redux-saga/effects';
-import { ApiServiceBase } from '../../services';
+import { api } from '../../services';
 import { requestProfileFailure, requestProfileSuccess, updateProfileFailure, updateProfileSuccess } from './actions';
-
-const api = new ApiServiceBase();
 
 async function getData(token) {
     const result = await api.get(`card?token=${token}`);

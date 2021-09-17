@@ -1,9 +1,8 @@
-import { ApiServiceBase, LocalStorageService, StorageKeys } from '../../services';
+import { api, LocalStorageService, StorageKeys } from '../../services';
 import { authUserFailure, authUserRequest, authUserSuccess } from './actions';
 import { takeLatest, put, call } from 'redux-saga/effects';
 
 const localStorageService = new LocalStorageService();
-const api = new ApiServiceBase();
 
 async function login(data) {
     const result = await api.post('auth', JSON.stringify(data));

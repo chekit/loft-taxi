@@ -1,9 +1,8 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 import { registerUserFailure, registerUserRequest, registerUserSuccess } from '.';
-import { ApiServiceBase, LocalStorageService, StorageKeys } from '../../services';
+import { api, LocalStorageService, StorageKeys } from '../../services';
 
 const localStorageService = new LocalStorageService();
-const api = new ApiServiceBase();
 
 async function register(data) {
     const result = await api.post('register', JSON.stringify(data));

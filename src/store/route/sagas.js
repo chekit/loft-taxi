@@ -1,8 +1,6 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
-import { ApiServiceBase } from '../../services';
+import { api } from '../../services';
 import { requestRoute, requestRouteFailure, requestRouteSuccess } from './actions';
-
-const api = new ApiServiceBase();
 
 async function fetchData({ address1, address2 }) {
     const result = await api.get(`route?address1=${address1}&address2=${address2}`);
