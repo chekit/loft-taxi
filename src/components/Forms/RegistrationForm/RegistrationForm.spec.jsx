@@ -35,7 +35,7 @@ describe('Registration Form', () => {
                 case 'email':
                     fireEvent.change(input, { target: { value: 'email@mail.test' } });
                     break;
-                case 'usesrName':
+                case 'userName':
                     fireEvent.change(input, { target: { value: 'John Smith' } });
                     break;
                 case 'password':
