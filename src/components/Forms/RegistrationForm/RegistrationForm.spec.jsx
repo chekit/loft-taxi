@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { INPUT_TEST_ID } from '../../FormElements/Input/Input';
 import { SUBMIT_TEST_ID } from '../../FormElements/SubmitButton/SubmitButton';
-import RegistrationForm from './RegistrationForm';
+import { RegistrationForm } from './RegistrationForm';
 import { AppRoutes } from '../../../common/app.routes';
 import { Provider } from 'react-redux';
 import store from '../../../store';
@@ -35,7 +35,7 @@ describe('Registration Form', () => {
                 case 'email':
                     fireEvent.change(input, { target: { value: 'email@mail.test' } });
                     break;
-                case 'name':
+                case 'userName':
                     fireEvent.change(input, { target: { value: 'John Smith' } });
                     break;
                 case 'password':
@@ -62,7 +62,7 @@ describe('Registration Form', () => {
                 case 'email':
                     fireEvent.change(input, { target: { value: 'email@mail.test' } });
                     break;
-                case 'name':
+                case 'userName':
                     fireEvent.change(input, { target: { value: 'John Smith' } });
                     break;
                 case 'password':

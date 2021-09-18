@@ -17,8 +17,8 @@ describe('Login Page', () => {
     it(`renders login Form`, () => {
         const { getByLabelText } = render(<PageWithProvider />);
 
-        expect(getByLabelText(`Email:`)).toHaveAttribute('name', 'email');
-        expect(getByLabelText(`Пароль:`)).toHaveAttribute('name', 'password');
+        expect(getByLabelText(`Email*:`)).toHaveAttribute('name', 'email');
+        expect(getByLabelText(`Пароль*:`)).toHaveAttribute('name', 'password');
     });
 
     it.todo('Test for form interaction');

@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { INPUT_TEST_ID } from '../../FormElements/Input/Input';
 import { SUBMIT_TEST_ID } from '../../FormElements/SubmitButton/SubmitButton';
-import LoginForm from './LoginForm';
+import { LoginForm } from './LoginForm';
 import { Provider } from 'react-redux';
 import store from '../../../store';
 

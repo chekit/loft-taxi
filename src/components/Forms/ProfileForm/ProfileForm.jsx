@@ -1,7 +1,6 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
+import { Form, Field } from 'react-final-form';
 
 import FormInput from '../../FormElements/Input';
 import SubmitButton from '../../FormElements/SubmitButton';
@@ -11,115 +10,147 @@ import Card from './Card';
 
 import './ProfileForm.scss';
 import { AppRoutes } from '../../../common/app.routes';
-import Form from '../../FormElements/Form';
+import AppForm from '../../FormElements/AppForm';
+import { useStore } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 export const PROFILE_FORM_TEST_ID = 'profile-form';
 export const PROFILE_FORM_SUBHEADING_TEST_ID = 'profile-form-subheading';
 
-class ProfileForm extends PureComponent {
-    static getDerivedStateFromProps({ profileData }, state) {
-        // Default state is EMPTY
-        if (!state.cardName && !state.cardNumber && !state.expiryDate && !state.cvc && profileData) {
-            return {
-                ...state,
-                cardName: profileData.cardName,
-                cardNumber: profileData.cardNumber,
-                expiryDate: profileData.expiryDate,
-                cvc: profileData.cvc
-            }
-        }
 
-        return null;
-    }
+export const ProfileForm = ({ history }) => {
+    const [isFilled, setIsFilled] = useState(false);
 
-    static propTypes = {
-        save: PropTypes.func
-    };
+    const dispatch = useDispatch();
+    const store = useStore();
+    const { profileData, isLoading, userData } = store.getState();
+    const token = userData?.token;
 
-    cardType = CardTypes.MASTERCARD;
+    const cardType = CardTypes.MASTERCARD;
 
-    state = {
-        cardName: '',
-        cardNumber: '',
-        expiryDate: '',
-        cvc: '',
-        isFilled: false
-    };
-
-    handleInputChange = e => {
-        const { target: { name, value } } = e;
-
-        // @FIXME: Too specific?
-        this.setState({
-            [name]: name === 'cvc' ? value.substr(0, 3) : value
-        });
-    };
-
-    submitHandler = () => {
-        const { cardName, cardNumber, expiryDate, cvc } = this.state;
-        const { updateProfile, token } = this.props;
-        updateProfile({ cardName, cardNumber, expiryDate, cvc, token });
-
-        this.setState({ isFilled: true });
-    };
-
-    componentDidMount() {
-        const { requestProfile, token, profileData } = this.props;
-
+    useEffect(() => {
         if (!profileData) {
             requestProfile(token);
         }
-    }
+    }, [profileData, token]);
 
-    render() {
-        const { cardName, cardNumber, expiryDate, cvc, isFilled } = this.state;
-        const { history, isLoading } = this.props;
+    const validate = values => {
+        const { cardNumber, cvc, expiryDate } = values;
+        const errors = {};
 
-        return (
-            <div className={classNames('profile', { 'is-center': isFilled })}>
-                <div className="profile__header">
-                    <h1 className="profile__title">Профиль</h1>
-                    <div className="profile__add-data add-data">
-                        <p className="add-data__link link" data-testid={PROFILE_FORM_SUBHEADING_TEST_ID}>
-                            {
-                                isFilled && !isLoading
-                                    ? <>Платёжные данные обновлены. Теперь вы можете заказывать такси.</>
-                                    : <><span className="link__icon">&#12296;</span>Введите платежные данные</>
-                            }
-                        </p>
+        if (!cardNumber?.trim().match(/^\d{16}$/)) {
+            errors.cardNumber = 'Wrong Card Num';
+        }
+
+        if (!cvc?.trim().match(/^\d{3}$/)) {
+            errors.cvc = 'Wrong CVC';
+        }
+
+        if (!expiryDate?.trim().match(/^\d{2}\/\d{2}$/)) {
+            errors.expiryDate = 'Wrong CVC';
+        }
+
+        return errors;
+    };
+
+    const onSubmit = ({ cardName, cardNumber, expiryDate, cvc }) => {
+        dispatch(updateProfile({ cardName, cardNumber, expiryDate, cvc, token }));
+        setIsFilled(true);
+    };
+
+    return (
+        <Form onSubmit={onSubmit} validate={validate} initialValues={profileData}>{
+            ({ handleSubmit, values, submitting, pristine, errors }) => (
+
+                <div className={classNames('profile', { 'is-center': isFilled })}>
+                    <div className="profile__header">
+                        <h1 className="profile__title">Профиль</h1>
+                        <div className="profile__add-data add-data">
+                            <p className="add-data__link link" data-testid={PROFILE_FORM_SUBHEADING_TEST_ID}>
+                                {
+                                    isFilled && !isLoading && !submitting
+                                        ? <>Платёжные данные обновлены. Теперь вы можете заказывать такси.</>
+                                        : <><span className="link__icon">&#12296;</span>Введите платежные данные</>
+                                }
+                            </p>
+                        </div>
+                    </div>
+                    {
+                        !isFilled && <>
+                            <Card cardNum={(values.cardNumber || '').split(' ').join('')} cardType={cardType} expires={values.expiryDate} />
+
+                            <AppForm classes={['profile__form', 'profile-form']} testId={PROFILE_FORM_TEST_ID}>
+                                <Field name="cardName">{
+                                    ({ input, meta }) => (
+                                        <FormInput
+                                            label="Имя владельца"
+                                            name={input.name}
+                                            placeholder="Vasiliy Vasiliev"
+                                            isLight={true}
+                                            value={input.value}
+                                            onChangeHandler={input.onChange}
+                                        />
+                                    )
+                                }</Field>
+                                <Field name="cardNumber">{
+                                    ({ input, meta }) => (
+                                        <FormInput
+                                            label="Номер карты"
+                                            name={input.name}
+                                            placeholder="1234567809874321"
+                                            isLight={true}
+                                            value={input.value}
+                                            onChangeHandler={input.onChange}
+                                            hasError={meta.dirty && !!meta.error}
+                                            errorMessage="Формат карты указан неверно"
+                                            maxlength={16} />
+
+                                    )
+                                }</Field>
+                                <div className="profile-form__group">
+                                    <Field name="expiryDate" parse={value => value.length >= 3 ? `${value.substr(0, 2)}/${value.replace('/', '').substr(2)}` : value}>{
+                                        ({ input, meta }) => (
+                                            <FormInput
+                                                label="MM/YY"
+                                                name={input.name}
+                                                placeholder="MM/YY"
+                                                maxlength={5}
+                                                isLight={true}
+                                                value={input.value}
+                                                hasError={meta.dirty && !!meta.error}
+                                                errorMessage="Срок действия карты казан неверно. Укажите MM/YY"
+                                                onChangeHandler={input.onChange}
+                                            />
+                                        )
+                                    }</Field>
+                                    <Field name="cvc" parse={value => value.substr(0, 3)}>{
+                                        ({ input, meta }) => (
+                                            <FormInput
+                                                label="CVC"
+                                                name={input.name}
+                                                type="number"
+                                                maxlength={3}
+                                                isLight={true}
+                                                hasError={meta.dirty && !!meta.error}
+                                                errorMessage="Формат CVC указан неверно"
+                                                value={input.value}
+                                                onChangeHandler={input.onChange}
+                                            />
+                                        )
+                                    }</Field>
+                                </div>
+                            </AppForm>
+                        </>
+                    }
+                    <div className="profile__footer">
+                        {
+                            isFilled && !isLoading && !submitting
+                                ? <SubmitButton title="Перейти на карту" modificators={['is-dense']} onClickHandler={() => history.push(AppRoutes.ORDER)} />
+                                : <SubmitButton title="Сохранить" modificators={['is-dense']} isDisabled={!values.cardName || !values.cardNumber || !values.expiryDate || !values.cvc || pristine || Object.keys(errors).length} onClickHandler={handleSubmit} />
+                        }
                     </div>
                 </div>
-                {
-                    !isFilled && <>
-                        {/* @FIXME: Card Number editing too dummy */}
-                        <Card cardNum={(cardNumber || '').split(' ').join('')} cardType={this.cardType} expires={expiryDate} />
-                        <Form classes={['profile__form', 'profile-form']} testId={PROFILE_FORM_TEST_ID}>
-                            <FormInput label="Имя владельца" name="cardName" placeholder="Vasiliy Vasiliev" isLight={true} value={cardName} onChangeHandler={this.handleInputChange} />
-                            <FormInput label="Номер карты" name="cardNumber" placeholder="1234567809874321" isLight={true} value={cardNumber} maxlength={16} onChangeHandler={this.handleInputChange} />
-                            <div className="profile-form__group">
-                                <FormInput label="MM/YY" name="expiryDate" placeholder="MM/YY" maxlength={5} isLight={true} value={expiryDate} onChangeHandler={this.handleInputChange} />
-                                <FormInput label="CVC" name="cvc" type="number" maxlength={3} isLight={true} value={cvc} onChangeHandler={this.handleInputChange} />
-                            </div>
-                        </Form>
-                    </>
-                }
-                <div className="profile__footer">
-                    {
-                        isFilled && !isLoading
-                            ? <SubmitButton title="Перейти на карту" modificators={['is-dense']} onClickHandler={() => history.push(AppRoutes.ORDER)} />
-                            : <SubmitButton title="Сохранить" modificators={['is-dense']} isDisabled={!cardName || !cardNumber || !expiryDate || !cvc} onClickHandler={this.submitHandler} />
-                    }
-                </div>
-            </div>
-        );
-    }
+            )
+        }</Form>
+    );
 }
-
-const mapStateToProps = ({ profileData, isLoading, userData }) => ({
-    profileData,
-    isLoading,
-    token: userData?.token,
-});
-const mapDispatchToProps = { updateProfile, requestProfile };
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm);

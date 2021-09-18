@@ -2,6 +2,7 @@
 
 .form {
     &__fieldset {
+        position: relative;
         border: none;
         padding: 0;
         margin-bottom: $base-step * 2.5;
