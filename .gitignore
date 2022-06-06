@@ -24,3 +24,4 @@ yarn-error.log*
 
 *.lock
 *-lock.json
+*.code-workspace
