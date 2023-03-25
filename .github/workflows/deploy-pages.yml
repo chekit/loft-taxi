@@ -20,7 +20,7 @@ jobs:
         run: |
           npm install
           npm run test:mac
-          npm run build:mac
+          PUBLIC_URL=/loft-taxi/ npm run build:mac
 
       - name: Deploy to GitHub Pages ➡️
         uses: peaceiris/actions-gh-pages@v3
