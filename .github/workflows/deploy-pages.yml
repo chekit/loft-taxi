@@ -18,6 +18,7 @@ jobs:
 
       - name: Install dependencies 🛠️
         run: |
+          npm install node-gyp
           npm install
           npm run test
           npm run build
